@@ -1,0 +1,16 @@
+name: icapps_license
+description: Dart tool to generate a file that contains all licenses of the third party libraries
+version: 0.0.1
+author: Koen Van Looveren <koen.vanlooveren@icapps.com>
+homepage: https://github.com/icapps/flutter-icapps-license
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  http: ^0.12.0+4
+  path: ^1.6.4
+  yaml: ^2.2.0
+
+dev_dependencies:
+  test: ^1.9.4
