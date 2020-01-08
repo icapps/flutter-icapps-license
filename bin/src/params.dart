@@ -8,18 +8,18 @@ import 'model/dto/dependency.dart';
 
 import 'model/webservice/package.dart';
 
+const rawGithubDomain = 'https://raw.githubusercontent.com';
+const githubDomain = 'https://github.com';
+const licensePath = '/master/LICENSE';
+const licensePathShort = '/LICENSE';
+
 class Params {
   static const yamlConfigLicense = 'icapps_license';
   static const yamlConfigLicensesList = 'licenses';
   static const yamlConfigFailFast = 'failFast';
 
-  static const rawGithubDomain = 'https://raw.githubusercontent.com';
-  static const githubDomain = 'https://github.com';
-
   static const baseUrl = 'https://pub.dev/api/packages/';
   static const urlVersionPath = '/versions/';
-  static const licensePath = '/master/LICENSE';
-  static const licensePathShort = '/LICENSE';
 
   static var missingLicenses = false;
   static final missingLicensesList = List<String>();
@@ -102,7 +102,7 @@ class Params {
 
     final apiUrl =
         baseUrl + name + urlVersionPath + version.replaceFirst('^', '');
-    print(apiUrl);
+    print('Api Url: $apiUrl');
     final result = await http.get(apiUrl);
     if (result.statusCode != HttpStatus.ok) {
       missingLicensesList.add(
@@ -115,24 +115,21 @@ class Params {
     final package = Package.fromJson(jsonObj);
     String licenseUrl;
     if (overrideLicense == null) {
-      if (package.pubspec.homepage.startsWith(githubDomain)) {
-        var rawUrl = package.pubspec.homepage
-            .replaceFirst(githubDomain, rawGithubDomain);
-        if (rawUrl.contains('/blob/master/')) {
-          rawUrl = rawUrl.replaceFirst('/blob/master/', '/master/');
-          licenseUrl = rawUrl + licensePathShort;
-        } else if (rawUrl.contains('/tree/master')) {
-          rawUrl = rawUrl.replaceFirst('/tree/master/', '/master/');
-          licenseUrl = rawUrl + licensePathShort;
-        } else {
-          licenseUrl = rawUrl + licensePath;
-        }
+      licenseUrl = _getLicenseUrl(package.pubspec.repository);
+      if (licenseUrl == null) {
+        licenseUrl = _getLicenseUrl(package.pubspec.homepage);
+      } else {
+        missingLicensesList.add(
+            '$name should define a static license or url in the pubspec.yaml');
+        missingLicenses = true;
+        print('----');
+        return null;
       }
     } else {
       print('Overriding $name license url with: $overrideLicense');
       licenseUrl = overrideLicense;
     }
-    print(licenseUrl);
+    print('LicenseUrl: $licenseUrl');
     final licenseResult = await http.get(licenseUrl);
     if (licenseResult.statusCode != HttpStatus.ok) {
       missingLicensesList.add(
@@ -150,4 +147,19 @@ class Params {
         license: license,
         url: package.pubspec.homepage);
   }
+}
+
+String _getLicenseUrl(String url) {
+  if (url.startsWith(githubDomain)) {
+    var rawUrl = url.replaceFirst(githubDomain, rawGithubDomain);
+    if (rawUrl.contains('/blob/master/')) {
+      rawUrl = rawUrl.replaceFirst('/blob/master/', '/master/');
+      return rawUrl + licensePathShort;
+    } else if (rawUrl.contains('/tree/master')) {
+      rawUrl = rawUrl.replaceFirst('/tree/master/', '/master/');
+      return rawUrl + licensePathShort;
+    }
+    return rawUrl + licensePath;
+  }
+  return null;
 }
