@@ -1,8 +1,8 @@
 class PubSpec {
   final String name;
   final String version;
-  final String repository;
   final String homepage;
+  final String repository;
 
   PubSpec(
     this.name,

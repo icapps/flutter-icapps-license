@@ -116,9 +116,9 @@ class Params {
     String licenseUrl;
     if (overrideLicense == null) {
       licenseUrl = _getLicenseUrl(package.pubspec.repository);
+      licenseUrl ??= _getLicenseUrl(package.pubspec.homepage);
+
       if (licenseUrl == null) {
-        licenseUrl = _getLicenseUrl(package.pubspec.homepage);
-      } else {
         missingLicensesList.add(
             '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
         missingLicenses = true;

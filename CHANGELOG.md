@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.6] - 2020-01-08
+### Fixed
+-False positive when a repository is defined
+
 ## [0.0.5] - 2020-01-08
 ### Added
 -Url to pub.dev to make sure it is easy to find missing licenses
