@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.4] - 2020-01-08
+### Added
+-Better docs en example
+
 ## [0.0.3] - 2020-01-08
 ### Fixed
 -Fixed a null pointer exception

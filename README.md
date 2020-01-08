@@ -36,7 +36,7 @@ flutterlicense(){
 }
 ```
 
-now you can use the icapps translations with a single command.
+now you can use the icapps license with a single command.
 
 ```
 flutterlicense
