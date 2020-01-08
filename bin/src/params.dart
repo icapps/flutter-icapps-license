@@ -86,14 +86,14 @@ class Params {
         return null;
       } else {
         missingLicensesList.add(
-            '$name should define a static license or url in the pubspec.yaml');
+            '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
         missingLicenses = true;
         print('----');
       }
       return null;
     } else if (!(value is String)) {
       missingLicensesList.add(
-          '$name should define a static license or url in the pubspec.yaml');
+          '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
       missingLicenses = true;
       print('----');
       return null;
@@ -106,7 +106,7 @@ class Params {
     final result = await http.get(apiUrl);
     if (result.statusCode != HttpStatus.ok) {
       missingLicensesList.add(
-          '$name should define a static license or url in the pubspec.yaml');
+          '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
       missingLicenses = true;
       print('----');
       return null;
@@ -120,7 +120,7 @@ class Params {
         licenseUrl = _getLicenseUrl(package.pubspec.homepage);
       } else {
         missingLicensesList.add(
-            '$name should define a static license or url in the pubspec.yaml');
+            '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
         missingLicenses = true;
         print('----');
         return null;
@@ -133,7 +133,7 @@ class Params {
     final licenseResult = await http.get(licenseUrl);
     if (licenseResult.statusCode != HttpStatus.ok) {
       missingLicensesList.add(
-          '$name should define a static license or url in the pubspec.yaml');
+          '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
       missingLicenses = true;
       print('----');
       return null;

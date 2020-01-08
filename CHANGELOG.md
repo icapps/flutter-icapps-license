@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.5] - 2020-01-08
+### Added
+-Url to pub.dev to make sure it is easy to find missing licenses
+
 ## [0.0.4] - 2020-01-08
 ### Added
 -Better docs en example
