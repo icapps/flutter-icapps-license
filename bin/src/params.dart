@@ -150,6 +150,7 @@ class Params {
 }
 
 String _getLicenseUrl(String url) {
+  if (url == null) return null;
   if (url.startsWith(githubDomain)) {
     var rawUrl = url.replaceFirst(githubDomain, rawGithubDomain);
     if (rawUrl.contains('/blob/master/')) {

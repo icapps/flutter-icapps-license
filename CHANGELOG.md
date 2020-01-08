@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.3] - 2020-01-08
+### Fixed
+-Fixed a null pointer exception
+
 ## [0.0.2] - 2020-01-08
 ### Fixed
 -Fixed a bug where the repository was never used to detect the license
