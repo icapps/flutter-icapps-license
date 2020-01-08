@@ -16,7 +16,8 @@ final outputFilePath = join('lib', 'util', 'license.dart');
 Future<void> main(List<String> args) async {
   final pubspecYaml = File(join(Directory.current.path, 'pubspec.yaml'));
   if (!pubspecYaml.existsSync()) {
-    throw Exception('This program should be run from the root of a flutter/dart project');
+    throw Exception(
+        'This program should be run from the root of a flutter/dart project');
   }
 
   final pubspecContent = pubspecYaml.readAsStringSync();
@@ -28,9 +29,11 @@ Future<void> main(List<String> args) async {
     outputFile.createSync(recursive: true);
   }
   final sb = StringBuffer()
-    ..writeln('//============================================================//')
+    ..writeln(
+        '//============================================================//')
     ..writeln('//THIS FILE IS AUTO GENERATED. DO NOT EDIT//')
-    ..writeln('//============================================================//')
+    ..writeln(
+        '//============================================================//')
     ..writeln()
     ..writeln('class License {')
     ..writeln('  final String name;')
@@ -70,7 +73,9 @@ Future<void> main(List<String> args) async {
   outputFile.writeAsStringSync(sb.toString());
 
   Params.missingLicensesList.forEach(print);
-  if (params.failFast && Params.missingLicensesList.isNotEmpty && Params.missingLicenses) {
+  if (params.failFast &&
+      Params.missingLicensesList.isNotEmpty &&
+      Params.missingLicenses) {
     throw Exception('Failed to resolve all licenses');
   }
   print('DONE');

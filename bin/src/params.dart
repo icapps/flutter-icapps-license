@@ -34,7 +34,8 @@ class Params {
     projectName = config['name'];
 
     if (projectName == null || projectName.isEmpty) {
-      throw Exception('Could not parse the pubspec.yaml, project name not found');
+      throw Exception(
+          'Could not parse the pubspec.yaml, project name not found');
     }
 
     final YamlMap icappsLicenseConfig = config[yamlConfigLicense];
@@ -47,7 +48,8 @@ class Params {
     if (dependenciesYamlList != null && dependenciesYamlList.isNotEmpty) {
       for (final key in dependenciesYamlList.keys) {
         final value = dependenciesYamlList[key];
-        final dependency = await _getDependency(key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+        final dependency = await _getDependency(
+            key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
         if (dependency != null) {
           dependencies.add(dependency);
         }
@@ -58,7 +60,8 @@ class Params {
     if (devDependenciesYamlList != null && devDependenciesYamlList.isNotEmpty) {
       for (final key in devDependenciesYamlList.keys) {
         final value = devDependenciesYamlList[key];
-        final dependency = await _getDependency(key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+        final dependency = await _getDependency(
+            key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
         if (dependency != null) {
           devDependencies.add(dependency);
         }
@@ -68,11 +71,13 @@ class Params {
 
   String _getOverrideLicenseUrl(YamlMap icappsLicenseConfig, String name) {
     if (icappsLicenseConfig == null) return null;
-    final YamlMap overrideLicenseMap = icappsLicenseConfig[yamlConfigLicensesList];
+    final YamlMap overrideLicenseMap =
+        icappsLicenseConfig[yamlConfigLicensesList];
     return overrideLicenseMap[name];
   }
 
-  Future<Dependency> _getDependency(String name, value, String overrideLicense) async {
+  Future<Dependency> _getDependency(
+      String name, value, String overrideLicense) async {
     String version;
     if (value is YamlMap) {
       if (value.containsKey('sdk') && value['sdk'] == 'flutter') {
@@ -80,24 +85,28 @@ class Params {
         print('----');
         return null;
       } else {
-        missingLicensesList.add('$name should define a static license or url in the pubspec.yaml');
+        missingLicensesList.add(
+            '$name should define a static license or url in the pubspec.yaml');
         missingLicenses = true;
         print('----');
       }
       return null;
     } else if (!(value is String)) {
-      missingLicensesList.add('$name should define a static license or url in the pubspec.yaml');
+      missingLicensesList.add(
+          '$name should define a static license or url in the pubspec.yaml');
       missingLicenses = true;
       print('----');
       return null;
     }
     version = value;
 
-    final apiUrl = baseUrl + name + urlVersionPath + version.replaceFirst('^', '');
+    final apiUrl =
+        baseUrl + name + urlVersionPath + version.replaceFirst('^', '');
     print(apiUrl);
     final result = await http.get(apiUrl);
     if (result.statusCode != HttpStatus.ok) {
-      missingLicensesList.add('$name should define a static license or url in the pubspec.yaml');
+      missingLicensesList.add(
+          '$name should define a static license or url in the pubspec.yaml');
       missingLicenses = true;
       print('----');
       return null;
@@ -107,7 +116,8 @@ class Params {
     String licenseUrl;
     if (overrideLicense == null) {
       if (package.pubspec.homepage.startsWith(githubDomain)) {
-        var rawUrl = package.pubspec.homepage.replaceFirst(githubDomain, rawGithubDomain);
+        var rawUrl = package.pubspec.homepage
+            .replaceFirst(githubDomain, rawGithubDomain);
         if (rawUrl.contains('/blob/master/')) {
           rawUrl = rawUrl.replaceFirst('/blob/master/', '/master/');
           licenseUrl = rawUrl + licensePathShort;
@@ -125,13 +135,19 @@ class Params {
     print(licenseUrl);
     final licenseResult = await http.get(licenseUrl);
     if (licenseResult.statusCode != HttpStatus.ok) {
-      missingLicensesList.add('$name should define a static license or url in the pubspec.yaml');
+      missingLicensesList.add(
+          '$name should define a static license or url in the pubspec.yaml');
       missingLicenses = true;
       print('----');
       return null;
     }
     final license = licenseResult.body;
     print('----');
-    return Dependency(name: name, version: version, licenseUrl: licenseUrl, license: license, url: package.pubspec.homepage);
+    return Dependency(
+        name: name,
+        version: version,
+        licenseUrl: licenseUrl,
+        license: license,
+        url: package.pubspec.homepage);
   }
 }
