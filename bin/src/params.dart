@@ -76,6 +76,7 @@ class Params {
     if (icappsLicenseConfig == null) return null;
     final YamlMap overrideLicenseMap =
         icappsLicenseConfig[yamlConfigLicensesList];
+    if (overrideLicenseMap == null) return null;
     return overrideLicenseMap[name];
   }
 
