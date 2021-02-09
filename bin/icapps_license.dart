@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
 import 'src/model/dto/dependency.dart';
@@ -28,6 +27,10 @@ Future<void> main(List<String> args) async {
   if (!outputFile.existsSync()) {
     outputFile.createSync(recursive: true);
   }
+
+  final nullableFieldInfix = params.nullSafe ? '?' : '';
+  final requiredArgInfix = params.nullSafe ? 'required' : '';
+
   final sb = StringBuffer()
     ..writeln(
         '//============================================================//')
@@ -38,16 +41,16 @@ Future<void> main(List<String> args) async {
     ..writeln('class License {')
     ..writeln('  final String name;')
     ..writeln('  final String version;')
-    ..writeln('  final String url;')
-    ..write('  final String licenseUrl;')
+    ..writeln('  final String$nullableFieldInfix url;')
+    ..writeln('  final String licenseUrl;')
     ..writeln('  final String license;')
     ..writeln()
     ..writeln('  License({')
-    ..writeln('    this.name,')
-    ..writeln('    this.version,')
+    ..writeln('   $requiredArgInfix this.name,')
+    ..writeln('   $requiredArgInfix this.version,')
+    ..writeln('   $requiredArgInfix this.licenseUrl,')
+    ..writeln('   $requiredArgInfix this.license,')
     ..writeln('    this.url,')
-    ..writeln('    this.licenseUrl,')
-    ..writeln('    this.license,')
     ..writeln('  });')
     ..writeln('}')
     ..writeln()

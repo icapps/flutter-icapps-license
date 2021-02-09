@@ -17,6 +17,7 @@ class Params {
   static const yamlConfigLicense = 'icapps_license';
   static const yamlConfigLicensesList = 'licenses';
   static const yamlConfigFailFast = 'failFast';
+  static const yamlConfigNullSafety = 'nullsafety';
 
   static const baseUrl = 'https://pub.dev/api/packages/';
   static const urlVersionPath = '/versions/';
@@ -26,6 +27,7 @@ class Params {
 
   String projectName;
   bool failFast = false;
+  bool nullSafe = false;
   final dependencies = List<Dependency>();
   final devDependencies = List<Dependency>();
 
@@ -41,7 +43,8 @@ class Params {
     final YamlMap icappsLicenseConfig = config[yamlConfigLicense];
 
     if (icappsLicenseConfig != null) {
-      failFast = icappsLicenseConfig[yamlConfigFailFast] == 'true';
+      failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
+      nullSafe = icappsLicenseConfig[yamlConfigNullSafety] == true;
     }
 
     final YamlMap dependenciesYamlList = config['dependencies'];

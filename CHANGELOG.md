@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.7] - 2021-02-09
+### Added
+-Support generating code with nullsafety
+
 ## [0.0.6] - 2020-01-08
 ### Fixed
 -False positive when a repository is defined
