@@ -57,12 +57,8 @@ Future<void> main(List<String> args) async {
     ..writeln('class LicenseUtil {')
     ..writeln('  LicenseUtil._();')
     ..writeln()
-    ..writeln('  static List<License> getLicenses() {');
-  if (params.nullSafe) {
-    sb.writeln('    return <License>[]');
-  } else {
-    sb.writeln('    return List<License>()');
-  }
+    ..writeln('  static List<License> getLicenses() {')
+    ..writeln('    return <License>[]');
 
   params.dependencies.forEach((e) {
     sb.write(_getDependencyText(e));
