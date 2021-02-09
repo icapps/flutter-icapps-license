@@ -14,6 +14,13 @@ dev-dependencies:
   icapps_license: <latest-version>
 ```
 
+### Basic options
+```yaml
+icapps_license:
+  failFast: true    #Errors are not ignored and the generator will fail with an error
+  nullsafety: true  #Generate nullsafe code
+```
+
 ### Run package with Flutter
 
 ```
