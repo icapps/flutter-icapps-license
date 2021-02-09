@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.0.8] - 2021-02-09
+### Fixed
+-Fixed crash if `licenses` was not set in yaml
+
 ## [0.0.7] - 2021-02-09
 ### Added
 -Support generating code with nullsafety
