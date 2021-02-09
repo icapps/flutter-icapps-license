@@ -58,7 +58,7 @@ Future<void> main(List<String> args) async {
     ..writeln('  LicenseUtil._();')
     ..writeln()
     ..writeln('  static List<License> getLicenses() {')
-    ..writeln('    return List<License>()');
+    ..writeln('    return <License>[]');
 
   params.dependencies.forEach((e) {
     sb.write(_getDependencyText(e));
