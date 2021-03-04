@@ -4,19 +4,19 @@ class PubSpec {
   final String homepage;
   final String repository;
 
-  PubSpec(
-    this.name,
-    this.version,
-    this.homepage,
-    this.repository,
-  );
+  PubSpec({
+    required this.name,
+    required this.version,
+    required this.homepage,
+    required this.repository,
+  });
 
   factory PubSpec.fromJson(Map<String, dynamic> json) {
     return PubSpec(
-      json['name'] as String,
-      json['version'] as String,
-      json['homepage'] as String,
-      json['repository'] as String,
+      name: json['name'] as String, // ignore: avoid_as
+      version: json['version'] as String, // ignore: avoid_as
+      homepage: json['homepage'] as String, // ignore: avoid_as
+      repository: json['repository'] as String, // ignore: avoid_as
     );
   }
 

@@ -10,21 +10,14 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  provider: ^4.0.1
-  kiwi: ^0.2.0
-  shared_preferences: ^0.5.6
+  provider: ^5.0.0
+  shared_preferences: ^2.0.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.7.3
-  built_value_generator: ^7.0.4
-  kiwi_generator: ^0.4.0
   icapps_license:
     path: ../
-
-dependency_overrides:
-  analyzer: ^0.39.2+1 #kiwi uses an outdated version of analyzer
 
 flutter:
   assets:
@@ -33,4 +26,4 @@ flutter:
 icapps_license:
   failFast: true
   licenses:
-    provider: 'https://raw.githubusercontent.com/rrousselGit/provider/master/packages/provider/LICENSE'
+    icapps_license: 'https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE'
