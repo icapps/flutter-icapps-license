@@ -1,5 +1,5 @@
 # Changelog
-## [1.0.0-nullsafe.0] - 2021-03-04
+## [1.0.0-nullsafety.0] - 2021-03-04
 ### Added
 -Nullsafe code migration
 
