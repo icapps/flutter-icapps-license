@@ -6,10 +6,10 @@ class Dependency {
   final String url;
 
   Dependency({
-    this.name,
-    this.version,
-    this.license,
-    this.licenseUrl,
-    this.url,
+    required this.name,
+    required this.version,
+    required this.license,
+    required this.licenseUrl,
+    required this.url,
   });
 }

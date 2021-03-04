@@ -3,11 +3,14 @@ import 'pubspec.dart';
 class Package {
   final PubSpec pubspec;
 
-  Package(this.pubspec);
+  Package({
+    required this.pubspec,
+  });
 
   factory Package.fromJson(Map<String, dynamic> json) {
     return Package(
-      PubSpec.fromJson(json['pubspec'] as Map<String, dynamic>),
+      pubspec: PubSpec.fromJson(
+          json['pubspec'] as Map<String, dynamic>), // ignore: avoid_as
     );
   }
 

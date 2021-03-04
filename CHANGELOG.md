@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.0] - 2021-03-04
+### Added
+-Nullsafe code migration
 
 ## [0.0.8] - 2021-02-09
 ### Fixed

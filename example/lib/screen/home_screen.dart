@@ -12,10 +12,10 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: ListView.builder(
           itemCount: LicenseUtil.getLicenses().length,
-          itemBuilder: (BuildContext context, int index) {
+          itemBuilder: (context, index) {
             final item = LicenseUtil.getLicenses()[index];
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Container(
                 color: Colors.grey.withOpacity(0.5),
                 child: Column(
