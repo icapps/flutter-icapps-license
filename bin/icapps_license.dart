@@ -29,7 +29,6 @@ Future<void> main(List<String> args) async {
   }
 
   final nullableFieldInfix = params.nullSafe ? '?' : '';
-  final requiredArgInfix = params.nullSafe ? 'required' : '';
 
   final sb = StringBuffer()
     ..writeln(
@@ -46,10 +45,10 @@ Future<void> main(List<String> args) async {
     ..writeln('  final String license;')
     ..writeln()
     ..writeln('  License({')
-    ..writeln('   $requiredArgInfix this.name,')
-    ..writeln('   $requiredArgInfix this.version,')
-    ..writeln('   $requiredArgInfix this.licenseUrl,')
-    ..writeln('   $requiredArgInfix this.license,')
+    ..writeln('   required this.name,')
+    ..writeln('   required this.version,')
+    ..writeln('   required this.licenseUrl,')
+    ..writeln('   required this.license,')
     ..writeln('    this.url,')
     ..writeln('  });')
     ..writeln('}')

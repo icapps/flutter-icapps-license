@@ -1,6 +1,10 @@
 # Changelog
 
-## [1.0.1] - 2021-03-04
+## [1.1.0] - 2021-03-07
+### Removed
+-Nullsafe flag
+
+## [1.0.1] - 2021-03-07
 ### Fixed
 -Nullsafe code migration with nullabel homepage & repository
 
