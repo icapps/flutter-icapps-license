@@ -3,7 +3,7 @@ class Dependency {
   final String version;
   final String license;
   final String licenseUrl;
-  final String url;
+  final String? url;
 
   Dependency({
     required this.name,
