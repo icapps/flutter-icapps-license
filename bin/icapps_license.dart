@@ -49,7 +49,7 @@ Future<void> main(List<String> args) async {
     ..writeln('   required this.version,')
     ..writeln('   required this.licenseUrl,')
     ..writeln('   required this.license,')
-    ..writeln('    this.url,')
+    ..writeln('   required this.url,')
     ..writeln('  });')
     ..writeln('}')
     ..writeln()

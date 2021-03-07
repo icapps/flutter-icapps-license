@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.1.1] - 2021-03-07
+### Fixed
+-Required url in License object
+
 ## [1.1.0] - 2021-03-07
 ### Removed
 -Nullsafe flag
