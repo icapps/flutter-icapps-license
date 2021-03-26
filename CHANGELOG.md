@@ -1,9 +1,15 @@
 # Changelog
 
-## [1.2.0] - 2021-03-26
+## [2.0.0] - 2021-03-26
+### Breaking
+-Version & LicenseUrl can return null from now on
 ### Added
+-Support for importing extra dependencies that are not included in the pubspec. (Android or iOS specific code for example)
 -Nullsafe flag again
 -Stric mode codebase
+### Fixed
+-Example android v2 embedding
+-Example android x migration
 
 ## [1.1.1] - 2021-03-07
 ### Fixed

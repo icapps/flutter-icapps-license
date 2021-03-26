@@ -11,7 +11,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   provider: ^5.0.0
-  shared_preferences: ^2.0.3
+  shared_preferences: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +24,17 @@ flutter:
     - assets/locale/
 
 icapps_license:
-#  failFast: true
+  #  failFast: true
   nullsafety: false
   licenses:
-    icapps_license: 'https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE'
+    #Path override is not yet supported -> https://github.com/icapps/flutter-icapps-license/issues/17
+    icapps_license: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
+  extra_licenses:
+    something_something:
+      name: Something Something
+      version: 2.0.0
+      url: https://www.google.com
+      license: test_license
+    icapps_license:
+      name: icapps_license
+      license: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
