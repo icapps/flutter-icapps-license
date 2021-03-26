@@ -4,6 +4,7 @@
 ### Breaking
 -Version & LicenseUrl can return null from now on
 ### Added
+-Support for importing extra dependencies that are not included in the pubspec. (Android or iOS specific code for example)
 -Nullsafe flag again
 -Stric mode codebase
 ### Fixed
