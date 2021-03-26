@@ -31,40 +31,47 @@ class Params {
   final dependencies = <Dependency>[];
   final devDependencies = <Dependency>[];
 
-  Future<void> init(pubspecContent) async {
-    final config = loadYaml(pubspecContent);
-    final projectName = config['name'];
+  Future<void> init(String pubspecContent) async {
+    final config = loadYaml(pubspecContent) as YamlMap; // ignore: avoid_as
+    final projectName = config['name'] as String?; // ignore: avoid_as
 
     if (projectName == null || projectName.isEmpty) {
       throw Exception(
           'Could not parse the pubspec.yaml, project name not found');
     }
 
-    final YamlMap? icappsLicenseConfig = config[yamlConfigLicense];
+    final icappsLicenseConfig =
+        config[yamlConfigLicense] as YamlMap?; // ignore: avoid_as
 
     if (icappsLicenseConfig != null) {
       failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
       nullSafe = icappsLicenseConfig[yamlConfigNullSafety] == true;
     }
 
-    final YamlMap? dependenciesYamlList = config['dependencies'];
+    final dependenciesYamlList =
+        config['dependencies'] as YamlMap?; // ignore: avoid_as
     if (dependenciesYamlList != null && dependenciesYamlList.isNotEmpty) {
       for (final key in dependenciesYamlList.keys) {
-        final value = dependenciesYamlList[key];
+        final stringKey = key as String; // ignore: avoid_as
+        final value = dependenciesYamlList[key] as Object; // ignore: avoid_as
         final dependency = await _getDependency(
-            key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+            stringKey, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
         if (dependency != null) {
           dependencies.add(dependency);
         }
       }
     }
 
-    final YamlMap? devDependenciesYamlList = config['dev_dependencies'];
+    final devDependenciesYamlList =
+        config['dev_dependencies'] as YamlMap?; // ignore: avoid_as
     if (devDependenciesYamlList != null && devDependenciesYamlList.isNotEmpty) {
       for (final key in devDependenciesYamlList.keys) {
-        final value = devDependenciesYamlList[key];
+        final stringKey = key as String; // ignore: avoid_as
+        final value =
+            devDependenciesYamlList[key] as Object; // ignore: avoid_as
         final dependency = await _getDependency(
-            key, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+            stringKey, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+
         if (dependency != null) {
           devDependencies.add(dependency);
         }
@@ -74,15 +81,14 @@ class Params {
 
   String? _getOverrideLicenseUrl(YamlMap? icappsLicenseConfig, String name) {
     if (icappsLicenseConfig == null) return null;
-    final YamlMap? overrideLicenseMap =
-        icappsLicenseConfig[yamlConfigLicensesList];
+    final overrideLicenseMap = icappsLicenseConfig[yamlConfigLicensesList]
+        as YamlMap?; // ignore: avoid_as
     if (overrideLicenseMap == null) return null;
-    return overrideLicenseMap[name];
+    return overrideLicenseMap[name] as String?; // ignore: avoid_as
   }
 
   Future<Dependency?> _getDependency(
-      String name, value, String? overrideLicense) async {
-    String version;
+      String name, Object value, String? overrideLicense) async {
     if (value is YamlMap) {
       if (value.containsKey('sdk') && value['sdk'] == 'flutter') {
         print('$name is part of flutter itself.');
@@ -102,7 +108,7 @@ class Params {
       print('----');
       return null;
     }
-    version = value;
+    final version = value;
 
     final apiUrl =
         baseUrl + name + urlVersionPath + version.replaceFirst('^', '');
@@ -115,7 +121,8 @@ class Params {
       print('----');
       return null;
     }
-    final jsonObj = json.decode(result.body);
+    final jsonObj =
+        json.decode(result.body) as Map<String, dynamic>; // ignore: avoid_as
     final package = Package.fromJson(jsonObj);
     String? licenseUrl;
     if (overrideLicense == null) {

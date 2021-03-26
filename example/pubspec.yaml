@@ -24,6 +24,7 @@ flutter:
     - assets/locale/
 
 icapps_license:
-  failFast: true
+#  failFast: true
+  nullsafety: false
   licenses:
     icapps_license: 'https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE'

@@ -21,7 +21,7 @@ class PubSpec {
   }
 
   Map<String, dynamic> toJson() {
-    return {
+    return <String, dynamic>{
       'name': name,
       'version': version,
       'homepage': homepage,

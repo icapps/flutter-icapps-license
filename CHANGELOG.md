@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.0] - 2021-03-26
+### Added
+-
+
 ## [1.1.1] - 2021-03-07
 ### Fixed
 -Required url in License object

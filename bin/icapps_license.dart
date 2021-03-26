@@ -44,12 +44,23 @@ Future<void> main(List<String> args) async {
     ..writeln('  final String licenseUrl;')
     ..writeln('  final String license;')
     ..writeln()
-    ..writeln('  License({')
-    ..writeln('   required this.name,')
-    ..writeln('   required this.version,')
-    ..writeln('   required this.licenseUrl,')
-    ..writeln('   required this.license,')
-    ..writeln('   required this.url,')
+    ..writeln('  License({');
+  if (params.nullSafe) {
+    sb
+      ..writeln('   required this.name,')
+      ..writeln('   required this.version,')
+      ..writeln('   required this.licenseUrl,')
+      ..writeln('   required this.license,')
+      ..writeln('   required this.url,');
+  } else {
+    sb
+      ..writeln('   this.name,')
+      ..writeln('   this.version,')
+      ..writeln('   this.licenseUrl,')
+      ..writeln('   this.license,')
+      ..writeln('   this.url,');
+  }
+  sb
     ..writeln('  });')
     ..writeln('}')
     ..writeln()

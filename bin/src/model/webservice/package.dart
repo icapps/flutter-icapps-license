@@ -15,7 +15,7 @@ class Package {
   }
 
   Map<String, dynamic> toJson() {
-    return {
+    return <String, dynamic>{
       'pubspec': pubspec,
     };
   }
