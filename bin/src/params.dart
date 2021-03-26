@@ -16,6 +16,11 @@ const licensePathShort = '/LICENSE';
 class Params {
   static const yamlConfigLicense = 'icapps_license';
   static const yamlConfigLicensesList = 'licenses';
+  static const yamlConfigExtraLicensesList = 'extra_licenses';
+  static const yamlConfigExtraLicenseName = 'name';
+  static const yamlConfigExtraLicenseVersion = 'version';
+  static const yamlConfigExtraLicenseUrl = 'url';
+  static const yamlConfigExtraLicenseLicenseUrl = 'license';
   static const yamlConfigFailFast = 'failFast';
   static const yamlConfigNullSafety = 'nullsafety';
 
@@ -71,7 +76,23 @@ class Params {
             devDependenciesYamlList[key] as Object; // ignore: avoid_as
         final dependency = await _getDependency(
             stringKey, value, _getOverrideLicenseUrl(icappsLicenseConfig, key));
+        if (dependency != null) {
+          devDependencies.add(dependency);
+        }
+      }
+    }
 
+    if (icappsLicenseConfig == null) return;
+    final extraDependenciesYamlList =
+        icappsLicenseConfig[yamlConfigExtraLicensesList]
+            as YamlMap?; // ignore: avoid_as
+    if (extraDependenciesYamlList != null &&
+        extraDependenciesYamlList.isNotEmpty) {
+      for (final key in extraDependenciesYamlList.keys) {
+        final stringKey = key as String; // ignore: avoid_as
+        final value =
+            extraDependenciesYamlList[key] as Object; // ignore: avoid_as
+        final dependency = await _getExtraDependency(stringKey, value);
         if (dependency != null) {
           devDependencies.add(dependency);
         }
@@ -96,7 +117,7 @@ class Params {
         return null;
       } else {
         missingLicensesList.add(
-            '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
+            'The license for $name could not be fetched automaticly. $name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
         missingLicenses = true;
         print('----');
       }
@@ -140,24 +161,84 @@ class Params {
       print('Overriding $name license url with: $overrideLicense');
       licenseUrl = overrideLicense;
     }
-    print('LicenseUrl: $licenseUrl');
-    final licenseResult = await http.get(Uri.parse(licenseUrl));
-    if (licenseResult.statusCode != HttpStatus.ok) {
-      missingLicensesList.add(
-          '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
-      missingLicenses = true;
-      print('----');
-      return null;
-    }
-    final license = licenseResult.body;
+    final license = await _getLicense(name, licenseUrl);
+    if (license == null) return null;
+
     print('----');
     return Dependency(
       name: name,
       version: version,
-      licenseUrl: licenseUrl,
+      licenseUrl: isNetworkUrl(licenseUrl) ? licenseUrl : null,
       license: license,
       url: package.pubspec.homepage,
     );
+  }
+
+  Future<Dependency?> _getExtraDependency(
+      String pubspecName, Object value) async {
+    if (value is! YamlMap) {
+      missingLicensesList.add(
+          'Extra dependency: $pubspecName should define under extra_dependencies. Everything should be configured here');
+      missingLicenses = true;
+      print('----');
+      return null;
+    }
+    final name =
+        value[yamlConfigExtraLicenseName] as String?; // ignore: avoid_as
+    final version =
+        value[yamlConfigExtraLicenseVersion] as String?; // ignore: avoid_as
+    final url = value[yamlConfigExtraLicenseUrl] as String?; // ignore: avoid_as
+    final licenseUrl =
+        value[yamlConfigExtraLicenseLicenseUrl] as String?; // ignore: avoid_as
+    if (name == null) {
+      missingLicensesList.add(
+          'Extra dependency: $pubspecName should define under extra_dependencies. Everything should be configured here. `name` is missing');
+      missingLicenses = true;
+      print('----');
+      return null;
+    }
+    if (licenseUrl == null) {
+      missingLicensesList.add(
+          'Extra dependency: $pubspecName should define under extra_dependencies. Everything should be configured here. `license` is missing');
+      missingLicenses = true;
+      print('----');
+      return null;
+    }
+    final license = await _getLicense(pubspecName, licenseUrl);
+    if (license == null) return null;
+
+    print('----');
+    return Dependency(
+      name: name,
+      version: version,
+      licenseUrl: isNetworkUrl(licenseUrl) ? licenseUrl : null,
+      license: license,
+      url: url,
+    );
+  }
+
+  Future<String?> _getLicense(String name, String licenseUrl) async {
+    print('LicenseUrl: $licenseUrl');
+    if (isNetworkUrl(licenseUrl)) {
+      final licenseResult = await http.get(Uri.parse(licenseUrl));
+      if (licenseResult.statusCode != HttpStatus.ok) {
+        missingLicensesList.add(
+            '$name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
+        missingLicenses = true;
+        print('----');
+        return null;
+      }
+      return licenseResult.body;
+    }
+    final file = File(licenseUrl);
+    if (!file.existsSync()) {
+      missingLicensesList.add(
+          'File: $file does not exists. $name should define a static license or url in the pubspec.yaml (https://pub.dev/packages/$name)');
+      missingLicenses = true;
+      print('----');
+      return null;
+    }
+    return file.readAsStringSync();
   }
 }
 
@@ -176,3 +257,6 @@ String? _getLicenseUrl(String? url) {
   }
   return null;
 }
+
+bool isNetworkUrl(String licenseUrl) =>
+    licenseUrl.startsWith('http://') || licenseUrl.startsWith('https://');

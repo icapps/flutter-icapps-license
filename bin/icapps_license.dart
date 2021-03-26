@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path/path.dart';
 
 import 'src/model/dto/dependency.dart';
+import 'src/extension/string_builder_extension.dart';
 import 'src/params.dart';
 
 const baseUrl = 'https://pub.dev/api/packages/';
@@ -39,19 +40,19 @@ Future<void> main(List<String> args) async {
     ..writeln()
     ..writeln('class License {')
     ..writeln('  final String name;')
-    ..writeln('  final String version;')
-    ..writeln('  final String$nullableFieldInfix url;')
-    ..writeln('  final String licenseUrl;')
     ..writeln('  final String license;')
+    ..writeln('  final String$nullableFieldInfix version;')
+    ..writeln('  final String$nullableFieldInfix url;')
+    ..writeln('  final String$nullableFieldInfix licenseUrl;')
     ..writeln()
     ..writeln('  License({');
   if (params.nullSafe) {
     sb
       ..writeln('   required this.name,')
-      ..writeln('   required this.version,')
-      ..writeln('   required this.licenseUrl,')
       ..writeln('   required this.license,')
-      ..writeln('   required this.url,');
+      ..writeln('   this.version,')
+      ..writeln('   this.licenseUrl,')
+      ..writeln('   this.url,');
   } else {
     sb
       ..writeln('   this.name,')
@@ -97,10 +98,10 @@ Future<void> main(List<String> args) async {
 String _getDependencyText(Dependency dependency) {
   final sb = StringBuffer()
     ..writeln('      ..add(License(')
-    ..writeln('        name: \'${dependency.name}\',')
-    ..writeln('        version: \'${dependency.version}\',')
-    ..writeln('        url: \'${dependency.url}\',')
-    ..writeln('        licenseUrl: \'${dependency.licenseUrl}\',')
+    ..writelnWithQuotesOrNull('name', dependency.name)
+    ..writelnWithQuotesOrNull('version', dependency.version)
+    ..writelnWithQuotesOrNull('url', dependency.url)
+    ..writelnWithQuotesOrNull('licenseUrl', dependency.licenseUrl)
     ..writeln('        license: \'\'\'${dependency.license}\'\'\',')
     ..writeln('      ))');
   return sb.toString();

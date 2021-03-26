@@ -4,17 +4,17 @@
 
 class License {
   final String name;
+  final String license;
   final String version;
   final String url;
   final String licenseUrl;
-  final String license;
 
   License({
-    this.name,
-    this.version,
-    this.licenseUrl,
-    this.license,
-    this.url,
+   this.name,
+   this.version,
+   this.licenseUrl,
+   this.license,
+   this.url,
   });
 }
 
@@ -26,9 +26,8 @@ class LicenseUtil {
       ..add(License(
         name: 'provider',
         version: '^5.0.0',
-        url: 'null',
-        licenseUrl:
-            'https://raw.githubusercontent.com/rrousselGit/provider/master/LICENSE',
+        url: null,
+        licenseUrl: 'https://raw.githubusercontent.com/rrousselGit/provider/master/LICENSE',
         license: '''MIT License
 
 Copyright (c) 2019 Remi Rousselet
@@ -53,11 +52,9 @@ SOFTWARE.''',
       ))
       ..add(License(
         name: 'shared_preferences',
-        version: '^2.0.3',
-        url:
-            'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
-        licenseUrl:
-            'https://raw.githubusercontent.com/flutter/plugins/master/packages/shared_preferences/shared_preferences/LICENSE',
+        version: '^2.0.5',
+        url: 'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
+        licenseUrl: 'https://raw.githubusercontent.com/flutter/plugins/master/packages/shared_preferences/shared_preferences/LICENSE',
         license: '''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -84,6 +81,41 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-      ));
-  }
+      ))
+      ..add(License(
+        name: 'Something Something',
+        version: '2.0.0',
+        url: 'https://www.google.com',
+        licenseUrl: null,
+        license: '''This is a test license''',
+      ))
+      ..add(License(
+        name: 'icapps_license',
+        version: null,
+        url: null,
+        licenseUrl: 'https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE',
+        license: '''MIT License
+
+Copyright (c) 2019 icapps
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+''',
+      ))
+;  }
 }
