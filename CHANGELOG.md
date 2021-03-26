@@ -2,7 +2,8 @@
 
 ## [1.2.0] - 2021-03-26
 ### Added
--
+-Nullsafe flag again
+-Stric mode codebase
 
 ## [1.1.1] - 2021-03-07
 ### Fixed
