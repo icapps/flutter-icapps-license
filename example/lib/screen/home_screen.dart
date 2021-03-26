@@ -6,6 +6,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        brightness: Brightness.dark,
         title: const Text('icapps license'),
         backgroundColor: Colors.black45,
       ),
