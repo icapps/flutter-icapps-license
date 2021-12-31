@@ -21,13 +21,13 @@ class Params {
   static const yamlConfigFailFast = 'failFast';
   static const yamlConfigCheckBeforeGenerate = 'checkBeforeGenerate';
   static const yamlConfigDownloadPubDevDetails = 'downloadPubDevDetails';
-  static const yamlConfigUsePubDevZH = 'usePubDevZH';
+  static const yamlConfigPubDevBaseUrl = 'pubDevBaseUrl';
 
   late PubspecLock pubspecLock;
   String? projectName;
   var failFast = false;
-  var usePubDevZH = false;
-  var checkBeforGenerate = false;
+  String? pubDevBaseUrlOverride;
+  var checkBeforeGenerate = false;
   var downloadPubDevDetails = false;
   final _dependencies = <Dependency>[];
   final _dependencyOverrides = <String, String>{};
@@ -52,10 +52,10 @@ class Params {
 
     if (icappsLicenseConfig != null) {
       failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
-      checkBeforGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
+      checkBeforeGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
       downloadPubDevDetails = icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
-      usePubDevZH = icappsLicenseConfig[yamlConfigUsePubDevZH] == true;
-      PubDevWebservice.setBaseUrl(usePubDevZH);
+      pubDevBaseUrlOverride = icappsLicenseConfig[yamlConfigPubDevBaseUrl] as String?;
+      PubDevWebservice.setBaseUrl(pubDevBaseUrlOverride);
       _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
     }
 

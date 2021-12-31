@@ -16,7 +16,7 @@ class GenerateCommand {
   const GenerateCommand._();
 
   static Future<void> generateLicenses(Params params) async {
-    if (params.checkBeforGenerate) {
+    if (params.checkBeforeGenerate) {
       CheckCommand.checkDependencies(params);
       Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
     }

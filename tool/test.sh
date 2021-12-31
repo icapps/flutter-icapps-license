@@ -16,3 +16,5 @@ genhtml -o ./coverage/report ./coverage/lcov.info
 
 ## Open the HTML coverage report:
 open ./coverage/report/index.html
+
+rm test/coverage_helper_test.dart

@@ -12,7 +12,7 @@
     - `generate` to generate the license dart file
 - `checkBeforeGenerate` to run the check command before generate. default = false
 - `downloadPubDevDetails` to get the homepage or repository in the url. default = false
-- `usePubDevZH` to download the pub.dev details from https://pub.flutter-io.cn/ instead of https://pub.dev/. default = false
+- `pubDevBaseUrl` to download the pub.dev details from another baseUrl. default = https://pub.dev/
 
 ## [2.0.0] - 2021-03-26
 ### Breaking

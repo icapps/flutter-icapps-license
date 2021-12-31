@@ -38,7 +38,7 @@ class Dependency {
       isLocalDependency: path != null,
       localPath: path,
       isGitDependency: git != null,
-      gitPath: _getGitPath(git),
+      gitPath: GitInfo.fromYaml(git),
       isPartOfFlutterSdk: sdk == 'flutter',
     );
   }
@@ -63,18 +63,6 @@ class Dependency {
       return version ?? lockedDependency.version;
     }
   }
-
-  static GitInfo? _getGitPath(YamlMap? git) {
-    if (git == null) return null;
-    final url = git['url'] as String;
-    final path = git['path'] as String?;
-    final ref = git['ref'] as String?;
-    return GitInfo(
-      url: url,
-      path: path,
-      ref: ref,
-    );
-  }
 }
 
 @immutable
@@ -88,4 +76,16 @@ class GitInfo {
     this.path,
     this.ref,
   });
+
+  static GitInfo? fromYaml(YamlMap? git) {
+    if (git == null) return null;
+    final url = git['url'] as String;
+    final path = git['path'] as String?;
+    final ref = git['ref'] as String?;
+    return GitInfo(
+      url: url,
+      path: path,
+      ref: ref,
+    );
+  }
 }

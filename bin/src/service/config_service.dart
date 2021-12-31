@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:meta/meta.dart';
 
-import '../model/dto/config/package.dart';
+import '../model/dto/config/cached_package.dart';
 import '../model/dto/config/package_config.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_lock.dart';

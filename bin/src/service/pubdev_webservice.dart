@@ -16,13 +16,12 @@ import '../util/logger.dart';
 @immutable
 class PubDevWebservice {
   static const _pubDevBaseUrl = 'https://pub.dev';
-  static const _pubDevZHBaseUrl = 'https://pub.flutter-io.cn';
   static String _baseUrl = _pubDevBaseUrl;
 
   const PubDevWebservice._();
 
-  static void setBaseUrl(bool useZH) {
-    _baseUrl = useZH ? _pubDevZHBaseUrl : _pubDevBaseUrl;
+  static void setBaseUrl(String? baseUrlOverride) {
+    _baseUrl = baseUrlOverride ?? _pubDevBaseUrl;
   }
 
   static Future<PubDevPackage?> getPubDevData(Dependency dependency, DependencyLock lockedDependency) async {

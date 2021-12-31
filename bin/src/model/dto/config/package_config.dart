@@ -1,6 +1,6 @@
 import 'package:meta/meta.dart';
 
-import 'package.dart';
+import 'cached_package.dart';
 
 @immutable
 class PackageConfig {
