@@ -324,7 +324,7 @@ void main() {
 ''';
       final json = jsonDecode(packageConfigJson) as Map<String, dynamic>;
       final result = PackageConfig.fromJson(json);
-      expect(result.packages.length, 150);
+      expect(result.packages.length, 51);
     });
   });
 }

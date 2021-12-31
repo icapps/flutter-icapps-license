@@ -28,7 +28,7 @@ void main() {
   "rootUri": "file:///Users/myuser/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0",
   "packageUri": "lib/",
   "languageVersion": "2.12"
-},
+}
 ''';
 
       final json = jsonDecode(packageConfigJson) as Map<String, dynamic>;
