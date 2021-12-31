@@ -31,8 +31,7 @@ Future<void> main(List<String> args) async {
 
     final pubspecContent = pubspecYaml.readAsStringSync();
     final pubspecLockContent = pubspecLockYaml.readAsStringSync();
-    final params = Params();
-    await params.init(pubspecContent, pubspecLockContent);
+    final params = Params(pubspecContent, pubspecLockContent);
 
     final command = args[0];
     if (args.length >= 2) {

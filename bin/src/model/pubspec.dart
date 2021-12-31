@@ -23,7 +23,7 @@ class Params {
   static const yamlConfigDownloadPubDevDetails = 'downloadPubDevDetails';
   static const yamlConfigUsePubDevZH = 'usePubDevZH';
 
-  final pubspecLock = PubspecLock();
+  late PubspecLock pubspecLock;
   String? projectName;
   var failFast = false;
   var usePubDevZH = false;
@@ -40,7 +40,7 @@ class Params {
 
   List<Dependency> get mainDependencies => _dependencies.where((element) => !element.isDevDependency).toList();
 
-  Future<void> init(String pubspecContent, String pubspecLockContent) async {
+  Params(String pubspecContent, String pubspecLockContent) {
     final config = loadYaml(pubspecContent) as YamlMap;
     final projectName = config['name'] as String?;
 
@@ -70,7 +70,7 @@ class Params {
       Logger.logInfo(message);
       throw FatalException(message);
     }
-    pubspecLock.init(pubspecLockContent);
+    pubspecLock = PubspecLock(pubspecLockContent);
     Logger.logInfo('pubspec.yaml:');
     Logger.logInfo('All: ${dependencies.length}');
     Logger.logInfo('Main: ${mainDependencies.length}');
