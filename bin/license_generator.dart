@@ -8,6 +8,7 @@ import 'package:path/path.dart';
 import 'src/command/check.dart';
 import 'src/command/generate.dart';
 import 'src/model/pubspec.dart';
+import 'src/util/logger.dart';
 
 Future<void> main(List<String> args) async {
   if (args.isEmpty) {
@@ -30,7 +31,10 @@ Future<void> main(List<String> args) async {
   final params = Params();
   await params.init(pubspecContent, pubspecLockContent);
 
-  final command = args.first;
+  final command = args[0];
+  if (args.length >= 2) {
+    Logger.init(args[1]);
+  }
   switch (command) {
     case 'check':
       CheckCommand.checkDependencies(params);

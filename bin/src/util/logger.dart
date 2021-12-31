@@ -1,20 +1,27 @@
 // ignore_for_file: avoid_print
 
 class Logger {
+  static var _logInfo = false;
   static var _logDebug = false;
   static var _logVerbose = false;
 
   Logger.init(String flag) {
-    if (flag == 'debug') {
+    if (flag == 'info') {
+      _logInfo = true;
+    } else if (flag == 'debug') {
+      _logInfo = true;
       _logDebug = true;
     } else if (flag == 'verbose') {
+      _logInfo = true;
       _logDebug = true;
       _logVerbose = true;
     }
   }
 
   static void logInfo(dynamic message) {
-    print(message);
+    if (_logInfo) {
+      print(message);
+    }
   }
 
   static void logDebug(dynamic message) {

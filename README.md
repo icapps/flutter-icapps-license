@@ -40,6 +40,27 @@ pub run license_generator check
 pub run license_generator generate
 ```
 
+### Logs
+
+Info is the default and is not required to pass.
+```
+pub run license_generator generate
+
+is the same as
+
+pub run license_generator generate info
+```
+
+Debug will log more info te find out why the license_generator is failing. Stacktraces & errors will be shown. Info logs will also be shown.
+```
+pub run license_generator generate debug
+```
+
+Verbose will log everything. Downloading files & their status. Debug & info will also be shown.
+```
+pub run license_generator generate verbose
+```
+
 ### Working on mac?
 
 add this to you .bash_profile
