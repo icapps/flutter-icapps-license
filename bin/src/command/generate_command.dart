@@ -7,7 +7,7 @@ import '../extension/string_builder_extension.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_lock.dart';
 import '../model/pubspec.dart';
-import '../repo/license_repo.dart';
+import '../repo/license_repository.dart';
 import '../util/logger.dart';
 import 'check_command.dart';
 
@@ -85,7 +85,7 @@ class GenerateCommand {
   }
 
   static Future<String> _getDependencyText(Params params, Dependency dependency, DependencyLock lockedDependency) async {
-    final licenseData = await LicenseRepo.getLicenseData(params, dependency, lockedDependency);
+    final licenseData = await LicenseRepository.getLicenseData(params, dependency, lockedDependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
