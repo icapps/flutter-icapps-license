@@ -12,10 +12,12 @@ void main() {
       final params = Params();
       CheckCommand.checkDependencies(params);
     });
+
     test('Test checkCommand without dependencies', () {
       final params = Params();
       CheckCommand.checkDependencies(params);
     });
+
     test('Test checkCommand with dependency but no locked dependencies', () {
       final params = Params();
       params.dependencies.add(Dependency(
@@ -31,6 +33,7 @@ void main() {
         throwsA(predicate((e) => e is ArgumentError && e.message == 'test_package is not yet included in the pubspec.lock. Make sure you run pacakges get')),
       );
     });
+
     test('Test checkCommand with dependency & locked dependencies', () {
       final params = Params();
       params.dependencies.add(Dependency(
