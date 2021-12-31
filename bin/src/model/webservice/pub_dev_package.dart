@@ -1,9 +1,12 @@
+import 'package:meta/meta.dart';
+
 import 'pub_dev_pubspec.dart';
 
+@immutable
 class PubDevPackage {
   final PubDevPubSpec pubspec;
 
-  PubDevPackage({
+  const PubDevPackage({
     required this.pubspec,
   });
 

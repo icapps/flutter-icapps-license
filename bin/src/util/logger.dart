@@ -1,20 +1,29 @@
 // ignore_for_file: avoid_print
 
+import 'package:meta/meta.dart';
+
+@immutable
 class Logger {
-  static var _logInfo = false;
+  static var _logInfo = true;
   static var _logDebug = false;
   static var _logVerbose = false;
 
-  Logger.init(String flag) {
-    if (flag == 'info') {
-      _logInfo = true;
-    } else if (flag == 'debug') {
-      _logInfo = true;
-      _logDebug = true;
-    } else if (flag == 'verbose') {
-      _logInfo = true;
-      _logDebug = true;
-      _logVerbose = true;
+  const Logger._();
+
+  static void init(String flag) {
+    switch (flag) {
+      case 'info':
+        _logInfo = true;
+        break;
+      case 'debug':
+        _logInfo = true;
+        _logDebug = true;
+        break;
+      case 'verbose':
+        _logInfo = true;
+        _logDebug = true;
+        _logVerbose = true;
+        break;
     }
   }
 

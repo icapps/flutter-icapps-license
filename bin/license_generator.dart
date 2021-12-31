@@ -37,6 +37,8 @@ Future<void> main(List<String> args) async {
     final command = args[0];
     if (args.length >= 2) {
       Logger.init(args[1]);
+    } else {
+      Logger.init('info');
     }
     switch (command) {
       case 'check':

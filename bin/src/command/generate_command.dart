@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
 import '../extension/string_builder_extension.dart';
@@ -10,13 +11,14 @@ import '../repo/license_repo.dart';
 import '../util/logger.dart';
 import 'check_command.dart';
 
+@immutable
 class GenerateCommand {
-  GenerateCommand._();
+  const GenerateCommand._();
 
   static Future<void> generateLicenses(Params params) async {
     if (params.checkBeforGenerate) {
       CheckCommand.checkDependencies(params);
-      Logger.logInfo('\n\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n\n');
+      Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
     }
     final outputFilePath = join('lib', 'util', 'license.dart');
     final outputFile = File(outputFilePath);
@@ -25,10 +27,13 @@ class GenerateCommand {
     }
 
     final sb = StringBuffer()
+      ..writeln("import 'package:flutter/widgets.dart';")
+      ..writeln()
       ..writeln('//============================================================//')
       ..writeln('//THIS FILE IS AUTO GENERATED. DO NOT EDIT//')
       ..writeln('//============================================================//')
       ..writeln()
+      ..writeln('@immutable')
       ..writeln('class License {')
       ..writeln('  final String name;')
       ..writeln('  final String license;')
@@ -36,14 +41,15 @@ class GenerateCommand {
       ..writeln('  final String? homepage;')
       ..writeln('  final String? repository;')
       ..writeln()
-      ..writeln('  License({')
-      ..writeln('   required this.name,')
-      ..writeln('   required this.license,')
-      ..writeln('   this.version,')
-      ..writeln('   this.homepage,')
-      ..writeln('   this.repository,')
+      ..writeln('  const License({')
+      ..writeln('    required this.name,')
+      ..writeln('    required this.license,')
+      ..writeln('    this.version,')
+      ..writeln('    this.homepage,')
+      ..writeln('    this.repository,')
       ..writeln('  });')
-      ..writeln('}');
+      ..writeln('}')
+      ..writeln();
 
     final dependencies = <Dependency, DependencyLock>{};
     final sortedDependencies = params.dependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
@@ -83,7 +89,7 @@ class GenerateCommand {
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
-      ..writeln('        license: \'\'\'${licenseData.license}\'\'\',')
+      ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
       ..writelnWithQuotesOrNull('version', dependency.getVersion(lockedDependency))
       ..writelnWithQuotesOrNull('homepage', licenseData.homepageUrl)
       ..writelnWithQuotesOrNull('repository', licenseData.repositoryUrl)

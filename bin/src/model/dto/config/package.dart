@@ -1,9 +1,12 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class CachedPackage {
   final String name;
   final String rootUri;
   final String packageUri;
 
-  CachedPackage({
+  const CachedPackage({
     required this.name,
     required this.rootUri,
     required this.packageUri,

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
@@ -12,13 +13,22 @@ import '../model/webservice/pub_dev_package.dart';
 import '../model/webservice/pub_dev_pubspec.dart';
 import '../util/logger.dart';
 
+@immutable
 class PubDevWebservice {
-  PubDevWebservice._();
+  static const _pubDevBaseUrl = 'https://pub.dev';
+  static const _pubDevZHBaseUrl = 'https://pub.flutter-io.cn';
+  static String _baseUrl = _pubDevBaseUrl;
+
+  const PubDevWebservice._();
+
+  static void setBaseUrl(bool useZH) {
+    _baseUrl = useZH ? _pubDevZHBaseUrl : _pubDevBaseUrl;
+  }
 
   static Future<PubDevPackage?> getPubDevData(Dependency dependency, DependencyLock lockedDependency) async {
     try {
       final version = lockedDependency.version;
-      final url = 'https://pub.dev/api/packages/${dependency.name}/versions/$version';
+      final url = '$_baseUrl/api/packages/${dependency.name}/versions/$version';
       Logger.logVerbose('Downloading: $url');
       final result = await get(Uri.parse(url));
       if (result.statusCode != 200) {
@@ -41,7 +51,7 @@ class PubDevWebservice {
   static Future<PubDevPackage?> _getLocalPubDevData(Dependency dependency) async {
     final localPath = dependency.localPath;
     if (!dependency.isLocalDependency || localPath == null) return null;
-    Logger.logInfo('Fetching pub dev info from local dependency. (Because we were not able to fetch the detail from pub.dev)');
+    Logger.logInfo('Fetching pub dev info from local dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
     final file = File(join(localPath, 'pubspec.yaml'));
     final content = file.readAsStringSync();
     final yaml = loadYaml(content) as YamlMap;
@@ -58,7 +68,7 @@ class PubDevWebservice {
   static Future<PubDevPackage?> _getGitPubDevData(Dependency dependency) async {
     final gitInfo = dependency.gitPath;
     if (!dependency.isGitDependency || gitInfo == null) return null;
-    Logger.logInfo('Fetching pub dev info from git dependency. (Because we were not able to fetch the detail from pub.dev)');
+    Logger.logInfo('Fetching pub dev info from git dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
     String? url;
     if (gitInfo.isGithubUrl()) {
       url = gitInfo.getGithubPubSpecUrl();

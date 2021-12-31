@@ -1,5 +1,7 @@
+import 'package:meta/meta.dart';
 import 'package:yaml/yaml.dart';
 
+@immutable
 class DependencyLock {
   final String name;
   final String version;
@@ -8,7 +10,7 @@ class DependencyLock {
   final bool isDirectMainDependency;
   final bool isDirectDevDependency;
 
-  DependencyLock({
+  const DependencyLock({
     required this.name,
     required this.version,
     required this.source,

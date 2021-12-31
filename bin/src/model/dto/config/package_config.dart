@@ -1,9 +1,12 @@
+import 'package:meta/meta.dart';
+
 import 'package.dart';
 
+@immutable
 class PackageConfig {
   final List<CachedPackage> packages;
 
-  PackageConfig({
+  const PackageConfig({
     required this.packages,
   });
 

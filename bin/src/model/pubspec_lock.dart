@@ -18,7 +18,7 @@ class PubspecLock {
 
   List<DependencyLock> get devDependencies => _dependencies.where((element) => element.isDirectDevDependency).toList();
 
-  Future<void> init(String pubspecContent) async {
+  void init(String pubspecContent) {
     final config = loadYaml(pubspecContent) as YamlMap;
     final packages = config['packages'] as YamlMap?;
     if (packages == null) throw Exception('Did you forget to run flutter packages get');

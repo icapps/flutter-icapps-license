@@ -1,10 +1,13 @@
+import 'package:meta/meta.dart';
+
+@immutable
 class PubDevPubSpec {
   final String name;
   final String version;
   final String? homepage;
   final String? repository;
 
-  PubDevPubSpec({
+  const PubDevPubSpec({
     required this.name,
     required this.version,
     required this.homepage,

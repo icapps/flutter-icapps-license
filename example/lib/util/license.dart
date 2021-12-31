@@ -1,7 +1,10 @@
+import 'package:flutter/widgets.dart';
+
 //============================================================//
 //THIS FILE IS AUTO GENERATED. DO NOT EDIT//
 //============================================================//
 
+@immutable
 class License {
   final String name;
   final String license;
@@ -9,22 +12,23 @@ class License {
   final String? homepage;
   final String? repository;
 
-  License({
-   required this.name,
-   required this.license,
-   this.version,
-   this.homepage,
-   this.repository,
+  const License({
+    required this.name,
+    required this.license,
+    this.version,
+    this.homepage,
+    this.repository,
   });
 }
+
 class LicenseUtil {
   LicenseUtil._();
 
   static List<License> getLicenses() {
     return [
       License(
-        name: 'fast_barcode_scanner',
-        license: '''MIT License
+        name: r'fast_barcode_scanner',
+        license: r'''MIT License
 
 Copyright (c) 2020 Joshua Hoogstraat
 
@@ -45,13 +49,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
-        version: '1.1.4',
-        homepage: 'https://github.com/jhoogstraat/fast_barcode_scanner',
-        repository: 'https://github.com/jhoogstraat/fast_barcode_scanner',
+        version: r'1.1.4',
+        homepage: r'https://github.com/jhoogstraat/fast_barcode_scanner',
+        repository: r'https://github.com/jhoogstraat/fast_barcode_scanner',
       ),
       License(
-        name: 'flutter',
-        license: '''Copyright 2014 The Flutter Authors. All rights reserved.
+        name: r'flutter',
+        license: r'''Copyright 2014 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -78,12 +82,12 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: null,
-        homepage: 'https://flutter.dev/',
-        repository: 'https://github.com/flutter/flutter',
+        homepage: r'https://flutter.dev/',
+        repository: r'https://github.com/flutter/flutter',
       ),
       License(
-        name: 'flutter_lints',
-        license: '''Copyright 2013 The Flutter Authors. All rights reserved.
+        name: r'flutter_lints',
+        license: r'''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -109,13 +113,13 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: '^1.0.4',
+        version: r'^1.0.4',
         homepage: null,
-        repository: 'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
+        repository: r'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
       ),
       License(
-        name: 'flutter_localizations',
-        license: '''Copyright 2014 The Flutter Authors. All rights reserved.
+        name: r'flutter_localizations',
+        license: r'''Copyright 2014 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -142,12 +146,12 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: null,
-        homepage: 'https://flutter.dev/',
-        repository: 'https://github.com/flutter/flutter',
+        homepage: r'https://flutter.dev/',
+        repository: r'https://github.com/flutter/flutter',
       ),
       License(
-        name: 'flutter_test',
-        license: '''Copyright 2014 The Flutter Authors. All rights reserved.
+        name: r'flutter_test',
+        license: r'''Copyright 2014 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -174,12 +178,12 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: null,
-        homepage: 'https://flutter.dev/',
-        repository: 'https://github.com/flutter/flutter',
+        homepage: r'https://flutter.dev/',
+        repository: r'https://github.com/flutter/flutter',
       ),
       License(
-        name: 'license_generator',
-        license: '''MIT License
+        name: r'license_generator',
+        license: r'''MIT License
 
 Copyright (c) 2021 icapps
 
@@ -201,13 +205,13 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ''',
-        version: '3.0.0',
-        homepage: 'https://github.com/icapps/flutter-icapps-license',
+        version: r'3.0.0',
+        homepage: r'https://github.com/icapps/flutter-icapps-license',
         repository: null,
       ),
       License(
-        name: 'provider',
-        license: '''MIT License
+        name: r'provider',
+        license: r'''MIT License
 
 Copyright (c) 2019 Remi Rousselet
 
@@ -228,13 +232,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
-        version: '^5.0.0',
+        version: r'^5.0.0',
         homepage: null,
-        repository: 'https://github.com/rrousselGit/provider',
+        repository: r'https://github.com/rrousselGit/provider',
       ),
       License(
-        name: 'shared_preferences',
-        license: '''Copyright 2017 The Chromium Authors. All rights reserved.
+        name: r'shared_preferences',
+        license: r'''Copyright 2017 The Chromium Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -260,13 +264,13 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: '^2.0.5',
-        homepage: 'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
+        version: r'^2.0.5',
+        homepage: r'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
         repository: null,
       ),
       License(
-        name: 'test',
-        license: '''Copyright 2014, the Dart project authors. 
+        name: r'test',
+        license: r'''Copyright 2014, the Dart project authors. 
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are
@@ -294,9 +298,9 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: '^1.17.10',
+        version: r'^1.17.10',
         homepage: null,
-        repository: 'https://github.com/dart-lang/test/blob/master/pkgs/test',
+        repository: r'https://github.com/dart-lang/test/blob/master/pkgs/test',
       ),
     ];
   }

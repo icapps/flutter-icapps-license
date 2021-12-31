@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:http/http.dart';
+import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 
 import '../model/dto/dependency.dart';
@@ -29,8 +30,9 @@ const _allowedLicenseFilesName = [
   'license.rst',
 ];
 
-class LicenseRepo {
-  LicenseRepo._();
+@immutable
+class LicenseRepository {
+  const LicenseRepository._();
 
   static Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
     if (dependency.isPartOfFlutterSdk) {

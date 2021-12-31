@@ -1,23 +1,25 @@
 import 'dart:io';
 
+import 'package:meta/meta.dart';
+
 import 'logger.dart';
 
+@immutable
 class ConsoleUtil {
   static String? _testMessage;
 
-  ConsoleUtil._();
+  const ConsoleUtil._();
 
   static void returnInTest(String message) {
     _testMessage = message;
   }
 
   static bool readBoolean(String message) {
-    if (_testMessage != null) return _testMessage == 'y';
-    String? result;
-    while (result != 'y' && result != 'n') {
+    var result = _testMessage;
+    while (result != 'y' && result != 'yes' && result != 'n' && result != 'no') {
       Logger.logInfo(message);
       result = stdin.readLineSync()?.trim();
     }
-    return result == 'y';
+    return result == 'y' || result == 'yes';
   }
 }

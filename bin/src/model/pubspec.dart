@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:yaml/yaml.dart';
+import '../service/pubdev_webservice.dart';
 import '../util/logger.dart';
 import 'dto/dependency.dart';
 import 'exception/fatal_exception.dart';
@@ -22,10 +21,12 @@ class Params {
   static const yamlConfigFailFast = 'failFast';
   static const yamlConfigCheckBeforeGenerate = 'checkBeforeGenerate';
   static const yamlConfigDownloadPubDevDetails = 'downloadPubDevDetails';
+  static const yamlConfigUsePubDevZH = 'usePubDevZH';
 
   final pubspecLock = PubspecLock();
   String? projectName;
   var failFast = false;
+  var usePubDevZH = false;
   var checkBeforGenerate = false;
   var downloadPubDevDetails = false;
   final _dependencies = <Dependency>[];
@@ -53,6 +54,8 @@ class Params {
       failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
       checkBeforGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
       downloadPubDevDetails = icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
+      usePubDevZH = icappsLicenseConfig[yamlConfigUsePubDevZH] == true;
+      PubDevWebservice.setBaseUrl(usePubDevZH);
       _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
     }
 
@@ -67,7 +70,7 @@ class Params {
       Logger.logInfo(message);
       throw FatalException(message);
     }
-    await pubspecLock.init(pubspecLockContent);
+    pubspecLock.init(pubspecLockContent);
     Logger.logInfo('pubspec.yaml:');
     Logger.logInfo('All: ${dependencies.length}');
     Logger.logInfo('Main: ${mainDependencies.length}');

@@ -1,7 +1,9 @@
+import 'package:meta/meta.dart';
 import 'package:yaml/yaml.dart';
 
 import 'dependency_lock.dart';
 
+@immutable
 class Dependency {
   final String name;
   final bool isDevDependency;
@@ -13,7 +15,7 @@ class Dependency {
   final bool isExtraDependency;
   final String? version;
 
-  Dependency({
+  const Dependency({
     required this.name,
     required this.isDevDependency,
     required this.isPartOfFlutterSdk,

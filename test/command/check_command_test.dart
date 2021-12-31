@@ -20,7 +20,7 @@ void main() {
 
     test('Test checkCommand with dependency but no locked dependencies', () {
       final params = Params();
-      params.dependencies.add(Dependency(
+      params.dependencies.add(const Dependency(
         name: 'test_package',
         version: '1.0.0',
         isGitDependency: false,
@@ -36,7 +36,7 @@ void main() {
 
     test('Test checkCommand with dependency & locked dependencies', () {
       final params = Params();
-      params.dependencies.add(Dependency(
+      params.dependencies.add(const Dependency(
         name: 'test_package',
         version: '1.0.0',
         isGitDependency: false,
@@ -44,7 +44,7 @@ void main() {
         isPartOfFlutterSdk: false,
         isDevDependency: false,
       ));
-      params.pubspecLock.dependencies.add(DependencyLock(
+      params.pubspecLock.dependencies.add(const DependencyLock(
         name: 'test_package',
         version: '1.0.0',
         isDirectMainDependency: true,
@@ -58,7 +58,7 @@ void main() {
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
       ConsoleUtil.returnInTest('n');
       final params = Params();
-      params.dependencies.add(Dependency(
+      params.dependencies.add(const Dependency(
         name: 'test_package',
         version: '1.0.0',
         isGitDependency: false,
@@ -66,7 +66,7 @@ void main() {
         isPartOfFlutterSdk: false,
         isDevDependency: false,
       ));
-      params.pubspecLock.dependencies.add(DependencyLock(
+      params.pubspecLock.dependencies.add(const DependencyLock(
         name: 'test_package',
         version: '1.0.1',
         isDirectMainDependency: true,
@@ -83,7 +83,7 @@ void main() {
     test('Test checkCommand with dependency & locked dependencies missmatch & fail fast', () {
       final params = Params();
       params.failFast = true;
-      params.dependencies.add(Dependency(
+      params.dependencies.add(const Dependency(
         name: 'test_package',
         version: '1.0.0',
         isGitDependency: false,
@@ -91,7 +91,7 @@ void main() {
         isPartOfFlutterSdk: false,
         isDevDependency: false,
       ));
-      params.pubspecLock.dependencies.add(DependencyLock(
+      params.pubspecLock.dependencies.add(const DependencyLock(
         name: 'test_package',
         version: '1.0.1',
         isDirectMainDependency: true,
