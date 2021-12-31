@@ -8,7 +8,7 @@ import '../model/dto/dependency_lock.dart';
 import '../model/pubspec.dart';
 import '../repo/license_repo.dart';
 import '../util/logger.dart';
-import 'check.dart';
+import 'check_command.dart';
 
 class GenerateCommand {
   GenerateCommand._();

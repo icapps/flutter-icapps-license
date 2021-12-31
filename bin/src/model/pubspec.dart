@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:yaml/yaml.dart';
 import '../util/logger.dart';
 import 'dto/dependency.dart';
+import 'exception/fatal_exception.dart';
 import 'pubspec_lock.dart';
 
 const rawGithubDomain = 'https://raw.githubusercontent.com';
@@ -52,18 +53,19 @@ class Params {
       failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
       checkBeforGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
       downloadPubDevDetails = icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
-      generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
+      _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
     }
 
     final packages = config['dependencies'] as YamlMap?;
     final devPackages = config['dev_dependencies'] as YamlMap?;
-    generateDependencies(packages: packages, isDevDependency: false);
-    generateDependencies(packages: devPackages, isDevDependency: true);
+    _generateDependencies(packages: packages, isDevDependency: false);
+    _generateDependencies(packages: devPackages, isDevDependency: true);
 
     final containsLicenseGenerator = devDependencies.where((element) => element.name == yamlConfigLicense).isNotEmpty;
     if (!containsLicenseGenerator) {
-      Logger.logInfo('$yamlConfigLicense should be added to the dev_dependencies.');
-      exit(-1);
+      const message = '$yamlConfigLicense should be added to the dev_dependencies.';
+      Logger.logInfo(message);
+      throw FatalException(message);
     }
     await pubspecLock.init(pubspecLockContent);
     Logger.logInfo('pubspec.yaml:');
@@ -79,7 +81,7 @@ class Params {
     Logger.logInfo('----');
   }
 
-  void generateDependencies({required YamlMap? packages, required bool isDevDependency}) {
+  void _generateDependencies({required YamlMap? packages, required bool isDevDependency}) {
     final type = isDevDependency ? 'dev_dependencies' : 'dependencies';
     if (packages != null) {
       for (final package in packages.keys) {
@@ -105,7 +107,7 @@ class Params {
     }
   }
 
-  void generateLicensesOverride(YamlMap? packages) {
+  void _generateLicensesOverride(YamlMap? packages) {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
