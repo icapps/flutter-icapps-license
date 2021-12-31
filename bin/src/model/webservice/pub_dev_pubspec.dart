@@ -1,18 +1,18 @@
-class PubSpec {
+class PubDevPubSpec {
   final String name;
   final String version;
   final String? homepage;
   final String? repository;
 
-  PubSpec({
+  PubDevPubSpec({
     required this.name,
     required this.version,
     required this.homepage,
     required this.repository,
   });
 
-  factory PubSpec.fromJson(Map<String, dynamic> json) {
-    return PubSpec(
+  factory PubDevPubSpec.fromJson(Map<String, dynamic> json) {
+    return PubDevPubSpec(
       name: json['name'] as String, // ignore: avoid_as
       version: json['version'] as String, // ignore: avoid_as
       homepage: json['homepage'] as String?, // ignore: avoid_as

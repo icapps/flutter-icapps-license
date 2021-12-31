@@ -1,4 +1,4 @@
-# Example for the icapps license
+# Example for the license_generator
 
 This will be generated.
 
@@ -29,7 +29,7 @@ class LicenseUtil {
   static List<License> getLicenses() {
     return List<License>()
       ..add(License(
-        name: 'icapps_license',
+        name: 'license_generator',
         version: '^0.0.3',
         url: 'https://github.com/icapps/flutter-icapps-license',
         licenseUrl: 'https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE',

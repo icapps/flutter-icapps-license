@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:icapps_license_example/app.dart';
+import 'package:license_generator_example/app.dart';
 
 Future<void> main() async {
-  runApp(MyApp());
+  runApp(const MyApp());
 }

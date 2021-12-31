@@ -1,36 +1,43 @@
-# flutter icapps license
+# flutter license_generator
 
 A dart package to download the licenses for al the packages used.
 
-[![pub package](https://img.shields.io/pub/v/icapps_license.svg)](https://pub.dartlang.org/packages/icapps_license)
+[![pub package](https://img.shields.io/pub/v/license_generator.svg)](https://pub.dartlang.org/packages/license_generator)
 
 ## Setup
 
 ### Add dependency to pubspec
 
-[![pub package](https://img.shields.io/pub/v/icapps_license.svg)](https://pub.dartlang.org/packages/icapps_license)
+[![pub package](https://img.shields.io/pub/v/license_generator.svg)](https://pub.dartlang.org/packages/license_generator)
 ```
 dev-dependencies:
-  icapps_license: <latest-version>
+  license_generator: <latest-version>
 ```
 
 ### Basic options
 ```yaml
-icapps_license:
+license_generator:
   failFast: true    #Errors are not ignored and the generator will fail with an error
-  nullsafety: true  #Generate nullsafe code
 ```
 
 ### Run package with Flutter
 
 ```
-flutter packages pub run icapps_license
+flutter packages pub run license_generator
 ```
 
 ### Run package with Dart
 
+### Check if all versions in your pubspec.yaml match your pubspec.lock
+
 ```
-pub run icapps_license
+pub run license_generator check
+```
+
+#### Generate the license file
+
+```
+pub run license_generator generate
 ```
 
 ### Working on mac?
@@ -38,13 +45,24 @@ pub run icapps_license
 add this to you .bash_profile
 
 ```
-flutterlicense(){
- flutter packages get && flutter packages pub run icapps_license
+flutterlicensecheck(){
+ flutter packages get && flutter packages pub run license_generator check
 }
 ```
 
-now you can use the icapps license with a single command.
+```
+flutterlicense(){
+ flutter packages get && flutter packages pub run license_generator generate
+}
+```
+
+now you can use the license_generate with a single command.
 
 ```
 flutterlicense
+```
+
+And to check if everything is up to date use:
+```
+flutterlicensecheck
 ```
