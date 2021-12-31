@@ -7,15 +7,17 @@ extension GitInfoExtensions on GitInfo {
       url.startsWith('http://github.com/') ||
       url.startsWith('http://www.github.com/') ||
       url.startsWith('git://github.com/') ||
-      url.startsWith('git@github.com:') ||
-      url.startsWith('https://raw.githubusercontent.com/') ||
-      url.startsWith('http://raw.githubusercontent.com/');
+      url.startsWith('git@github.com:');
 
   String getGithubPubSpecUrl() {
+    const rawGithubUrl = 'https://raw.githubusercontent.com/';
+    const githubPrefix = 'https://github.com/';
+    const wwwGithubPrefix = 'https://www.github.com/';
     const wwwHttpsPrefix = 'https://www.';
     const httpPrefix = 'http://';
     const wwwHttpPrefix = 'http://www.';
     const gitPrefix = 'git@github.com:';
+    const gitPrefix2 = 'git://';
     const gitSuffix = '.git';
     var newUrl = url;
     if (newUrl.startsWith(wwwHttpsPrefix)) {
@@ -30,10 +32,18 @@ extension GitInfoExtensions on GitInfo {
     if (newUrl.startsWith(gitPrefix)) {
       newUrl = newUrl.replaceFirst(gitPrefix, 'https://github.com/');
     }
+    if (newUrl.startsWith(gitPrefix2)) {
+      newUrl = newUrl.replaceFirst(gitPrefix2, 'https://');
+    }
     if (newUrl.endsWith(gitSuffix)) {
       newUrl = newUrl.replaceFirst(gitSuffix, '', url.length - gitSuffix.length);
     }
-    newUrl = newUrl.replaceFirst('https://github.com/', 'https://raw.githubusercontent.com/');
+    if (newUrl.startsWith(githubPrefix)) {
+      newUrl = newUrl.replaceFirst(githubPrefix, rawGithubUrl);
+    }
+    if (newUrl.startsWith(wwwGithubPrefix)) {
+      newUrl = newUrl.replaceFirst(wwwGithubPrefix, rawGithubUrl);
+    }
     if (ref != null) {
       newUrl = '$newUrl/$ref';
     } else {
