@@ -23,7 +23,7 @@ Future<void> main(List<String> args) async {
 
   final pubspecLockYaml = File(join(Directory.current.path, 'pubspec.lock'));
   if (!pubspecLockYaml.existsSync()) {
-    throw Exception('Make sure you run flutter packages get ');
+    throw Exception('pubspec.lock is missing. Make sure you run flutter packages get');
   }
 
   final pubspecContent = pubspecYaml.readAsStringSync();
