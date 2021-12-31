@@ -123,6 +123,39 @@ packages:
       );
     });
 
+    test('Test checkCommand with dependency & locked dependencies missmatch', () {
+      ConsoleUtil.returnInTest('y');
+      const yaml = r'''
+name: test_example
+dependencies:
+dev_dependencies:
+  license_generator: 1.0.0
+  test_package: 1.0.0
+''';
+      const lock = r'''
+packages:
+  license_generator:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
+  test_package:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1"
+''';
+      final params = Params(yaml, lock);
+      expect(
+        () => CheckCommand.checkDependencies(params),
+        throwsA(predicate((e) => e is FatalException && e.message == 'We found some version mismatches: 1')),
+      );
+    });
+
     test('Test checkCommand with dependency & locked dependencies missmatch & fail fast', () {
       const yaml = r'''
 name: test_example

@@ -17,10 +17,4 @@ class PubDevPackage {
       ),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'pubspec': pubspec,
-    };
-  }
 }

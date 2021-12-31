@@ -30,15 +30,4 @@ class DependencyLock {
       isDirectDevDependency: dependency == 'direct dev',
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'name': name,
-      'version': version,
-      'source': source,
-      'isTransitiveDependency': isTransitiveDependency,
-      'isDirectMainDependency': isDirectMainDependency,
-      'isDirectDevDependency': isDirectDevDependency,
-    };
-  }
 }

@@ -22,13 +22,4 @@ class PubDevPubSpec {
       repository: json['repository'] as String?, // ignore: avoid_as
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'name': name,
-      'version': version,
-      'homepage': homepage,
-      'repository': repository,
-    };
-  }
 }

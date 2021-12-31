@@ -77,12 +77,13 @@ class Dependency {
   }
 }
 
+@immutable
 class GitInfo {
   final String url;
   final String? path;
   final String? ref;
 
-  GitInfo({
+  const GitInfo({
     required this.url,
     this.path,
     this.ref,

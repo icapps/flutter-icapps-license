@@ -48,6 +48,18 @@ void main() {
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
+      test('Test getGithubPubSpecUrl with normal git repo with git://', () {
+        final gitInfo = GitInfo(
+          url: 'git://github.com/vanlooverenkoen/test-repo.git',
+        );
+        expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
+      });
+      test('Test getGithubPubSpecUrl with normal git repo with git://', () {
+        final gitInfo = GitInfo(
+          url: 'git://www.github.com/vanlooverenkoen/test-repo.git',
+        );
+        expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
+      });
       test('Test getGithubPubSpecUrl without .git', () {
         final gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo',

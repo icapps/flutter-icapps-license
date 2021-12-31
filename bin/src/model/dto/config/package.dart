@@ -26,12 +26,4 @@ class CachedPackage {
       packageUri: json['packageUri'] as String,
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return <String, dynamic>{
-      'name': name,
-      'rootUri': rootUri,
-      'packageUri': packageUri,
-    };
-  }
 }
