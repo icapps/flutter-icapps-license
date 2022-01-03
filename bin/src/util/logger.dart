@@ -4,6 +4,8 @@ import 'package:meta/meta.dart';
 
 @immutable
 class Logger {
+  static var _impl = LoggerImpl();
+
   static var _logInfo = true;
   static var _logDebug = false;
   static var _logVerbose = false;
@@ -27,33 +29,44 @@ class Logger {
     }
   }
 
+  @visibleForTesting
+  static void setLoggerImpl(LoggerImpl impl) {
+    _impl = impl;
+  }
+
   static void logInfo(dynamic message) {
     if (_logInfo) {
-      print(message);
+      _impl.log(message);
     }
   }
 
   static void logDebug(dynamic message) {
     if (_logDebug) {
-      print(message);
+      _impl.log(message);
     }
   }
 
   static void logVerbose(dynamic message) {
     if (_logVerbose) {
-      print(message);
+      _impl.log(message);
     }
   }
 
   static void logError(dynamic error) {
     if (_logDebug) {
-      print(error);
+      _impl.log(error);
     }
   }
 
   static void logStacktrace(StackTrace trace) {
     if (_logDebug) {
-      print(trace);
+      _impl.log(trace);
     }
+  }
+}
+
+class LoggerImpl {
+  void log(dynamic message) {
+    print(message);
   }
 }

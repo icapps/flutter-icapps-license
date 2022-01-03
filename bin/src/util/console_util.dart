@@ -10,7 +10,8 @@ class ConsoleUtil {
 
   const ConsoleUtil._();
 
-  static void returnInTest(String message) {
+  @visibleForTesting
+  static void returnInTest(String? message) {
     _testMessage = message;
   }
 
