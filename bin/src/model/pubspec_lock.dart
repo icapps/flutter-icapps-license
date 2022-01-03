@@ -1,6 +1,7 @@
 import 'package:yaml/yaml.dart';
 
 import 'dto/dependency_lock.dart';
+import 'exception/fatal_exception.dart';
 
 const rawGithubDomain = 'https://raw.githubusercontent.com';
 const githubDomain = 'https://github.com';
@@ -19,10 +20,12 @@ class PubspecLock {
   List<DependencyLock> get devDependencies => _dependencies.where((element) => element.isDirectDevDependency).toList();
 
   PubspecLock(String pubspecContent) {
+    const key = 'packages';
     final config = loadYaml(pubspecContent) as YamlMap;
-    final packages = config['packages'] as YamlMap?;
-    if (packages == null) throw Exception('Did you forget to run flutter packages get');
-
+    if (!config.containsKey(key)) {
+      throw FatalException('Did you forget to run flutter packages get');
+    }
+    final packages = config[key] as YamlMap;
     for (final package in packages.keys) {
       if (package is! String) throw ArgumentError('package should be a String, the name of the package');
       final values = packages.value[package] as YamlMap;

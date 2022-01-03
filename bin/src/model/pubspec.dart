@@ -45,7 +45,7 @@ class Params {
     final projectName = config['name'] as String?;
 
     if (projectName == null || projectName.isEmpty) {
-      throw Exception('Could not parse the pubspec.yaml, project name not found');
+      throw FatalException('Could not parse the pubspec.yaml, project name not found');
     }
 
     final icappsLicenseConfig = config[yamlConfigLicense] as YamlMap?;
@@ -97,7 +97,7 @@ class Params {
           } else if (values is YamlMap) {
             dependency = Dependency.fromJson(package: package, isDevDependency: isDevDependency, data: values);
           } else {
-            throw ArgumentError('${values.runtimeType} ($type) is no String or YamlMap');
+            throw FatalException('${values.runtimeType} ($type) is no String or YamlMap');
           }
           _dependencies.add(dependency);
         } catch (e, trace) {
@@ -119,7 +119,7 @@ class Params {
           if (value is String) {
             _dependencyOverrides[package] = value;
           } else {
-            throw ArgumentError('${value.runtimeType} is no String');
+            throw FatalException('${value.runtimeType} is no String');
           }
         } catch (e, trace) {
           Logger.logInfo('Failed to parse: $package because of $e');

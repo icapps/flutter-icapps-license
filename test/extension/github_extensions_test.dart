@@ -7,34 +7,34 @@ void main() {
     group('normal', () {
       test('Test isGithubUrl with normal https', () {
         const url = 'https://github.com/vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal http', () {
         const url = 'http://github.com/vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal git', () {
         const url = 'git://github.com/vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal git', () {
         const url = 'git@github.com:vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
     });
     group('www', () {
       test('Test isGithubUrl with normal https www', () {
         const url = 'https://www.github.com/vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal http www', () {
         const url = 'http://www.github.com/vanlooverenkoen/test-repo';
-        final gitInfo = GitInfo(url: url);
+        const gitInfo = GitInfo(url: url);
         expect(gitInfo.isGithubUrl(), true);
       });
     });
@@ -43,37 +43,37 @@ void main() {
   group('Test getGithubPubSpecUrl', () {
     group('normal', () {
       test('Test getGithubPubSpecUrl with normal git repo', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo.git',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with normal git repo with git://', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git://github.com/vanlooverenkoen/test-repo.git',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with normal git repo with git://', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git://www.github.com/vanlooverenkoen/test-repo.git',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl without .git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with https', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'https://github.com/vanlooverenkoen/test-repo',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with http', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'http://github.com/vanlooverenkoen/test-repo',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
@@ -81,13 +81,13 @@ void main() {
     });
     group('www', () {
       test('Test getGithubPubSpecUrl with https', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'https://www.github.com/vanlooverenkoen/test-repo',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with http', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'http://www.github.com/vanlooverenkoen/test-repo',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/pubspec.yaml');
@@ -95,21 +95,21 @@ void main() {
     });
     group('ref', () {
       test('Test getGithubPubSpecUrl with https', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'https://github.com/vanlooverenkoen/test-repo',
           ref: '654dsf564dsf4ds5f6',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/654dsf564dsf4ds5f6/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo.git',
           ref: '654dsf564dsf4ds5f6',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/654dsf564dsf4ds5f6/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl without .git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo',
           ref: '654dsf564dsf4ds5f6',
         );
@@ -118,21 +118,21 @@ void main() {
     });
     group('path', () {
       test('Test getGithubPubSpecUrl with https', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'https://github.com/vanlooverenkoen/test-repo',
           path: 'extra-path',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/extra-path/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo.git',
           path: 'extra-path',
         );
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/master/extra-path/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl without .git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo',
           path: 'extra-path',
         );
@@ -141,7 +141,7 @@ void main() {
     });
     group('ref and path', () {
       test('Test getGithubPubSpecUrl with https', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'https://github.com/vanlooverenkoen/test-repo',
           path: 'extra-path',
           ref: '654dsf564dsf4ds5f6',
@@ -149,7 +149,7 @@ void main() {
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/654dsf564dsf4ds5f6/extra-path/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl with git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo.git',
           path: 'extra-path',
           ref: '654dsf564dsf4ds5f6',
@@ -157,7 +157,7 @@ void main() {
         expect(gitInfo.getGithubPubSpecUrl(), 'https://raw.githubusercontent.com/vanlooverenkoen/test-repo/654dsf564dsf4ds5f6/extra-path/pubspec.yaml');
       });
       test('Test getGithubPubSpecUrl without .git', () {
-        final gitInfo = GitInfo(
+        const gitInfo = GitInfo(
           url: 'git@github.com:vanlooverenkoen/test-repo',
           path: 'extra-path',
           ref: '654dsf564dsf4ds5f6',

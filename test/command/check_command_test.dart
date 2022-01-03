@@ -6,21 +6,6 @@ import '../../bin/src/util/console_util.dart';
 
 void main() {
   group('Test check command', () {
-    test('Test checkCommand without license_generator', () {
-      const yaml = r'''
-name: test_example
-dependencies:
-dev_dependencies:
-''';
-      const lock = r'''
-packages:
-''';
-      expect(
-        () => Params(yaml, lock),
-        throwsA(predicate((e) => e is FatalException && e.message == 'license_generator should be added to the dev_dependencies.')),
-      );
-    });
-
     test('Test checkCommand without dependencies', () {
       const yaml = r'''
 name: test_example
