@@ -3,6 +3,7 @@ import '../../bin/src/model/pubspec.dart';
 import '../../bin/src/model/exception/fatal_exception.dart';
 import '../../bin/src/command/check_command.dart';
 import '../../bin/src/util/console_util.dart';
+import '../util/test_stdin.dart';
 
 void main() {
   group('Test check command', () {
@@ -76,7 +77,9 @@ packages:
     });
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
-      ConsoleUtil.addTestMessage('n');
+      final stdin = TestStdinSync();
+      ConsoleUtil.addStdin(stdin);
+      stdin.addInputString('n');
       const yaml = r'''
 name: test_example
 dependencies:
@@ -109,7 +112,9 @@ packages:
     });
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
-      ConsoleUtil.addTestMessage('y');
+      final stdin = TestStdinSync();
+      ConsoleUtil.addStdin(stdin);
+      stdin.addInputString('y');
       const yaml = r'''
 name: test_example
 dependencies:

@@ -1,45 +1,49 @@
 import 'package:test/test.dart';
 import '../../bin/src/util/logger.dart';
 import '../../bin/src/util/console_util.dart';
+import 'test_stdin.dart';
 
 void main() {
   group('Test Console Util', () {
     late TestLoggerImpl loggerImpl;
+    late TestStdin stdin;
 
     setUp(() {
       loggerImpl = TestLoggerImpl();
+      stdin = TestStdinSync();
       Logger.setLoggerImpl(loggerImpl);
-      ConsoleUtil.clearTestMessages();
+      ConsoleUtil.addStdin(stdin);
     });
+
     group('no', () {
       test('test console util with no', () {
         expect(loggerImpl.lastMessage, null);
-        ConsoleUtil.addTestMessage('no');
+        stdin.addInputString('no');
         final result = ConsoleUtil.readBoolean('This is the message');
-        expect(loggerImpl.lastMessage, null);
+        expect(loggerImpl.lastMessage, 'This is the message');
         expect(result, false);
       });
       test('test console util with n', () {
         expect(loggerImpl.lastMessage, null);
-        ConsoleUtil.addTestMessage('n');
+        stdin.addInputString('n');
         final result = ConsoleUtil.readBoolean('This is the message');
-        expect(loggerImpl.lastMessage, null);
+        expect(loggerImpl.lastMessage, 'This is the message');
         expect(result, false);
       });
     });
     group('yes', () {
       test('test console util with yes', () {
         expect(loggerImpl.lastMessage, null);
-        ConsoleUtil.addTestMessage('yes');
+        stdin.addInputString('yes');
         final result = ConsoleUtil.readBoolean('This is the message');
-        expect(loggerImpl.lastMessage, null);
+        expect(loggerImpl.lastMessage, 'This is the message');
         expect(result, true);
       });
       test('test console util with y', () {
         expect(loggerImpl.lastMessage, null);
-        ConsoleUtil.addTestMessage('y');
+        stdin.addInputString('y');
         final result = ConsoleUtil.readBoolean('This is the message');
-        expect(loggerImpl.lastMessage, null);
+        expect(loggerImpl.lastMessage, 'This is the message');
         expect(result, true);
       });
     });
@@ -47,16 +51,16 @@ void main() {
       group('yes', () {
         test('test console util with yes', () {
           expect(loggerImpl.lastMessage, null);
-          ConsoleUtil.addTestMessage('something');
-          ConsoleUtil.addTestMessage('yes');
+          stdin.addInputString('something');
+          stdin.addInputString('yes');
           final result = ConsoleUtil.readBoolean('This is the message');
           expect(loggerImpl.lastMessage, 'This is the message');
           expect(result, true);
         });
         test('test console util with y', () {
           expect(loggerImpl.lastMessage, null);
-          ConsoleUtil.addTestMessage('something');
-          ConsoleUtil.addTestMessage('y');
+          stdin.addInputString('something');
+          stdin.addInputString('y');
           final result = ConsoleUtil.readBoolean('This is the message');
           expect(loggerImpl.lastMessage, 'This is the message');
           expect(result, true);
@@ -65,16 +69,16 @@ void main() {
       group('no', () {
         test('test console util with no', () {
           expect(loggerImpl.lastMessage, null);
-          ConsoleUtil.addTestMessage('something');
-          ConsoleUtil.addTestMessage('no');
+          stdin.addInputString('something');
+          stdin.addInputString('no');
           final result = ConsoleUtil.readBoolean('This is the message');
           expect(loggerImpl.lastMessage, 'This is the message');
           expect(result, false);
         });
         test('test console util with n', () {
           expect(loggerImpl.lastMessage, null);
-          ConsoleUtil.addTestMessage('something');
-          ConsoleUtil.addTestMessage('n');
+          stdin.addInputString('something');
+          stdin.addInputString('n');
           final result = ConsoleUtil.readBoolean('This is the message');
           expect(loggerImpl.lastMessage, 'This is the message');
           expect(result, false);
