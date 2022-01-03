@@ -12,7 +12,7 @@ void main() {
       loggerImpl = TestLoggerImpl();
       stdin = TestStdinSync();
       Logger.setLoggerImpl(loggerImpl);
-      ConsoleUtil.addStdin(stdin);
+      ConsoleUtil.setStdin(stdin);
     });
 
     group('no', () {

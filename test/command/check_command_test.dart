@@ -78,7 +78,7 @@ packages:
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
       final stdin = TestStdinSync();
-      ConsoleUtil.addStdin(stdin);
+      ConsoleUtil.setStdin(stdin);
       stdin.addInputString('n');
       const yaml = r'''
 name: test_example
@@ -113,7 +113,7 @@ packages:
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
       final stdin = TestStdinSync();
-      ConsoleUtil.addStdin(stdin);
+      ConsoleUtil.setStdin(stdin);
       stdin.addInputString('y');
       const yaml = r'''
 name: test_example

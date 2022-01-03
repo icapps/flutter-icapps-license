@@ -11,7 +11,7 @@ class ConsoleUtil {
   const ConsoleUtil._();
 
   @visibleForTesting
-  static void addStdin(Stdin stdin) {
+  static void setStdin(Stdin stdin) {
     _stdin = stdin;
   }
 
