@@ -6,20 +6,32 @@ import 'logger.dart';
 
 @immutable
 class ConsoleUtil {
-  static String? _testMessage;
+  static final _testMessage = <String>[];
 
   const ConsoleUtil._();
 
   @visibleForTesting
-  static void returnInTest(String? message) {
-    _testMessage = message;
+  static void addTestMessage(String message) {
+    _testMessage.add(message);
+  }
+
+  @visibleForTesting
+  static void clearTestMessages() {
+    _testMessage.clear();
   }
 
   static bool readBoolean(String message) {
-    var result = _testMessage;
+    String? result;
+    if (_testMessage.isNotEmpty) {
+      result = _testMessage.removeAt(0);
+    }
     while (result != 'y' && result != 'yes' && result != 'n' && result != 'no') {
       Logger.logInfo(message);
-      result = stdin.readLineSync()?.trim();
+      if (_testMessage.isNotEmpty) {
+        result = _testMessage.removeAt(0);
+      } else {
+        result = stdin.readLineSync()?.trim();
+      }
     }
     return result == 'y' || result == 'yes';
   }

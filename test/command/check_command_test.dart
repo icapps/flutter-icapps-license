@@ -76,7 +76,7 @@ packages:
     });
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
-      ConsoleUtil.returnInTest('n');
+      ConsoleUtil.addTestMessage('n');
       const yaml = r'''
 name: test_example
 dependencies:
@@ -109,7 +109,7 @@ packages:
     });
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
-      ConsoleUtil.returnInTest('y');
+      ConsoleUtil.addTestMessage('y');
       const yaml = r'''
 name: test_example
 dependencies:
