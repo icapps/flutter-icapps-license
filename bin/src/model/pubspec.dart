@@ -1,5 +1,4 @@
 import 'package:yaml/yaml.dart';
-import '../service/pubdev_webservice.dart';
 import '../util/logger.dart';
 import 'dto/dependency.dart';
 import 'exception/fatal_exception.dart';
@@ -55,7 +54,7 @@ class Params {
       checkBeforeGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
       downloadPubDevDetails = icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
       pubDevBaseUrlOverride = icappsLicenseConfig[yamlConfigPubDevBaseUrl] as String?;
-      PubDevWebservice.setBaseUrl(pubDevBaseUrlOverride);
+
       _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
     }
 

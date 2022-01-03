@@ -1,14 +1,22 @@
 import '../model/dto/dependency.dart';
 
-extension GitInfoExtensions on GitInfo {
+extension StringExtensions on String {
   bool isGithubUrl() =>
-      url.startsWith('https://github.com/') ||
-      url.startsWith('https://www.github.com/') ||
-      url.startsWith('http://github.com/') ||
-      url.startsWith('http://www.github.com/') ||
-      url.startsWith('git://github.com/') ||
-      url.startsWith('git@github.com:');
+      startsWith('https://github.com/') ||
+      startsWith('https://www.github.com/') ||
+      startsWith('http://github.com/') ||
+      startsWith('http://www.github.com/') ||
+      startsWith('git://github.com/') ||
+      startsWith('git@github.com:');
 
+  bool isGithubRawUrl() =>
+      startsWith('https://raw.githubusercontent.com') ||
+      startsWith('https://www.raw.githubusercontent.com') ||
+      startsWith('http://raw.githubusercontent.com') ||
+      startsWith('http://www.raw.githubusercontent.com');
+}
+
+extension GitInfoExtensions on GitInfo {
   String getGithubPubSpecUrl() {
     const rawGithubUrl = 'https://raw.githubusercontent.com/';
     const githubPrefix = 'https://github.com/';

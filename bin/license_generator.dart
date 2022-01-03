@@ -11,6 +11,8 @@ import 'src/model/exception/fatal_exception.dart';
 import 'src/model/pubspec.dart';
 import 'src/repo/license_repository.dart';
 import 'src/service/config_service.dart';
+import 'src/service/pubdev_webservice.dart';
+import 'src/service/webservice.dart';
 import 'src/util/logger.dart';
 
 Future<void> main(List<String> args) async {
@@ -41,14 +43,22 @@ Future<void> main(List<String> args) async {
     } else {
       Logger.init('info');
     }
+    const webservice = WebService();
     const configService = ConfigService();
-    const licenseRepo = LicenseRepository(configService);
+    final _pubDevWebservice = PubDevWebservice(
+      webservice: webservice,
+      baseUrl: params.pubDevBaseUrlOverride ?? PubDevWebservice.defaultPubDevBaseUrl,
+    );
+    final licenseRepo = LicenseRepository(
+      configService,
+      _pubDevWebservice,
+    );
     switch (command) {
       case 'check':
         CheckCommand.checkDependencies(params);
         break;
       case 'generate':
-        await const GenerateCommand(licenseRepo).generateLicenses(params);
+        await GenerateCommand(licenseRepo).generateLicenses(params);
         break;
     }
   } on FatalException {

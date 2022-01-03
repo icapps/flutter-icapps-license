@@ -8,34 +8,34 @@ void main() {
       test('Test isGithubUrl with normal https', () {
         const url = 'https://github.com/vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal http', () {
         const url = 'http://github.com/vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal git', () {
         const url = 'git://github.com/vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal git', () {
         const url = 'git@github.com:vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
     });
     group('www', () {
       test('Test isGithubUrl with normal https www', () {
         const url = 'https://www.github.com/vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
       test('Test isGithubUrl with normal http www', () {
         const url = 'http://www.github.com/vanlooverenkoen/test-repo';
         const gitInfo = GitInfo(url: url);
-        expect(gitInfo.isGithubUrl(), true);
+        expect(gitInfo.url.isGithubUrl(), true);
       });
     });
   });

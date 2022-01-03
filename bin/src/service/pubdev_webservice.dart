@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:http/http.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
@@ -9,33 +8,29 @@ import 'package:yaml/yaml.dart';
 import '../extension/github_extensions.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_lock.dart';
+import '../model/exception/fatal_exception.dart';
 import '../model/webservice/pub_dev_package.dart';
 import '../model/webservice/pub_dev_pubspec.dart';
 import '../util/logger.dart';
+import 'webservice.dart';
 
 @immutable
 class PubDevWebservice {
-  static const _pubDevBaseUrl = 'https://pub.dev';
-  static String _baseUrl = _pubDevBaseUrl;
+  static const defaultPubDevBaseUrl = 'https://pub.dev';
+  final String baseUrl;
+  final WebService webservice;
 
-  const PubDevWebservice._();
+  const PubDevWebservice({
+    required this.webservice,
+    this.baseUrl = defaultPubDevBaseUrl,
+  });
 
-  static void setBaseUrl(String? baseUrlOverride) {
-    _baseUrl = baseUrlOverride ?? _pubDevBaseUrl;
-  }
-
-  static Future<PubDevPackage?> getPubDevData(Dependency dependency, DependencyLock lockedDependency) async {
+  Future<PubDevPackage?> getPubDevData(Dependency dependency, DependencyLock lockedDependency) async {
     try {
       final version = lockedDependency.version;
-      final url = '$_baseUrl/api/packages/${dependency.name}/versions/$version';
-      Logger.logVerbose('Downloading: $url');
-      final result = await get(Uri.parse(url));
-      if (result.statusCode != 200) {
-        Logger.logVerbose('Downloading failed: ${result.body}');
-        throw Exception('Failed to get $url');
-      }
-      Logger.logVerbose('Downloading complete: $url');
-      final json = jsonDecode(result.body) as Map<String, dynamic>;
+      final url = '$baseUrl/api/packages/${dependency.name}/versions/$version';
+      final jsonString = await webservice.get(url);
+      final json = jsonDecode(jsonString) as Map<String, dynamic>;
       return PubDevPackage.fromJson(json);
     } catch (e) {
       if (dependency.isLocalDependency) {
@@ -47,7 +42,7 @@ class PubDevWebservice {
     }
   }
 
-  static Future<PubDevPackage?> _getLocalPubDevData(Dependency dependency) async {
+  Future<PubDevPackage?> _getLocalPubDevData(Dependency dependency) async {
     final localPath = dependency.localPath;
     if (!dependency.isLocalDependency || localPath == null) return null;
     Logger.logInfo('Fetching pub dev info from local dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
@@ -64,25 +59,19 @@ class PubDevWebservice {
     );
   }
 
-  static Future<PubDevPackage?> _getGitPubDevData(Dependency dependency) async {
+  Future<PubDevPackage?> _getGitPubDevData(Dependency dependency) async {
     final gitInfo = dependency.gitPath;
     if (!dependency.isGitDependency || gitInfo == null) return null;
     Logger.logInfo('Fetching pub dev info from git dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
     String? url;
-    if (gitInfo.isGithubUrl()) {
+    if (gitInfo.url.isGithubUrl()) {
       url = gitInfo.getGithubPubSpecUrl();
     }
     if (url == null) {
-      throw Exception('This git url is not yet supported: $url. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)');
+      throw FatalException('This git url is not yet supported: ${gitInfo.url}. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)');
     }
-    final result = await get(Uri.parse(url));
-    Logger.logVerbose('Downloading: $url');
-    if (result.statusCode != 200) {
-      Logger.logVerbose('Downloading failed: ${result.body}');
-      throw Exception('Failed to get $url');
-    }
-    final content = result.body;
-    final yaml = loadYaml(content) as YamlMap;
+    final yamlString = await webservice.get(url);
+    final yaml = loadYaml(yamlString) as YamlMap;
     return PubDevPackage(
       pubspec: PubDevPubSpec(
         name: yaml['name'] as String,

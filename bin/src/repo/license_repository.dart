@@ -33,9 +33,11 @@ const _allowedLicenseFilesName = [
 @immutable
 class LicenseRepository {
   final ConfigService _configService;
+  final PubDevWebservice _pubDevWebservice;
 
   const LicenseRepository(
     this._configService,
+    this._pubDevWebservice,
   );
 
   Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
@@ -44,7 +46,7 @@ class LicenseRepository {
     }
     final licenseOverride = params.dependencyOverrides[dependency.name];
     var licenseUrl = licenseOverride;
-    final pubDevData = await PubDevWebservice.getPubDevData(dependency, lockedDependency);
+    final pubDevData = await _pubDevWebservice.getPubDevData(dependency, lockedDependency);
     if (licenseOverride == null) {
       final configData = await _configService.getConfigData(dependency, lockedDependency);
       licenseUrl = _guessLocalLicenseFile(configData.rootUri);
