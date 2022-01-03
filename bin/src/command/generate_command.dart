@@ -13,9 +13,13 @@ import 'check_command.dart';
 
 @immutable
 class GenerateCommand {
-  const GenerateCommand._();
+  final LicenseRepository _licenseRepo;
 
-  static Future<void> generateLicenses(Params params) async {
+  const GenerateCommand(
+    this._licenseRepo,
+  );
+
+  Future<void> generateLicenses(Params params) async {
     if (params.checkBeforeGenerate) {
       CheckCommand.checkDependencies(params);
       Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
@@ -84,8 +88,8 @@ class GenerateCommand {
     outputFile.writeAsStringSync(sb.toString());
   }
 
-  static Future<String> _getDependencyText(Params params, Dependency dependency, DependencyLock lockedDependency) async {
-    final licenseData = await LicenseRepository.getLicenseData(params, dependency, lockedDependency);
+  Future<String> _getDependencyText(Params params, Dependency dependency, DependencyLock lockedDependency) async {
+    final licenseData = await _licenseRepo.getLicenseData(params, dependency, lockedDependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)

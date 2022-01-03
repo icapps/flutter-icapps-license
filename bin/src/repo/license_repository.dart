@@ -32,9 +32,13 @@ const _allowedLicenseFilesName = [
 
 @immutable
 class LicenseRepository {
-  const LicenseRepository._();
+  final ConfigService _configService;
 
-  static Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
+  const LicenseRepository(
+    this._configService,
+  );
+
+  Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
     if (dependency.isPartOfFlutterSdk) {
       return _getFlutterLicenseData();
     }
@@ -42,7 +46,7 @@ class LicenseRepository {
     var licenseUrl = licenseOverride;
     final pubDevData = await PubDevWebservice.getPubDevData(dependency, lockedDependency);
     if (licenseOverride == null) {
-      final configData = await ConfigService.getConfigData(dependency, lockedDependency);
+      final configData = await _configService.getConfigData(dependency, lockedDependency);
       licenseUrl = _guessLocalLicenseFile(configData.rootUri);
       Logger.logVerbose('GET LICENSE AT ${configData.rootUri} - $licenseUrl');
     }

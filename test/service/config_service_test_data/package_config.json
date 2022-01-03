@@ -1,0 +1,14 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "test_package",
+      "rootUri": "file:///Users/myuser/.pub-cache/hosted/pub.dartlang.org/test_package-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    }
+  ],
+  "generated": "2021-12-31T11:41:40.795166Z",
+  "generator": "pub",
+  "generatorVersion": "2.14.3"
+}

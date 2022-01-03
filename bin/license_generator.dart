@@ -9,6 +9,8 @@ import 'src/command/check_command.dart';
 import 'src/command/generate_command.dart';
 import 'src/model/exception/fatal_exception.dart';
 import 'src/model/pubspec.dart';
+import 'src/repo/license_repository.dart';
+import 'src/service/config_service.dart';
 import 'src/util/logger.dart';
 
 Future<void> main(List<String> args) async {
@@ -39,12 +41,14 @@ Future<void> main(List<String> args) async {
     } else {
       Logger.init('info');
     }
+    const configService = ConfigService();
+    const licenseRepo = LicenseRepository(configService);
     switch (command) {
       case 'check':
         CheckCommand.checkDependencies(params);
         break;
       case 'generate':
-        await GenerateCommand.generateLicenses(params);
+        await const GenerateCommand(licenseRepo).generateLicenses(params);
         break;
     }
   } on FatalException {
