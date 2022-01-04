@@ -1,0 +1,14 @@
+name: test_example
+version: 1.0.0
+homepage: https://github.com/icapps/flutter-icapps-license
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+dev_dependencies:
+  test_package: ^1.0.0
+  license_generator: ^1.0.0
+license_generator:
+  licenses:
+    test_package: http://test.com

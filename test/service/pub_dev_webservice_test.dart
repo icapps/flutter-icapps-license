@@ -38,7 +38,7 @@ void main() {
           'repository': 'https://repository.com',
         }
       };
-      final webservice = TestWebService(data);
+      final webservice = TestJsonWebService(data);
       final pubDevService = PubDevWebservice(webservice: webservice);
       final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'test_package');
@@ -73,7 +73,7 @@ void main() {
         isDirectMainDependency: true,
       );
       final data = <String, dynamic>{};
-      final webservice = TestWebService(data);
+      final webservice = TestJsonWebService(data);
       final pubDevService = PubDevWebservice(webservice: webservice);
       final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'test_package');
@@ -109,7 +109,7 @@ version: 3.0.0
 homepage: https://homepage.com
 repository: https://repository.com
 ''';
-      final webservice = TestGitWebService(data, gitData);
+      final webservice = TestJsonAndGitWebService(data, gitData);
       final pubDevService = PubDevWebservice(webservice: webservice);
       final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'license_generator');
@@ -139,37 +139,44 @@ repository: https://repository.com
         isDirectMainDependency: true,
       );
       final data = <String, dynamic>{};
-      final webservice = TestWebService(data);
+      final webservice = TestJsonWebService(data);
       final pubDevService = PubDevWebservice(webservice: webservice);
       expect(
-            () async => pubDevService.getPubDevData(dependency, lockedDependency),
+        () async => pubDevService.getPubDevData(dependency, lockedDependency),
         throwsA(predicate((e) =>
-        e is FatalException &&
-            e.message ==
-                'This git url is not yet supported: ../. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)')),
+            e is FatalException &&
+            e.message == 'This git url is not yet supported: ../. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)')),
       );
     });
   });
 }
 
 @immutable
-class TestWebService extends WebService {
-  final Map<String, dynamic> data;
+class TestStringWebService extends WebService {
+  final String data;
 
-  const TestWebService(this.data);
+  const TestStringWebService(this.data);
 
   @override
-  Future<String> get(String url) async {
-    return jsonEncode(data);
-  }
+  Future<String> get(String url) async => data;
 }
 
 @immutable
-class TestGitWebService extends WebService {
+class TestJsonWebService extends WebService {
+  final Map<String, dynamic> data;
+
+  const TestJsonWebService(this.data);
+
+  @override
+  Future<String> get(String url) async => jsonEncode(data);
+}
+
+@immutable
+class TestJsonAndGitWebService extends WebService {
   final Map<String, dynamic> data;
   final String githubData;
 
-  const TestGitWebService(
+  const TestJsonAndGitWebService(
     this.data,
     this.githubData,
   );

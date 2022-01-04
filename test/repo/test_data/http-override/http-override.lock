@@ -1,0 +1,17 @@
+packages:
+  licence_generator:
+    dependency: direct dev
+    description:
+      name: test_package
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+  test_package:
+    dependency: direct main
+    description:
+      name: test_package
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
+sdks:
+  dart: ">=2.12.0 <3.0.0"

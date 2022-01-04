@@ -50,6 +50,7 @@ Future<void> main(List<String> args) async {
       baseUrl: params.pubDevBaseUrlOverride ?? PubDevWebservice.defaultPubDevBaseUrl,
     );
     final licenseRepo = LicenseRepository(
+      webservice,
       configService,
       _pubDevWebservice,
     );
