@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:test/test.dart';
 import '../../bin/src/service/webservice.dart';
 import '../../bin/src/model/exception/fatal_exception.dart';
