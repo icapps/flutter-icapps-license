@@ -281,6 +281,7 @@ license_generator:
   extra_licenses:
     test_package: 
       name: Test Package
+      license: https://test.com
 ''';
         const lock = r'''
 packages:

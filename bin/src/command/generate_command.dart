@@ -69,7 +69,7 @@ class GenerateCommand {
 
     for (final dependency in sortedDependencies) {
       if (dependency is ExtraDependency) {
-        sb.write(await _getExtraDependencyText(params, dependency));
+        sb.write(await _getExtraDependencyText(dependency));
       } else {
         final lockedDependency = params.pubspecLock.dependencies.firstWhere((element) => element.name == dependency.name);
         sb.write(await _getDependencyText(params, dependency, lockedDependency));
@@ -97,8 +97,8 @@ class GenerateCommand {
     return sb.toString();
   }
 
-  Future<String> _getExtraDependencyText(Params params, ExtraDependency dependency) async {
-    final licenseData = await _licenseRepo.getLicenseDataForExtraDependency(params, dependency);
+  Future<String> _getExtraDependencyText(ExtraDependency dependency) async {
+    final licenseData = await _licenseRepo.getLicenseDataForExtraDependency(dependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)

@@ -165,7 +165,7 @@ class TestLicenseRepository implements LicenseRepository {
   }
 
   @override
-  Future<DependencyLicenseData> getLicenseDataForExtraDependency(Params params, ExtraDependency dependency) async {
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(ExtraDependency dependency) async {
     final key = data.keys.firstWhere((element) => element == dependency.name);
     return data[key]!;
   }

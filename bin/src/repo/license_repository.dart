@@ -66,20 +66,9 @@ class LicenseRepository {
     );
   }
 
-  Future<DependencyLicenseData> getLicenseDataForExtraDependency(Params params, ExtraDependency dependency) async {
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(ExtraDependency dependency) async {
     if (dependency.isPartOfFlutterSdk) return _getFlutterLicenseData();
-    final localPath = dependency.localPath;
-    final licenseUrl = dependency.licenseUrl;
-    String? license;
-    if (dependency.isLocalDependency && localPath != null) {
-      final file = File(localPath);
-      license = file.readAsStringSync();
-    } else if (licenseUrl != null) {
-      license = await _getLicenseDataByUrl(licenseUrl);
-    }
-    if (license == null) {
-      throw FatalException('Failed to get the license for ${dependency.name} (extra_licenses)');
-    }
+    final license = await _getLicenseDataByUrl(dependency.licenseUrl);
     return DependencyLicenseData(
       homepageUrl: dependency.homepageUrl,
       repositoryUrl: dependency.repositoryUrl,

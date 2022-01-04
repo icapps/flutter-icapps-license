@@ -39,7 +39,7 @@ class Params {
 
   Map<String, String> get dependencyOverrides => _dependencyOverrides;
 
-  List<Dependency> get extraDependencies => _extraDependencies;
+  List<ExtraDependency> get extraDependencies => _extraDependencies;
 
   List<Dependency> get dependencies => _dependencies;
 
