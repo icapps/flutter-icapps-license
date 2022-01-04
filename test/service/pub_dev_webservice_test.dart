@@ -82,7 +82,7 @@ void main() {
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
-    test('test this getPubDevData with invalid data but git repo', () async {
+    test('test this getPubDevData with invalid data but github repo', () async {
       const dependency = Dependency(
         name: 'test_package',
         version: '1.0.0',
@@ -118,6 +118,7 @@ repository: https://repository.com
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
+    //If this test fails it is possible that the repo does not exist anymore. It was the only example I could find. GitPath can be changed if needed.
     test('test this getPubDevData with invalid data but git lab repo', () async {
       const dependency = Dependency(
         name: 'test_package',
@@ -126,7 +127,8 @@ repository: https://repository.com
         isPartOfFlutterSdk: false,
         isGitDependency: true,
         gitPath: GitInfo(
-          url: 'git@gitlab.com:vanlooverenkoen/company/frontend/flutter-app.git',
+          url: 'git@gitlab.com:famedly/company/frontend/famedlysdk.git',
+          ref: 'main',
         ),
         isLocalDependency: false,
       );
@@ -219,7 +221,7 @@ class TestJsonAndGitWebService extends WebService {
 
   @override
   Future<String> get(String url) async {
-    if (url.isGithubRawUrl()) return githubData;
+    if (url.isGithubRawUrl() || url.isGitLabUrl()) return githubData;
     return jsonEncode(data);
   }
 }
