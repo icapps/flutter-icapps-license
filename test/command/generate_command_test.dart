@@ -5,6 +5,7 @@ import 'package:test/test.dart';
 import '../../bin/src/model/dto/dependency.dart';
 import '../../bin/src/model/dto/dependency_license_data.dart';
 import '../../bin/src/model/dto/dependency_lock.dart';
+import '../../bin/src/model/dto/extra_dependency.dart';
 import '../../bin/src/model/pubspec.dart';
 import '../../bin/src/command/generate_command.dart';
 import '../../bin/src/repo/license_repository.dart';
@@ -158,7 +159,13 @@ class TestLicenseRepository implements LicenseRepository {
   TestLicenseRepository(this.data);
 
   @override
-  Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
+  Future<DependencyLicenseData> getLicenseDataForDependency(Params params, Dependency dependency, DependencyLock lockedDependency) async {
+    final key = data.keys.firstWhere((element) => element == dependency.name);
+    return data[key]!;
+  }
+
+  @override
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(Params params, ExtraDependency dependency) async {
     final key = data.keys.firstWhere((element) => element == dependency.name);
     return data[key]!;
   }

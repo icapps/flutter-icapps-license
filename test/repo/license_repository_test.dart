@@ -27,7 +27,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency();
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(),
@@ -53,7 +53,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(useDev: true),
@@ -79,7 +79,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency();
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(),
@@ -105,7 +105,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(useDev: true),
@@ -132,7 +132,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency();
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(),
@@ -156,7 +156,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(useDev: true),
@@ -180,7 +180,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency();
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(),
@@ -205,7 +205,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(useDev: true),
@@ -231,7 +231,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency();
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(),
@@ -255,7 +255,7 @@ void main() {
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
       expect(
-        () async => repo.getLicenseData(
+        () async => repo.getLicenseDataForDependency(
           params,
           dependency,
           params.getFirstLockedDependency(useDev: true),
@@ -278,7 +278,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency();
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(),
@@ -300,7 +300,7 @@ void main() {
       final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
       final params = getParams(name);
       final dependency = params.getFirstDependency(useDev: true);
-      final result = await repo.getLicenseData(
+      final result = await repo.getLicenseDataForDependency(
         params,
         dependency,
         params.getFirstLockedDependency(useDev: true),
