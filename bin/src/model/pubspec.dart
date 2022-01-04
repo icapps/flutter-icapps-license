@@ -98,7 +98,7 @@ class Params {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String, the name of the package');
+          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
           final dynamic values = packages.value[package];
           Dependency dependency;
           if (values is String) {
@@ -123,7 +123,7 @@ class Params {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String, the name of the package');
+          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
           final dynamic value = packages.value[package];
           if (value is String) {
             _dependencyOverrides[package] = value;
@@ -144,7 +144,7 @@ class Params {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String, the name of the package');
+          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
           final dynamic value = packages.value[package];
           if (value is YamlMap) {
             _extraDependencies.add(ExtraDependency.fromJson(package, value));
