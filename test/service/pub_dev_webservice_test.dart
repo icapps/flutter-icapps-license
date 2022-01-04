@@ -118,7 +118,6 @@ repository: https://repository.com
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
-    //If this test fails it is possible that the repo does not exist anymore. It was the only example I could find. GitPath can be changed if needed.
     test('test this getPubDevData with invalid data but git lab repo', () async {
       const dependency = Dependency(
         name: 'test_package',
@@ -127,8 +126,7 @@ repository: https://repository.com
         isPartOfFlutterSdk: false,
         isGitDependency: true,
         gitPath: GitInfo(
-          url: 'git@gitlab.com:famedly/company/frontend/famedlysdk.git',
-          ref: 'main',
+          url: 'git@gitlab.com:vanlooverenkoen/company/app/flutter-sdk.git',
         ),
         isLocalDependency: false,
       );
