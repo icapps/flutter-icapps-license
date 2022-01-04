@@ -149,7 +149,7 @@ class Params {
           if (value is YamlMap) {
             _extraDependencies.add(ExtraDependency.fromJson(package, value));
           } else {
-            throw FatalException('${value.runtimeType} is no String');
+            throw FatalException('${value.runtimeType} is no YamlMap');
           }
         } catch (e, trace) {
           Logger.logInfo('Failed to parse: $package because of $e');
