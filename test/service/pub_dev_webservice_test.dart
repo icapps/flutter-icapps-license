@@ -118,6 +118,42 @@ repository: https://repository.com
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
+    test('test this getPubDevData with invalid data but git lab repo', () async {
+      const dependency = Dependency(
+        name: 'test_package',
+        version: '1.0.0',
+        isDevDependency: false,
+        isPartOfFlutterSdk: false,
+        isGitDependency: true,
+        gitPath: GitInfo(
+          url: 'git@gitlab.com:vanlooverenkoen/company/frontend/flutter-app.git',
+        ),
+        isLocalDependency: false,
+      );
+      const lockedDependency = DependencyLock(
+        name: 'test_package',
+        source: 'pub.dev',
+        version: '1.0.0',
+        isDirectDevDependency: false,
+        isTransitiveDependency: false,
+        isDirectMainDependency: true,
+      );
+      final data = <String, dynamic>{};
+      const gitData = r'''
+name: license_generator
+version: 3.0.0
+homepage: https://homepage.com
+repository: https://repository.com
+''';
+      final webservice = TestJsonAndGitWebService(data, gitData);
+      final pubDevService = PubDevWebservice(webservice: webservice);
+      final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
+      expect(pubDevPackage!.pubspec.name, 'license_generator');
+      expect(pubDevPackage.pubspec.version, '3.0.0');
+      expect(pubDevPackage.pubspec.homepage, 'https://homepage.com');
+      expect(pubDevPackage.pubspec.repository, 'https://repository.com');
+    });
+
     test('test this getPubDevData with unkown url', () async {
       const dependency = Dependency(
         name: 'test_package',
