@@ -154,7 +154,7 @@ repository: https://repository.com
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
-    test('test this getPubDevData with unkown url', () async {
+    test('test this getPubDevData with unknown url', () async {
       const dependency = Dependency(
         name: 'test_package',
         version: '1.0.0',
