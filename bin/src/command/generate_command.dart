@@ -55,8 +55,12 @@ class GenerateCommand {
       ..writeln();
 
     final allDependencies = <Dependency>[];
-    allDependencies.addAll(params.dependencies);
     allDependencies.addAll(params.extraDependencies);
+    for (final dependency in params.dependencies) {
+      if (allDependencies.where((element) => element.name == dependency.name).isEmpty) {
+        allDependencies.add(dependency);
+      }
+    }
 
     final sortedDependencies = allDependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
 

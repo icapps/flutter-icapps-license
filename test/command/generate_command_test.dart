@@ -219,13 +219,6 @@ class LicenseUtil {
       License(
         name: r'license_generator',
         license: r'''this is the license_generator license''',
-        version: r'1.0.0',
-        homepage: r'https://homepage.com',
-        repository: r'https://repository.com',
-      ),
-      License(
-        name: r'license_generator',
-        license: r'''this is the license_generator license''',
         version: null,
         homepage: r'https://homepage.com',
         repository: r'https://repository.com',
