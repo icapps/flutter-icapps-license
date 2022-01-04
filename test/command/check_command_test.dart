@@ -154,7 +154,7 @@ dev_dependencies:
   license_generator: 1.0.0
   test_package: 1.0.0
 license_generator:
-  failFast: true
+  fail_fast: true
 ''';
       const lock = r'''
 packages:

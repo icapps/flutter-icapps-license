@@ -17,7 +17,7 @@ dev-dependencies:
 ### Basic options
 ```yaml
 license_generator:
-  failFast: true    #Errors are not ignored and the generator will fail with an error
+  fail_fast: true    #Errors are not ignored and the generator will fail with an error
 ```
 
 ### Run package with Flutter

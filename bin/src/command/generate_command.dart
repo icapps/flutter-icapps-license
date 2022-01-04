@@ -24,8 +24,7 @@ class GenerateCommand {
       CheckCommand.checkDependencies(params);
       Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
     }
-    final outputFilePath = join('lib', 'util', 'license.dart');
-    final outputFile = File(outputFilePath);
+    final outputFile = File(params.fileOutputPath);
     if (!outputFile.existsSync()) {
       outputFile.createSync(recursive: true);
     }
