@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
-import 'package:path/path.dart';
 
 import '../extension/string_builder_extension.dart';
 import '../model/dto/dependency.dart';
@@ -21,7 +20,7 @@ class GenerateCommand {
 
   Future<void> generateLicenses(Params params) async {
     if (params.checkBeforeGenerate) {
-      CheckCommand.checkDependencies(params);
+      const CheckCommand().checkDependencies(params);
       Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
     }
     final outputFile = File(params.fileOutputPath);
@@ -57,11 +56,7 @@ class GenerateCommand {
     final dependencies = <Dependency, DependencyLock>{};
     final sortedDependencies = params.dependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
     for (final dependency in sortedDependencies) {
-      final matchingDependencies = params.pubspecLock.dependencies.where((element) => element.name == dependency.name);
-      if (matchingDependencies.isEmpty) {
-        throw Exception('Make sure you run packages get before the license_generator');
-      }
-      dependencies[dependency] = matchingDependencies.first;
+      dependencies[dependency] = params.pubspecLock.dependencies.firstWhere((element) => element.name == dependency.name);
     }
 
     sb
@@ -72,10 +67,7 @@ class GenerateCommand {
       ..writeln('    return [');
 
     for (final dependency in dependencies.keys) {
-      final lockedDependency = dependencies[dependency];
-      if (lockedDependency == null) {
-        throw Exception('${dependency.name} could not be found in the dependency map');
-      }
+      final lockedDependency = dependencies[dependency]!;
       sb.write(await _getDependencyText(params, dependency, lockedDependency));
     }
 

@@ -56,7 +56,7 @@ Future<void> main(List<String> args) async {
     );
     switch (command) {
       case 'check':
-        CheckCommand.checkDependencies(params);
+        const CheckCommand().checkDependencies(params);
         break;
       case 'generate':
         await GenerateCommand(licenseRepo).generateLicenses(params);

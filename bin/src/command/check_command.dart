@@ -9,9 +9,9 @@ import '../util/logger.dart';
 
 @immutable
 class CheckCommand {
-  const CheckCommand._();
+  const CheckCommand();
 
-  static void checkDependencies(Params params) {
+  void checkDependencies(Params params) {
     final versionMismatches = <Dependency, DependencyLock>{};
     for (final dependency in params.dependencies) {
       final lockDependencies = params.pubspecLock.dependencies.where((element) => element.name == dependency.name);
@@ -33,10 +33,7 @@ class CheckCommand {
       final printDependencies = ConsoleUtil.readBoolean('Do you want to see all the dependencies? (y/n)');
       if (printDependencies) {
         for (final dependency in versionMismatches.keys) {
-          final lockedDependency = versionMismatches[dependency];
-          if (lockedDependency == null) {
-            throw Exception('${dependency.name} could not be found in the version mismatch list');
-          }
+          final lockedDependency = versionMismatches[dependency]!;
           Logger.logInfo('${dependency.name} is ${dependency.version} in your pubspec.yaml, your pubspec.lock is using ${lockedDependency.version}');
         }
       }

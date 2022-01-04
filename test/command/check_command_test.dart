@@ -27,7 +27,7 @@ packages:
       final params = Params(yaml, lock);
       params.dependencies.clear();
       params.pubspecLock.dependencies.clear();
-      CheckCommand.checkDependencies(params);
+      const CheckCommand().checkDependencies(params);
     });
 
     test('Test checkCommand with dependency but no locked dependencies', () {
@@ -50,7 +50,7 @@ packages:
 ''';
       final params = Params(yaml, lock);
       expect(
-        () => CheckCommand.checkDependencies(params),
+        () => const CheckCommand().checkDependencies(params),
         throwsA(predicate((e) => e is ArgumentError && e.message == 'test_package is not yet included in the pubspec.lock. Make sure you run packages get')),
       );
     });
@@ -73,7 +73,7 @@ packages:
     version: "1.0.0"
 ''';
       final params = Params(yaml, lock);
-      CheckCommand.checkDependencies(params);
+      const CheckCommand().checkDependencies(params);
     });
 
     test('Test checkCommand with dependency & locked dependencies missmatch', () {
@@ -106,7 +106,7 @@ packages:
 ''';
       final params = Params(yaml, lock);
       expect(
-        () => CheckCommand.checkDependencies(params),
+        () => const CheckCommand().checkDependencies(params),
         throwsA(predicate((e) => e is FatalException && e.message == 'We found some version mismatches: 1')),
       );
     });
@@ -141,7 +141,7 @@ packages:
 ''';
       final params = Params(yaml, lock);
       expect(
-        () => CheckCommand.checkDependencies(params),
+        () => const CheckCommand().checkDependencies(params),
         throwsA(predicate((e) => e is FatalException && e.message == 'We found some version mismatches: 1')),
       );
     });
@@ -175,7 +175,7 @@ packages:
 ''';
       final params = Params(yaml, lock);
       expect(
-        () => CheckCommand.checkDependencies(params),
+        () => const CheckCommand().checkDependencies(params),
         throwsA(predicate((e) => e is FatalException && e.message == 'test_package is 1.0.0 in your pubspec. Your pubspec.lock is using 1.0.1')),
       );
     });
