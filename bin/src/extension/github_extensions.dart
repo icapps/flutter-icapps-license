@@ -9,6 +9,14 @@ extension StringExtensions on String {
       startsWith('git://github.com/') ||
       startsWith('git@github.com:');
 
+  bool isGitLabUrl() =>
+      startsWith('https://gitlab.com/') ||
+      startsWith('https://www.gitlab.com/') ||
+      startsWith('http://gitlab.com/') ||
+      startsWith('http://www.gitlab.com/') ||
+      startsWith('git://gitlab.com/') ||
+      startsWith('git@gitlab.com:');
+
   bool isGithubRawUrl() =>
       startsWith('https://raw.githubusercontent.com') ||
       startsWith('https://www.raw.githubusercontent.com') ||
@@ -17,14 +25,45 @@ extension StringExtensions on String {
 }
 
 extension GitInfoExtensions on GitInfo {
-  String getGithubPubSpecUrl() {
+  String getGitLabPubSpecUrl() {
+    const hostName = 'gitlab';
     const rawGithubUrl = 'https://raw.githubusercontent.com/';
-    const githubPrefix = 'https://github.com/';
-    const wwwGithubPrefix = 'https://www.github.com/';
+    var newUrl = _getCleanedUpUrl(hostName, rawGithubUrl);
+
+    newUrl = '$newUrl/-/raw';
+
+    if (ref != null) {
+      newUrl = '$newUrl/$ref';
+    } else {
+      newUrl = '$newUrl/master';
+    }
+    if (path != null) {
+      newUrl = '$newUrl/$path';
+    }
+    return '$newUrl/pubspec.yaml';
+  }
+
+  String getGithubPubSpecUrl() {
+    const hostName = 'github';
+    const rawGithubUrl = 'https://raw.githubusercontent.com/';
+    var newUrl = _getCleanedUpUrl(hostName, rawGithubUrl);
+    newUrl = _replaceHostname(newUrl, hostName, rawGithubUrl);
+    if (ref != null) {
+      newUrl = '$newUrl/$ref';
+    } else {
+      newUrl = '$newUrl/master';
+    }
+    if (path != null) {
+      newUrl = '$newUrl/$path';
+    }
+    return '$newUrl/pubspec.yaml';
+  }
+
+  String _getCleanedUpUrl(String hostName, String rawUrl) {
     const wwwHttpsPrefix = 'https://www.';
     const httpPrefix = 'http://';
     const wwwHttpPrefix = 'http://www.';
-    const gitPrefix = 'git@github.com:';
+    final gitPrefix = 'git@$hostName.com:';
     const gitPrefix2 = 'git://';
     const gitSuffix = '.git';
     var newUrl = url;
@@ -38,7 +77,7 @@ extension GitInfoExtensions on GitInfo {
       newUrl = newUrl.replaceFirst(httpPrefix, 'https://');
     }
     if (newUrl.startsWith(gitPrefix)) {
-      newUrl = newUrl.replaceFirst(gitPrefix, 'https://github.com/');
+      newUrl = newUrl.replaceFirst(gitPrefix, 'https://$hostName.com/');
     }
     if (newUrl.startsWith(gitPrefix2)) {
       newUrl = newUrl.replaceFirst(gitPrefix2, 'https://');
@@ -46,20 +85,19 @@ extension GitInfoExtensions on GitInfo {
     if (newUrl.endsWith(gitSuffix)) {
       newUrl = newUrl.replaceFirst(gitSuffix, '', url.length - gitSuffix.length);
     }
-    if (newUrl.startsWith(githubPrefix)) {
-      newUrl = newUrl.replaceFirst(githubPrefix, rawGithubUrl);
+    return newUrl;
+  }
+
+  String _replaceHostname(String url, String hostName, String rawUrl) {
+    final hostNamePrefix = 'https://$hostName.com/';
+    final wwwHostnamePrefix = 'https://www.$hostName.com/';
+    var newUrl = url;
+    if (newUrl.startsWith(hostNamePrefix)) {
+      newUrl = newUrl.replaceFirst(hostNamePrefix, rawUrl);
     }
-    if (newUrl.startsWith(wwwGithubPrefix)) {
-      newUrl = newUrl.replaceFirst(wwwGithubPrefix, rawGithubUrl);
+    if (newUrl.startsWith(wwwHostnamePrefix)) {
+      newUrl = newUrl.replaceFirst(wwwHostnamePrefix, rawUrl);
     }
-    if (ref != null) {
-      newUrl = '$newUrl/$ref';
-    } else {
-      newUrl = '$newUrl/master';
-    }
-    if (path != null) {
-      newUrl = '$newUrl/$path';
-    }
-    return '$newUrl/pubspec.yaml';
+    return newUrl;
   }
 }

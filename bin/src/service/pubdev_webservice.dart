@@ -66,9 +66,12 @@ class PubDevWebservice {
     String? url;
     if (gitInfo.url.isGithubUrl()) {
       url = gitInfo.getGithubPubSpecUrl();
+    } else if (gitInfo.url.isGitLabUrl()) {
+      url = gitInfo.getGitLabPubSpecUrl();
     }
     if (url == null) {
-      throw FatalException('This git url is not yet supported: ${gitInfo.url}. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)');
+      throw FatalException(
+          'This git url is not yet supported: ${gitInfo.url}. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)');
     }
     final yamlString = await webservice.get(url);
     final yaml = loadYaml(yamlString) as YamlMap;
