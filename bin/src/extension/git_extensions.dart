@@ -27,8 +27,7 @@ extension StringExtensions on String {
 extension GitInfoExtensions on GitInfo {
   String getGitLabPubSpecUrl() {
     const hostName = 'gitlab';
-    const rawGithubUrl = 'https://raw.githubusercontent.com/';
-    var newUrl = _getCleanedUpUrl(hostName, rawGithubUrl);
+    var newUrl = _getCleanedUpUrl(hostName);
 
     newUrl = '$newUrl/-/raw';
 
@@ -46,7 +45,7 @@ extension GitInfoExtensions on GitInfo {
   String getGithubPubSpecUrl() {
     const hostName = 'github';
     const rawGithubUrl = 'https://raw.githubusercontent.com/';
-    var newUrl = _getCleanedUpUrl(hostName, rawGithubUrl);
+    var newUrl = _getCleanedUpUrl(hostName);
     newUrl = _replaceHostname(newUrl, hostName, rawGithubUrl);
     if (ref != null) {
       newUrl = '$newUrl/$ref';
@@ -59,7 +58,7 @@ extension GitInfoExtensions on GitInfo {
     return '$newUrl/pubspec.yaml';
   }
 
-  String _getCleanedUpUrl(String hostName, String rawUrl) {
+  String _getCleanedUpUrl(String hostName) {
     const wwwHttpsPrefix = 'https://www.';
     const httpPrefix = 'http://';
     const wwwHttpPrefix = 'http://www.';
