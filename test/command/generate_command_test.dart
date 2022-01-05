@@ -187,7 +187,6 @@ packages:
       final generateCommand = GenerateCommand(repo);
       await generateCommand.generateLicenses(params);
       final data = File(outputPath).readAsStringSync();
-      print(data);
       expect(data, """import 'package:flutter/widgets.dart';
 
 //============================================================//

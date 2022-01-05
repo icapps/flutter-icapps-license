@@ -27,7 +27,7 @@ class PubspecLock {
     }
     final packages = config[key] as YamlMap;
     for (final package in packages.keys) {
-      if (package is! String) throw ArgumentError('package should be a String, the name of the package');
+      if (package is! String) throw ArgumentError('package should be a String: the name of the package');
       final values = packages.value[package] as YamlMap;
       final dependencyLock = DependencyLock.fromJson(package, values);
       _dependencies.add(dependencyLock);

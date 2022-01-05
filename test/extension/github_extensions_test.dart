@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../../bin/src/extension/github_extensions.dart';
+import '../../bin/src/extension/git_extensions.dart';
 import '../../bin/src/model/dto/dependency.dart';
 
 void main() {
