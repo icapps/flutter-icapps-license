@@ -27,6 +27,13 @@ class LicenseUtil {
   static List<License> getLicenses() {
     return [
       License(
+        name: r'Something Something',
+        license: r'''This is a test license''',
+        version: r'2.0.0',
+        homepage: r'https://www.google.com',
+        repository: null,
+      ),
+      License(
         name: r'fast_barcode_scanner',
         license: r'''MIT License
 
@@ -115,7 +122,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: r'^1.0.4',
         homepage: null,
-        repository: r'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
+        repository:
+            r'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
       ),
       License(
         name: r'flutter_localizations',
@@ -205,8 +213,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ''',
-        version: r'3.0.0',
-        homepage: r'https://github.com/icapps/flutter-icapps-license',
+        version: null,
+        homepage: null,
         repository: null,
       ),
       License(
@@ -232,13 +240,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
-        version: r'^5.0.0',
+        version: r'^6.0.2',
         homepage: null,
         repository: r'https://github.com/rrousselGit/provider',
       ),
       License(
         name: r'shared_preferences',
-        license: r'''Copyright 2017 The Chromium Authors. All rights reserved.
+        license: r'''Copyright 2013 The Flutter Authors. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -264,9 +272,10 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: r'^2.0.5',
-        homepage: r'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
-        repository: null,
+        version: r'^2.0.11',
+        homepage: null,
+        repository:
+            r'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
       ),
       License(
         name: r'test',
@@ -298,7 +307,7 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: r'^1.17.10',
+        version: r'^1.17.12',
         homepage: null,
         repository: r'https://github.com/dart-lang/test/blob/master/pkgs/test',
       ),

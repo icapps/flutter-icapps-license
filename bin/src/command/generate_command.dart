@@ -22,7 +22,8 @@ class GenerateCommand {
   Future<void> generateLicenses(Params params) async {
     if (params.checkBeforeGenerate) {
       const CheckCommand().checkDependencies(params);
-      Logger.logInfo('\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
+      Logger.logInfo(
+          '\nYour pubspec.yaml & pubspec.lock are in sync. Generating the dart license file.\n');
     }
     final outputFile = File(params.fileOutputPath);
     if (!outputFile.existsSync()) {
@@ -32,9 +33,11 @@ class GenerateCommand {
     final sb = StringBuffer()
       ..writeln("import 'package:flutter/widgets.dart';")
       ..writeln()
-      ..writeln('//============================================================//')
+      ..writeln(
+          '//============================================================//')
       ..writeln('//THIS FILE IS AUTO GENERATED. DO NOT EDIT//')
-      ..writeln('//============================================================//')
+      ..writeln(
+          '//============================================================//')
       ..writeln()
       ..writeln('@immutable')
       ..writeln('class License {')
@@ -57,12 +60,15 @@ class GenerateCommand {
     final allDependencies = <Dependency>[];
     allDependencies.addAll(params.extraDependencies);
     for (final dependency in params.dependencies) {
-      if (allDependencies.where((element) => element.name == dependency.name).isEmpty) {
+      if (allDependencies
+          .where((element) => element.name == dependency.name)
+          .isEmpty) {
         allDependencies.add(dependency);
       }
     }
 
-    final sortedDependencies = allDependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
+    final sortedDependencies = allDependencies
+      ..sort((a1, a2) => a1.name.compareTo(a2.name));
 
     sb
       ..writeln('class LicenseUtil {')
@@ -75,8 +81,10 @@ class GenerateCommand {
       if (dependency is ExtraDependency) {
         sb.write(await _getExtraDependencyText(dependency));
       } else {
-        final lockedDependency = params.pubspecLock.dependencies.firstWhere((element) => element.name == dependency.name);
-        sb.write(await _getDependencyText(params, dependency, lockedDependency));
+        final lockedDependency = params.pubspecLock.dependencies
+            .firstWhere((element) => element.name == dependency.name);
+        sb.write(
+            await _getDependencyText(params, dependency, lockedDependency));
       }
     }
 
@@ -88,13 +96,16 @@ class GenerateCommand {
     outputFile.writeAsStringSync(sb.toString());
   }
 
-  Future<String> _getDependencyText(Params params, Dependency dependency, DependencyLock lockedDependency) async {
-    final licenseData = await _licenseRepo.getLicenseDataForDependency(params, dependency, lockedDependency);
+  Future<String> _getDependencyText(Params params, Dependency dependency,
+      DependencyLock lockedDependency) async {
+    final licenseData = await _licenseRepo.getLicenseDataForDependency(
+        params, dependency, lockedDependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
       ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
-      ..writelnWithQuotesOrNull('version', dependency.getVersion(lockedDependency))
+      ..writelnWithQuotesOrNull(
+          'version', dependency.getVersion(lockedDependency))
       ..writelnWithQuotesOrNull('homepage', licenseData.homepageUrl)
       ..writelnWithQuotesOrNull('repository', licenseData.repositoryUrl)
       ..writeln('      ),');
@@ -102,7 +113,8 @@ class GenerateCommand {
   }
 
   Future<String> _getExtraDependencyText(ExtraDependency dependency) async {
-    final licenseData = await _licenseRepo.getLicenseDataForExtraDependency(dependency);
+    final licenseData =
+        await _licenseRepo.getLicenseDataForExtraDependency(dependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)

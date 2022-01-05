@@ -17,7 +17,8 @@ class ConsoleUtil {
 
   static bool readBoolean(String message) {
     String? result;
-    while (result != 'y' && result != 'yes' && result != 'n' && result != 'no') {
+    while (
+        result != 'y' && result != 'yes' && result != 'n' && result != 'no') {
       Logger.logInfo(message);
       result = _stdin.readLineSync()?.trim();
     }

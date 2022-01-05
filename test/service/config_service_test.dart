@@ -34,10 +34,12 @@ void main() {
         'package_config.json',
       );
       final configService = ConfigService(path: path);
-      final cachedPackage = await configService.getConfigData(dependency, lockedDependency);
+      final cachedPackage =
+          await configService.getConfigData(dependency, lockedDependency);
       expect(cachedPackage.name, 'test_package');
       expect(cachedPackage.packageUri, 'lib/');
-      expect(cachedPackage.rootUri, '/Users/myuser/.pub-cache/hosted/pub.dartlang.org/test_package-1.0.0');
+      expect(cachedPackage.rootUri,
+          '/Users/myuser/.pub-cache/hosted/pub.dartlang.org/test_package-1.0.0');
     });
     test('test this getConfigData without file', () async {
       const dependency = Dependency(

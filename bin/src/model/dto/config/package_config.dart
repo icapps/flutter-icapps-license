@@ -12,7 +12,9 @@ class PackageConfig {
 
   factory PackageConfig.fromJson(Map<String, dynamic> json) {
     return PackageConfig(
-      packages: (json['packages'] as List<dynamic>).map((dynamic e) => CachedPackage.fromJson(e as Map<String, dynamic>)).toList(),
+      packages: (json['packages'] as List<dynamic>)
+          .map((dynamic e) => CachedPackage.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
   }
 }

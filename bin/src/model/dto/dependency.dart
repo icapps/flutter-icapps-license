@@ -27,7 +27,10 @@ class Dependency {
     this.isExtraDependency = false,
   });
 
-  factory Dependency.fromJson({required String package, required bool isDevDependency, required YamlMap data}) {
+  factory Dependency.fromJson(
+      {required String package,
+      required bool isDevDependency,
+      required YamlMap data}) {
     final sdk = data['sdk'] as String?;
     final path = data['path'] as String?;
     final git = data['git'] as YamlMap?;
@@ -43,7 +46,10 @@ class Dependency {
     );
   }
 
-  factory Dependency.fromWithVersion({required String package, required bool isDevDependency, required String version}) {
+  factory Dependency.fromWithVersion(
+      {required String package,
+      required bool isDevDependency,
+      required String version}) {
     return Dependency(
       name: package,
       version: version,

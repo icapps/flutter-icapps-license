@@ -11,7 +11,8 @@ import '../../bin/src/command/generate_command.dart';
 import '../../bin/src/repo/license_repository.dart';
 
 void main() {
-  final outputPath = join(Directory.current.path, 'test', 'command', 'generate-command-output.txt');
+  final outputPath = join(
+      Directory.current.path, 'test', 'command', 'generate-command-output.txt');
 
   tearDown(() {
     File(outputPath).deleteSync();
@@ -37,7 +38,8 @@ packages:
 ''';
       final params = Params(yaml, lock);
       final repo = TestLicenseRepository({
-        'license_generator': const DependencyLicenseData(license: 'this is the license_generator license'),
+        'license_generator': const DependencyLicenseData(
+            license: 'this is the license_generator license'),
       });
       params.fileOutputPath = outputPath;
       final generateCommand = GenerateCommand(repo);
@@ -103,7 +105,8 @@ packages:
 ''';
       final params = Params(yaml, lock);
       final repo = TestLicenseRepository({
-        'license_generator': const DependencyLicenseData(license: 'this is the license_generator license'),
+        'license_generator': const DependencyLicenseData(
+            license: 'this is the license_generator license'),
       });
       params.fileOutputPath = outputPath;
       params.checkBeforeGenerate = true;
@@ -236,9 +239,16 @@ class TestLicenseRepository implements LicenseRepository {
   TestLicenseRepository(this.data);
 
   @override
-  Future<DependencyLicenseData> getLicenseDataForDependency(Params params, Dependency dependency, DependencyLock lockedDependency) async =>
-      data.entries.firstWhere((element) => element.key == dependency.name).value;
+  Future<DependencyLicenseData> getLicenseDataForDependency(Params params,
+          Dependency dependency, DependencyLock lockedDependency) async =>
+      data.entries
+          .firstWhere((element) => element.key == dependency.name)
+          .value;
 
   @override
-  Future<DependencyLicenseData> getLicenseDataForExtraDependency(ExtraDependency dependency) async => data.entries.firstWhere((element) => element.key == dependency.name).value;
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(
+          ExtraDependency dependency) async =>
+      data.entries
+          .firstWhere((element) => element.key == dependency.name)
+          .value;
 }

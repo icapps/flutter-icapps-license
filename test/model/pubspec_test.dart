@@ -16,7 +16,10 @@ packages:
 ''';
         expect(
           () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'license_generator should be added to the dev_dependencies.')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message ==
+                  'license_generator should be added to the dev_dependencies.')),
         );
       });
 
@@ -30,7 +33,10 @@ packages:
 ''';
         expect(
           () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'Could not parse the pubspec.yaml, project name not found')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message ==
+                  'Could not parse the pubspec.yaml, project name not found')),
         );
       });
 
@@ -92,7 +98,9 @@ packages:
 ''';
         expect(
           () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'YamlList (dependencies) is no String or YamlMap')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message == 'YamlList (dependencies) is no String or YamlMap')),
         );
       });
 
@@ -125,7 +133,10 @@ packages:
 ''';
         expect(
           () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'YamlList (dev_dependencies) is no String or YamlMap')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message ==
+                  'YamlList (dev_dependencies) is no String or YamlMap')),
         );
       });
     });
@@ -229,8 +240,9 @@ packages:
     version: "1.0.1"
 ''';
         expect(
-              () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'YamlList is no String')),
+          () => Params(yaml, lock),
+          throwsA(predicate((e) =>
+              e is FatalException && e.message == 'YamlList is no String')),
         );
       });
 
@@ -264,8 +276,9 @@ packages:
     version: "1.0.1"
 ''';
         expect(
-              () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'YamlMap is no String')),
+          () => Params(yaml, lock),
+          throwsA(predicate((e) =>
+              e is FatalException && e.message == 'YamlMap is no String')),
         );
       });
     });
@@ -370,8 +383,9 @@ packages:
     version: "1.0.1"
 ''';
         expect(
-              () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'YamlList is no YamlMap')),
+          () => Params(yaml, lock),
+          throwsA(predicate((e) =>
+              e is FatalException && e.message == 'YamlList is no YamlMap')),
         );
       });
 
@@ -404,8 +418,9 @@ packages:
     version: "1.0.1"
 ''';
         expect(
-              () => Params(yaml, lock),
-          throwsA(predicate((e) => e is FatalException && e.message == 'String is no YamlMap')),
+          () => Params(yaml, lock),
+          throwsA(predicate((e) =>
+              e is FatalException && e.message == 'String is no YamlMap')),
         );
       });
     });

@@ -9,7 +9,9 @@ void main() {
       final yamlMap = YamlMap.wrap(data);
       expect(
         () async => ExtraDependency.fromJson('test_package', yamlMap),
-        throwsA(predicate((e) => e.toString() == r"type 'Null' is not a subtype of type 'String' in type cast")),
+        throwsA(predicate((e) =>
+            e.toString() ==
+            r"type 'Null' is not a subtype of type 'String' in type cast")),
       );
     });
 

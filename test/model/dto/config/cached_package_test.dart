@@ -34,7 +34,8 @@ void main() {
       final json = jsonDecode(packageConfigJson) as Map<String, dynamic>;
       final package = CachedPackage.fromJson(json);
       expect(package.name, 'yaml');
-      expect(package.rootUri, '/Users/myuser/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0');
+      expect(package.rootUri,
+          '/Users/myuser/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0');
       expect(package.packageUri, 'lib/');
     });
   });

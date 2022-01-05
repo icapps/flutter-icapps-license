@@ -26,7 +26,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         final result = await repo.getLicenseDataForDependency(
@@ -38,7 +39,8 @@ void main() {
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.repositoryUrl, 'https://repository.com');
-        expect(result.license, 'this is the test_package license for 1.0.0 (normal)');
+        expect(result.license,
+            'this is the test_package license for 1.0.0 (normal)');
       });
 
       test('test LicenseRepository normal dev', () async {
@@ -52,7 +54,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         final result = await repo.getLicenseDataForDependency(
@@ -64,12 +67,14 @@ void main() {
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.repositoryUrl, 'https://repository.com');
-        expect(result.license, 'this is the test_package license for 1.0.0 (normal-dev)');
+        expect(result.license,
+            'this is the test_package license for 1.0.0 (normal-dev)');
       });
 
       test('test LicenseRepository http override', () async {
         const name = 'http-override';
-        const licenseWebServiceData = 'this is the test_package license for 1.0.0 with override http';
+        const licenseWebServiceData =
+            'this is the test_package license for 1.0.0 with override http';
         final pubDevWebServiceData = <String, dynamic>{
           'pubspec': {
             'name': 'test_package',
@@ -78,7 +83,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         final result = await repo.getLicenseDataForDependency(
@@ -90,12 +96,14 @@ void main() {
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.repositoryUrl, 'https://repository.com');
-        expect(result.license, 'this is the test_package license for 1.0.0 with override http');
+        expect(result.license,
+            'this is the test_package license for 1.0.0 with override http');
       });
 
       test('test LicenseRepository http override dev', () async {
         const name = 'http-override-dev';
-        const licenseWebServiceData = 'this is the test_package license for 1.0.0 with override http dev';
+        const licenseWebServiceData =
+            'this is the test_package license for 1.0.0 with override http dev';
         final pubDevWebServiceData = <String, dynamic>{
           'pubspec': {
             'name': 'test_package',
@@ -104,7 +112,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         final result = await repo.getLicenseDataForDependency(
@@ -116,12 +125,14 @@ void main() {
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.homepageUrl, 'https://hompage.com');
         expect(result.repositoryUrl, 'https://repository.com');
-        expect(result.license, 'this is the test_package license for 1.0.0 with override http dev');
+        expect(result.license,
+            'this is the test_package license for 1.0.0 with override http dev');
       });
 
       test('test LicenseRepository file override ', () async {
         const name = 'file-override-not-exist';
-        const licenseWebServiceData = 'this is the test_package license for 1.0.0 with override file (not exist)';
+        const licenseWebServiceData =
+            'this is the test_package license for 1.0.0 with override file (not exist)';
         final pubDevWebServiceData = <String, dynamic>{
           'pubspec': {
             'name': 'test_package',
@@ -130,7 +141,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         expect(
@@ -139,13 +151,16 @@ void main() {
             dependency,
             params.getFirstLockedDependency(),
           ),
-          throwsA(predicate((e) => e is FatalException && e.message == '/test/test.md does not exists')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message == '/test/test.md does not exists')),
         );
       });
 
       test('test LicenseRepository file override dev', () async {
         const name = 'file-override-not-exist-dev';
-        const licenseWebServiceData = 'this is the test_package license for 1.0.0 with override file (not exist) dev';
+        const licenseWebServiceData =
+            'this is the test_package license for 1.0.0 with override file (not exist) dev';
         final pubDevWebServiceData = <String, dynamic>{
           'pubspec': {
             'name': 'test_package',
@@ -154,7 +169,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         expect(
@@ -163,7 +179,9 @@ void main() {
             dependency,
             params.getFirstLockedDependency(useDev: true),
           ),
-          throwsA(predicate((e) => e is FatalException && e.message == '/test/test-dev.md does not exists')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message == '/test/test-dev.md does not exists')),
         );
       });
 
@@ -178,7 +196,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         expect(
@@ -189,7 +208,8 @@ void main() {
           ),
           throwsA(predicate((e) =>
               e is FatalException &&
-              e.message == '.dart_tool/package_config.json is not up to date. `test/repo/test_data/no-local-license/test_package-1.0.0-does-not-exist` does not exist anymore.')),
+              e.message ==
+                  '.dart_tool/package_config.json is not up to date. `test/repo/test_data/no-local-license/test_package-1.0.0-does-not-exist` does not exist anymore.')),
         );
       });
       test('test LicenseRepository no local license dev', () async {
@@ -203,7 +223,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         expect(
@@ -230,7 +251,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         expect(
@@ -239,7 +261,9 @@ void main() {
             dependency,
             params.getFirstLockedDependency(),
           ),
-          throwsA(predicate((e) => e is FatalException && e.message == 'Failed to get the license url for test_package')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message == 'Failed to get the license url for test_package')),
         );
       });
 
@@ -254,7 +278,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         expect(
@@ -263,7 +288,9 @@ void main() {
             dependency,
             params.getFirstLockedDependency(useDev: true),
           ),
-          throwsA(predicate((e) => e is FatalException && e.message == 'Failed to get the license url for test_package')),
+          throwsA(predicate((e) =>
+              e is FatalException &&
+              e.message == 'Failed to get the license url for test_package')),
         );
       });
 
@@ -278,7 +305,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency();
         final result = await repo.getLicenseDataForDependency(
@@ -300,7 +328,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final params = getParams(name);
         final dependency = params.getFirstDependency(useDev: true);
         final result = await repo.getLicenseDataForDependency(
@@ -323,12 +352,20 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final result = await repo.getLicenseDataForExtraDependency(
           ExtraDependency(
             name: 'test_package',
             version: '1.0.0',
-            licenseUrl: join(Directory.current.path, 'test', 'repo', 'test_data', 'extra_licenses', 'test_package-1.0.0', 'License.md'),
+            licenseUrl: join(
+                Directory.current.path,
+                'test',
+                'repo',
+                'test_data',
+                'extra_licenses',
+                'test_package-1.0.0',
+                'License.md'),
             isPartOfFlutterSdk: false,
             homepageUrl: 'https://homepage.com',
             repositoryUrl: 'https://repository.com',
@@ -337,7 +374,8 @@ void main() {
         );
         expect(result.homepageUrl, 'https://homepage.com');
         expect(result.repositoryUrl, 'https://repository.com');
-        expect(result.license, 'this is the test_package license for 1.0.0 (extra_licenses)');
+        expect(result.license,
+            'this is the test_package license for 1.0.0 (extra_licenses)');
       });
       test('test LicenseRepository extra licenses http', () async {
         const name = 'extra_licenses_http';
@@ -350,7 +388,8 @@ void main() {
             'repository': 'https://repository.com',
           }
         };
-        final repo = getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
+        final repo =
+            getLicenseRepo(name, licenseWebServiceData, pubDevWebServiceData);
         final result = await repo.getLicenseDataForExtraDependency(
           const ExtraDependency(
             name: 'test_package',
@@ -370,9 +409,11 @@ void main() {
   });
 }
 
-String getPath(String name) => join(Directory.current.path, 'test', 'repo', 'test_data', name);
+String getPath(String name) =>
+    join(Directory.current.path, 'test', 'repo', 'test_data', name);
 
-String getPackagesConfigJsonPath(String name) => join(getPath(name), '$name.json');
+String getPackagesConfigJsonPath(String name) =>
+    join(getPath(name), '$name.json');
 
 String getPubspec(String name) {
   final path = join(getPath(name), '$name.yaml');
@@ -392,7 +433,8 @@ Params getParams(String name) {
   return Params(pubspec, pubspecLock);
 }
 
-LicenseRepository getLicenseRepo(String name, String licenseWebServiceData, Map<String, dynamic> pubDevWebServiceData) {
+LicenseRepository getLicenseRepo(String name, String licenseWebServiceData,
+    Map<String, dynamic> pubDevWebServiceData) {
   final licenseWebservice = TestStringWebService(licenseWebServiceData);
   final webservice = TestJsonWebService(pubDevWebServiceData);
   final pubDevService = PubDevWebservice(webservice: webservice);
@@ -415,6 +457,7 @@ extension ParamsExtensions on Params {
     } else {
       lockedDependencies = pubspecLock.mainDependencies;
     }
-    return lockedDependencies.firstWhere((element) => element.name == getFirstDependency(useDev: useDev).name);
+    return lockedDependencies.firstWhere(
+        (element) => element.name == getFirstDependency(useDev: useDev).name);
   }
 }

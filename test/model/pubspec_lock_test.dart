@@ -10,7 +10,9 @@ test: test
 ''';
       expect(
         () => PubspecLock(lock),
-        throwsA(predicate((e) => e is FatalException && e.message == 'Did you forget to run flutter packages get')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message == 'Did you forget to run flutter packages get')),
       );
     });
   });

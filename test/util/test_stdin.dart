@@ -15,7 +15,8 @@ class TestStdinSync implements TestStdin {
   }
 
   @override
-  String? readLineSync({Encoding encoding = systemEncoding, bool retainNewlines = false}) {
+  String? readLineSync(
+      {Encoding encoding = systemEncoding, bool retainNewlines = false}) {
     if (messages.isEmpty) return null;
     return messages.removeAt(0);
   }

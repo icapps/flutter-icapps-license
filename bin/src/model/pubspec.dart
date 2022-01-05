@@ -39,29 +39,38 @@ class Params {
 
   List<Dependency> get dependencies => _dependencies;
 
-  List<Dependency> get devDependencies => _dependencies.where((element) => element.isDevDependency).toList();
+  List<Dependency> get devDependencies =>
+      _dependencies.where((element) => element.isDevDependency).toList();
 
-  List<Dependency> get mainDependencies => _dependencies.where((element) => !element.isDevDependency).toList();
+  List<Dependency> get mainDependencies =>
+      _dependencies.where((element) => !element.isDevDependency).toList();
 
   Params(String pubspecContent, String pubspecLockContent) {
     final config = loadYaml(pubspecContent) as YamlMap;
     final projectName = config['name'] as String?;
 
     if (projectName == null || projectName.isEmpty) {
-      throw FatalException('Could not parse the pubspec.yaml, project name not found');
+      throw FatalException(
+          'Could not parse the pubspec.yaml, project name not found');
     }
 
     final icappsLicenseConfig = config[yamlConfigLicense] as YamlMap?;
 
     if (icappsLicenseConfig != null) {
       failFast = icappsLicenseConfig[yamlConfigFailFast] == true;
-      checkBeforeGenerate = icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
-      downloadPubDevDetails = icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
-      pubDevBaseUrlOverride = icappsLicenseConfig[yamlConfigPubDevBaseUrl] as String?;
-      fileOutputPath = (icappsLicenseConfig[yamlConfigOuputPath] as String?) ?? defaultFileOutputPath;
+      checkBeforeGenerate =
+          icappsLicenseConfig[yamlConfigCheckBeforeGenerate] == true;
+      downloadPubDevDetails =
+          icappsLicenseConfig[yamlConfigDownloadPubDevDetails] == true;
+      pubDevBaseUrlOverride =
+          icappsLicenseConfig[yamlConfigPubDevBaseUrl] as String?;
+      fileOutputPath = (icappsLicenseConfig[yamlConfigOuputPath] as String?) ??
+          defaultFileOutputPath;
 
-      _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
-      _generateExtraLicenses(icappsLicenseConfig[yamlConfigExtraLicensesList] as YamlMap?);
+      _generateLicensesOverride(
+          icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
+      _generateExtraLicenses(
+          icappsLicenseConfig[yamlConfigExtraLicensesList] as YamlMap?);
     }
 
     final packages = config['dependencies'] as YamlMap?;
@@ -69,9 +78,12 @@ class Params {
     _generateDependencies(packages: packages, isDevDependency: false);
     _generateDependencies(packages: devPackages, isDevDependency: true);
 
-    final containsLicenseGenerator = devDependencies.where((element) => element.name == yamlConfigLicense).isNotEmpty;
+    final containsLicenseGenerator = devDependencies
+        .where((element) => element.name == yamlConfigLicense)
+        .isNotEmpty;
     if (!containsLicenseGenerator) {
-      const message = '$yamlConfigLicense should be added to the dev_dependencies.';
+      const message =
+          '$yamlConfigLicense should be added to the dev_dependencies.';
       Logger.logInfo(message);
       throw FatalException(message);
     }
@@ -89,20 +101,31 @@ class Params {
     Logger.logInfo('----');
   }
 
-  void _generateDependencies({required YamlMap? packages, required bool isDevDependency}) {
+  void _generateDependencies(
+      {required YamlMap? packages, required bool isDevDependency}) {
     final type = isDevDependency ? 'dev_dependencies' : 'dependencies';
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
+          if (package is! String) {
+            throw ArgumentError(
+                'package should be a String: the name of the package');
+          }
           final dynamic values = packages.value[package];
           Dependency dependency;
           if (values is String) {
-            dependency = Dependency.fromWithVersion(package: package, isDevDependency: isDevDependency, version: values);
+            dependency = Dependency.fromWithVersion(
+                package: package,
+                isDevDependency: isDevDependency,
+                version: values);
           } else if (values is YamlMap) {
-            dependency = Dependency.fromJson(package: package, isDevDependency: isDevDependency, data: values);
+            dependency = Dependency.fromJson(
+                package: package,
+                isDevDependency: isDevDependency,
+                data: values);
           } else {
-            throw FatalException('${values.runtimeType} ($type) is no String or YamlMap');
+            throw FatalException(
+                '${values.runtimeType} ($type) is no String or YamlMap');
           }
           _dependencies.add(dependency);
         } catch (e, trace) {
@@ -119,7 +142,10 @@ class Params {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
+          if (package is! String) {
+            throw ArgumentError(
+                'package should be a String: the name of the package');
+          }
           final dynamic value = packages.value[package];
           if (value is String) {
             _dependencyOverrides[package] = value;
@@ -140,7 +166,10 @@ class Params {
     if (packages != null) {
       for (final package in packages.keys) {
         try {
-          if (package is! String) throw ArgumentError('package should be a String: the name of the package');
+          if (package is! String) {
+            throw ArgumentError(
+                'package should be a String: the name of the package');
+          }
           final dynamic value = packages.value[package];
           if (value is YamlMap) {
             _extraDependencies.add(ExtraDependency.fromJson(package, value));

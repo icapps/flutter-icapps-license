@@ -25,7 +25,8 @@ class PubDevWebservice {
     this.baseUrl = defaultPubDevBaseUrl,
   });
 
-  Future<PubDevPackage?> getPubDevData(Dependency dependency, DependencyLock lockedDependency) async {
+  Future<PubDevPackage?> getPubDevData(
+      Dependency dependency, DependencyLock lockedDependency) async {
     try {
       final version = lockedDependency.version;
       final url = '$baseUrl/api/packages/${dependency.name}/versions/$version';
@@ -45,7 +46,8 @@ class PubDevWebservice {
   Future<PubDevPackage?> _getLocalPubDevData(Dependency dependency) async {
     final localPath = dependency.localPath;
     if (!dependency.isLocalDependency || localPath == null) return null;
-    Logger.logInfo('Fetching pub dev info from local dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
+    Logger.logInfo(
+        'Fetching pub dev info from local dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
     final file = File(join(localPath, 'pubspec.yaml'));
     final content = file.readAsStringSync();
     final yaml = loadYaml(content) as YamlMap;
@@ -62,7 +64,8 @@ class PubDevWebservice {
   Future<PubDevPackage?> _getGitPubDevData(Dependency dependency) async {
     final gitInfo = dependency.gitPath;
     if (!dependency.isGitDependency || gitInfo == null) return null;
-    Logger.logInfo('Fetching pub dev info from git dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
+    Logger.logInfo(
+        'Fetching pub dev info from git dependency. (Because we were not able to fetch the detail from pub.dev for ${dependency.name})');
     String? url;
     if (gitInfo.url.isGithubUrl()) {
       url = gitInfo.getGithubPubSpecUrl();

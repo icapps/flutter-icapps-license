@@ -4,7 +4,7 @@ version: 1.0.0+1
 publish_to: 'none'
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
   fast_barcode_scanner:
@@ -16,8 +16,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  provider: ^5.0.0
-  shared_preferences: ^2.0.5
+  provider: ^6.0.2
+  shared_preferences: ^2.0.11
 
 dev_dependencies:
   flutter_lints: ^1.0.4
@@ -25,7 +25,7 @@ dev_dependencies:
     sdk: flutter
   license_generator:
     path: ../
-  test: ^1.17.10
+  test: ^1.17.12
 
 flutter:
   assets:

@@ -19,14 +19,17 @@ class ConfigService {
     this.path = _path,
   });
 
-  Future<CachedPackage> getConfigData(Dependency dependency, DependencyLock lockedDependency) async {
+  Future<CachedPackage> getConfigData(
+      Dependency dependency, DependencyLock lockedDependency) async {
     final file = File(path);
     if (!file.existsSync()) {
-      throw FatalException('$path does not exists. Make sure you run packages get before license_generator');
+      throw FatalException(
+          '$path does not exists. Make sure you run packages get before license_generator');
     }
     final content = file.readAsStringSync();
     final json = jsonDecode(content) as Map<String, dynamic>;
     final packageConfig = PackageConfig.fromJson(json);
-    return packageConfig.packages.firstWhere((element) => element.name == dependency.name);
+    return packageConfig.packages
+        .firstWhere((element) => element.name == dependency.name);
   }
 }

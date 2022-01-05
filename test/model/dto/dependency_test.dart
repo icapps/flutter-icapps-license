@@ -246,7 +246,8 @@ void main() {
           source: 'pub.dev',
           isDirectMainDependency: false,
         );
-        expect(dependency.getVersion(lockedDependency), '1.0.0-dependency-locked');
+        expect(
+            dependency.getVersion(lockedDependency), '1.0.0-dependency-locked');
       });
       test('normal with dependency version with flutter sdk', () {
         const dependency = Dependency(

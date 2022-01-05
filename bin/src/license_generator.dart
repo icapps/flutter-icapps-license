@@ -28,7 +28,8 @@ class LicenseGenerator {
     String? pubspecLockPath,
   }) {
     if (args.isEmpty) {
-      const message = 'license_generator should be started with `check` or `generate`';
+      const message =
+          'license_generator should be started with `check` or `generate`';
       Logger.logInfo(message);
       throw FatalException(message);
     }
@@ -38,12 +39,14 @@ class LicenseGenerator {
 
     final pubspecYaml = File(pubspecPath);
     if (!pubspecYaml.existsSync()) {
-      throw FatalException('This program should be run from the root of a flutter/dart project');
+      throw FatalException(
+          'This program should be run from the root of a flutter/dart project');
     }
 
     final pubspecLockYaml = File(pubspecLockPath);
     if (!pubspecLockYaml.existsSync()) {
-      throw FatalException('pubspec.lock is missing. Make sure you run flutter packages get');
+      throw FatalException(
+          'pubspec.lock is missing. Make sure you run flutter packages get');
     }
 
     final pubspecContent = pubspecYaml.readAsStringSync();
@@ -60,7 +63,8 @@ class LicenseGenerator {
     const configService = ConfigService();
     final _pubDevWebservice = PubDevWebservice(
       webservice: webservice,
-      baseUrl: _params.pubDevBaseUrlOverride ?? PubDevWebservice.defaultPubDevBaseUrl,
+      baseUrl: _params.pubDevBaseUrlOverride ??
+          PubDevWebservice.defaultPubDevBaseUrl,
     );
     final licenseRepo = LicenseRepository(
       webservice,

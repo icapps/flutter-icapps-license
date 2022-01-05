@@ -40,7 +40,8 @@ void main() {
       };
       final webservice = TestJsonWebService(data);
       final pubDevService = PubDevWebservice(webservice: webservice);
-      final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
+      final pubDevPackage =
+          await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'test_package');
       expect(pubDevPackage.pubspec.version, '1.0.0');
       expect(pubDevPackage.pubspec.homepage, 'https://hompage.com');
@@ -75,7 +76,8 @@ void main() {
       final data = <String, dynamic>{};
       final webservice = TestJsonWebService(data);
       final pubDevService = PubDevWebservice(webservice: webservice);
-      final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
+      final pubDevPackage =
+          await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'test_package');
       expect(pubDevPackage.pubspec.version, '1.0.0');
       expect(pubDevPackage.pubspec.homepage, 'https://hompage.com');
@@ -111,14 +113,16 @@ repository: https://repository.com
 ''';
       final webservice = TestJsonAndGitWebService(data, gitData);
       final pubDevService = PubDevWebservice(webservice: webservice);
-      final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
+      final pubDevPackage =
+          await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'license_generator');
       expect(pubDevPackage.pubspec.version, '3.0.0');
       expect(pubDevPackage.pubspec.homepage, 'https://homepage.com');
       expect(pubDevPackage.pubspec.repository, 'https://repository.com');
     });
 
-    test('test this getPubDevData with invalid data but git lab repo', () async {
+    test('test this getPubDevData with invalid data but git lab repo',
+        () async {
       const dependency = Dependency(
         name: 'test_package',
         version: '1.0.0',
@@ -147,7 +151,8 @@ repository: https://repository.com
 ''';
       final webservice = TestJsonAndGitWebService(data, gitData);
       final pubDevService = PubDevWebservice(webservice: webservice);
-      final pubDevPackage = await pubDevService.getPubDevData(dependency, lockedDependency);
+      final pubDevPackage =
+          await pubDevService.getPubDevData(dependency, lockedDependency);
       expect(pubDevPackage!.pubspec.name, 'license_generator');
       expect(pubDevPackage.pubspec.version, '3.0.0');
       expect(pubDevPackage.pubspec.homepage, 'https://homepage.com');
@@ -181,7 +186,8 @@ repository: https://repository.com
         () async => pubDevService.getPubDevData(dependency, lockedDependency),
         throwsA(predicate((e) =>
             e is FatalException &&
-            e.message == 'This git url is not yet supported: ../. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)')),
+            e.message ==
+                'This git url is not yet supported: ../. Create an issue so we can make this plugin better. (https://github.com/icapps/flutter-icapps-license/issues)')),
       );
     });
   });

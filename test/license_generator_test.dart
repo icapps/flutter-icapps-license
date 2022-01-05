@@ -7,8 +7,10 @@ import '../bin/src/model/exception/fatal_exception.dart';
 import '../bin/license_generator.dart' as entry_point;
 
 void main() {
-  final pubspecPath = join(Directory.current.path, 'test', 'license_generator_pubspec.yaml');
-  final pubspecLockPath = join(Directory.current.path, 'test', 'license_generator_pubspec.lock');
+  final pubspecPath =
+      join(Directory.current.path, 'test', 'license_generator_pubspec.yaml');
+  final pubspecLockPath =
+      join(Directory.current.path, 'test', 'license_generator_pubspec.lock');
   group('Test License Generator', () {
     test('Test main', () {
       entry_point.main([]);
@@ -16,7 +18,10 @@ void main() {
     test('Test license generator with no arguments', () {
       expect(
         () async => LicenseGenerator([]),
-        throwsA(predicate((e) => e is FatalException && e.message == 'license_generator should be started with `check` or `generate`')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message ==
+                'license_generator should be started with `check` or `generate`')),
       );
     });
     test('Test license generator with check', () async {
@@ -24,7 +29,10 @@ void main() {
         () async => LicenseGenerator(
           ['check'],
         ),
-        throwsA(predicate((e) => e is FatalException && e.message == 'license_generator should be added to the dev_dependencies.')), //because the pubspec.yaml of the root is used
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message ==
+                'license_generator should be added to the dev_dependencies.')), //because the pubspec.yaml of the root is used
       );
     });
     test('Test license generator with check', () async {
@@ -42,7 +50,10 @@ void main() {
           pubspecPath: pubspecPath + 'does-not-exist',
           pubspecLockPath: pubspecLockPath,
         ),
-        throwsA(predicate((e) => e is FatalException && e.message == 'This program should be run from the root of a flutter/dart project')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message ==
+                'This program should be run from the root of a flutter/dart project')),
       );
     });
     test('Test license generator with non existing pubspec.lock', () async {
@@ -52,7 +63,10 @@ void main() {
           pubspecPath: pubspecPath,
           pubspecLockPath: pubspecLockPath + 'does-not-exist',
         ),
-        throwsA(predicate((e) => e is FatalException && e.message == 'pubspec.lock is missing. Make sure you run flutter packages get')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message ==
+                'pubspec.lock is missing. Make sure you run flutter packages get')),
       );
     });
     group('log check', () {
@@ -91,7 +105,8 @@ void main() {
       });
     });
     group('Output files', () {
-      final outputPath = join(Directory.current.path, 'test', 'license_generator_output.txt');
+      final outputPath =
+          join(Directory.current.path, 'test', 'license_generator_output.txt');
       tearDown(() {
         File(outputPath).deleteSync();
       });

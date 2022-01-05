@@ -82,7 +82,8 @@ extension GitInfoExtensions on GitInfo {
       newUrl = newUrl.replaceFirst(gitPrefix2, 'https://');
     }
     if (newUrl.endsWith(gitSuffix)) {
-      newUrl = newUrl.replaceFirst(gitSuffix, '', url.length - gitSuffix.length);
+      newUrl =
+          newUrl.replaceFirst(gitSuffix, '', url.length - gitSuffix.length);
     }
     return newUrl;
   }

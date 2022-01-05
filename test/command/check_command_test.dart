@@ -51,7 +51,10 @@ packages:
       final params = Params(yaml, lock);
       expect(
         () => const CheckCommand().checkDependencies(params),
-        throwsA(predicate((e) => e is ArgumentError && e.message == 'test_package is not yet included in the pubspec.lock. Make sure you run packages get')),
+        throwsA(predicate((e) =>
+            e is ArgumentError &&
+            e.message ==
+                'test_package is not yet included in the pubspec.lock. Make sure you run packages get')),
       );
     });
 
@@ -76,7 +79,8 @@ packages:
       const CheckCommand().checkDependencies(params);
     });
 
-    test('Test checkCommand with dependency & locked dependencies missmatch', () {
+    test('Test checkCommand with dependency & locked dependencies missmatch',
+        () {
       final stdin = TestStdinSync();
       ConsoleUtil.setStdin(stdin);
       stdin.addInputString('n');
@@ -107,11 +111,14 @@ packages:
       final params = Params(yaml, lock);
       expect(
         () => const CheckCommand().checkDependencies(params),
-        throwsA(predicate((e) => e is FatalException && e.message == 'We found some version mismatches: 1')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message == 'We found some version mismatches: 1')),
       );
     });
 
-    test('Test checkCommand with dependency & locked dependencies missmatch', () {
+    test('Test checkCommand with dependency & locked dependencies missmatch',
+        () {
       final stdin = TestStdinSync();
       ConsoleUtil.setStdin(stdin);
       stdin.addInputString('y');
@@ -142,11 +149,15 @@ packages:
       final params = Params(yaml, lock);
       expect(
         () => const CheckCommand().checkDependencies(params),
-        throwsA(predicate((e) => e is FatalException && e.message == 'We found some version mismatches: 1')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message == 'We found some version mismatches: 1')),
       );
     });
 
-    test('Test checkCommand with dependency & locked dependencies missmatch & fail fast', () {
+    test(
+        'Test checkCommand with dependency & locked dependencies missmatch & fail fast',
+        () {
       const yaml = r'''
 name: test_example
 dependencies:
@@ -176,7 +187,10 @@ packages:
       final params = Params(yaml, lock);
       expect(
         () => const CheckCommand().checkDependencies(params),
-        throwsA(predicate((e) => e is FatalException && e.message == 'test_package is 1.0.0 in your pubspec. Your pubspec.lock is using 1.0.1')),
+        throwsA(predicate((e) =>
+            e is FatalException &&
+            e.message ==
+                'test_package is 1.0.0 in your pubspec. Your pubspec.lock is using 1.0.1')),
       );
     });
   });
