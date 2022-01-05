@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 
-import '../extension/github_extensions.dart';
+import '../extension/git_extensions.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_lock.dart';
 import '../model/exception/fatal_exception.dart';

@@ -9,7 +9,7 @@ import '../../bin/src/service/webservice.dart';
 import '../../bin/src/model/dto/dependency.dart';
 import '../../bin/src/model/dto/dependency_lock.dart';
 import '../../bin/src/model/exception/fatal_exception.dart';
-import '../../bin/src/extension/github_extensions.dart';
+import '../../bin/src/extension/git_extensions.dart';
 
 void main() {
   group('Test PubDevWebService', () {
