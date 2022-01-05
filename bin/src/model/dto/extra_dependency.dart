@@ -27,8 +27,9 @@ class ExtraDependency extends Dependency {
         );
 
   factory ExtraDependency.fromJson(String package, YamlMap json) {
+    final name = json['name'] as String?;
     return ExtraDependency(
-      name: package,
+      name: name ?? package,
       licenseUrl: json['license'] as String,
       version: json['version'] as String?,
       homepageUrl: json['homepage'] as String?,

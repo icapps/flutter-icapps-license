@@ -17,12 +17,33 @@ dev-dependencies:
 ### Basic options
 ```yaml
 license_generator:
-  fail_fast: true    #Errors are not ignored and the generator will fail with an error
+  fail_fast: true/false    #(not required) Errors are not ignored and the generator will fail with an error
+```
+
+### All options
+```yaml
+license_generator:
+  fail_fast: boolean    #(not required) Errors are not ignored and the generator will fail with an error -> Default = false
+  check_before_generate: boolean #(not required) this will check if your pubspec.yaml & pubspec.lock are in sync before generating the code -> Default = false
+  output_path: String #(not required) Override the default output path to generate the license file somewhere else -> Default = lib/util/license.dart
+  download_pub_dev_details: bool #(not required) This will download the pubdev details (homepage/repository) -> Default = false
+  pub_dev_base_url: String #(not required) This will override the default pubdev base url for downloading the pubdev details (homepage/repository) -> Default = https://pub.dev
+  licenses: #(not required) This will accept key value pairs (String/String) -> (package name/raw license url)
+    #license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE (example)
+  extra_licenses: #(not required) this will allow you to add extra licenses that are not added in your pubspec.yaml
+    something_something: #the name of your package will be used if `name` is not specified
+      name: String #(not required) This will override your package name
+      version: String #(not required) The version of this specific package/license
+      homepage: String #(not required) The url of the homepage of this package
+      repository: String #(not required) The url where the repository is located
+      license: String #(required) This can be an http/https url or a path to a specific file. The content of that url/path will be used to generate code.
+      dev_dependency: boolean #(not required) This is used internally
+      part_of_flutter_sdk: boolean #(not required) This will use the flutter license instead of the license specified in this map
 ```
 
 ### Run package with Flutter
 
-```
+```bash
 flutter packages pub run license_generator
 ```
 
@@ -30,20 +51,20 @@ flutter packages pub run license_generator
 
 ### Check if all versions in your pubspec.yaml match your pubspec.lock
 
-```
+```bash
 pub run license_generator check
 ```
 
 #### Generate the license file
 
-```
+```bash
 pub run license_generator generate
 ```
 
 ### Logs
 
 Info is the default and is not required to pass.
-```
+```bash
 pub run license_generator generate
 
 is the same as
@@ -52,12 +73,12 @@ pub run license_generator generate info
 ```
 
 Debug will log more info te find out why the license_generator is failing. Stacktraces & errors will be shown. Info logs will also be shown.
-```
+```bash
 pub run license_generator generate debug
 ```
 
 Verbose will log everything. Downloading files & their status. Debug & info will also be shown.
-```
+```bash
 pub run license_generator generate verbose
 ```
 
@@ -65,13 +86,13 @@ pub run license_generator generate verbose
 
 add this to you .bash_profile
 
-```
+```bash
 flutterlicensecheck(){
  flutter packages get && flutter packages pub run license_generator check
 }
 ```
 
-```
+```bash
 flutterlicense(){
  flutter packages get && flutter packages pub run license_generator generate
 }
@@ -79,11 +100,11 @@ flutterlicense(){
 
 now you can use the license_generate with a single command.
 
-```
+```bash
 flutterlicense
 ```
 
 And to check if everything is up to date use:
-```
+```bash
 flutterlicensecheck
 ```

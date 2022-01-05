@@ -14,17 +14,13 @@ const licensePathShort = '/LICENSE';
 
 class Params {
   static const yamlConfigLicense = 'license_generator';
-  static const yamlConfigOuputPath = 'output_path';
-  static const yamlConfigLicensesList = 'licenses';
-  static const yamlConfigExtraLicensesList = 'extra_licenses';
-  static const yamlConfigExtraLicenseName = 'name';
-  static const yamlConfigExtraLicenseVersion = 'version';
-  static const yamlConfigExtraLicenseUrl = 'url';
-  static const yamlConfigExtraLicenseLicenseUrl = 'license';
   static const yamlConfigFailFast = 'fail_fast';
+  static const yamlConfigOuputPath = 'output_path';
   static const yamlConfigCheckBeforeGenerate = 'check_before_generate';
   static const yamlConfigDownloadPubDevDetails = 'download_pub_dev_details';
   static const yamlConfigPubDevBaseUrl = 'pub_dev_base_url';
+  static const yamlConfigLicensesList = 'licenses';
+  static const yamlConfigExtraLicensesList = 'extra_licenses';
 
   late PubspecLock pubspecLock;
   String fileOutputPath = defaultFileOutputPath;
