@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:icapps_license_example/util/license.dart';
+import 'package:flutter/services.dart';
+import 'package:license_generator_example/util/license.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        brightness: Brightness.dark,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         title: const Text('icapps license'),
         backgroundColor: Colors.black45,
       ),
@@ -22,8 +25,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(item.name),
-                    Text(item.version),
-                    Text(item.url),
+                    Text(item.version ?? 'n/a'),
+                    Text(item.homepage ?? 'n/a'),
+                    Text(item.repository ?? 'n/a'),
                     Container(height: 8),
                     Text(item.license),
                   ],

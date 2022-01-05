@@ -1,11 +1,17 @@
-name: icapps_license_example
+name: license_generator_example
 description: A project used to demo the Todo Reporter
 version: 1.0.0+1
+publish_to: 'none'
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  fast_barcode_scanner:
+    git:
+      url: git@github.com:vanlooverenkoen/fast_barcode_scanner.git
+      ref: 0054f100f47f85da39d8cd6bab5eddbe21515d84
+      path: fast_barcode_scanner
   flutter:
     sdk: flutter
   flutter_localizations:
@@ -14,27 +20,28 @@ dependencies:
   shared_preferences: ^2.0.5
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
-  icapps_license:
+  license_generator:
     path: ../
+  test: ^1.17.10
 
 flutter:
   assets:
     - assets/locale/
 
-icapps_license:
-  #  failFast: true
-  nullsafety: false
+license_generator:
+#  fail_fast: true
+  check_before_generate: true
   licenses:
-    #Path override is not yet supported -> https://github.com/icapps/flutter-icapps-license/issues/17
-    icapps_license: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
+#    license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
   extra_licenses:
     something_something:
       name: Something Something
       version: 2.0.0
       url: https://www.google.com
       license: test_license
-    icapps_license:
-      name: icapps_license
+    license_generator:
+      name: license_generator
       license: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE

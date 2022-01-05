@@ -1,5 +1,19 @@
 # Changelog
 
+## [3.0.0] - 2021-12-30
+### Breaking
+- Renamed this package from icapps_license to license_generator
+- Completely refactored this package
+- removed nullsafe flag
+- license_url (because local licenses are used.)
+### Added
+- 2 commands
+    - `check` to check if your pubspec.yaml versions match with your pubspec.lock versions
+    - `generate` to generate the license dart file
+- `checkBeforeGenerate` to run the check command before generate. default = false
+- `downloadPubDevDetails` to get the homepage or repository in the url. default = false
+- `pubDevBaseUrl` to download the pub.dev details from another baseUrl. default = https://pub.dev/
+
 ## [2.0.0] - 2021-03-26
 ### Breaking
 -Version & LicenseUrl can return null from now on
