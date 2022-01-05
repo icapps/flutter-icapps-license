@@ -1,7 +1,11 @@
 # Changelog
 
+## [1.0.2] - 2022-01-05
+### Improved
+- changelog formatting
+
 ## [1.0.1] - 2022-01-05
-# Improved
+### Improved
 - readme documentation for `fail_fast`, `check_before_generate`, `download_pub_dev_details`.
 
 ## [1.0.0] - 2022-01-05
