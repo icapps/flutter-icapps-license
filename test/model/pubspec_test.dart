@@ -280,7 +280,6 @@ dev_dependencies:
 license_generator:
   extra_licenses:
     test_package: 
-      name: Test Package
       license: https://test.com
 ''';
         const lock = r'''
@@ -303,6 +302,40 @@ packages:
         final params = Params(yaml, lock);
         expect(params.extraDependencies.length, 1);
         expect(params.extraDependencies.first.name, 'test_package');
+      });
+      test('Test Params with license_override override name', () {
+        const yaml = r'''
+name: test_example
+dependencies:
+dev_dependencies:
+  license_generator: 1.0.0
+  test_package: 1.0.0
+license_generator:
+  extra_licenses:
+    test_package: 
+      name: Test Package
+      license: https://test.com
+''';
+        const lock = r'''
+packages:
+  license_generator:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
+  test_package:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1"
+''';
+        final params = Params(yaml, lock);
+        expect(params.extraDependencies.length, 1);
+        expect(params.extraDependencies.first.name, 'Test Package');
       });
 
       test('Test Params with license_override non string (yaml list)', () {
