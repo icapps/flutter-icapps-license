@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.1] - 2022-01-05
+# Improved
+- readme documentation for `fail_fast`, `check_before_generate`, `download_pub_dev_details`.
+
 ## [1.0.0] - 2022-01-05
 ### Initial release
 - This package is a full refactor of icapps_license

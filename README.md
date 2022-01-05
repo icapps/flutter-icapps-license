@@ -23,11 +23,11 @@ license_generator:
 ### All options
 ```yaml
 license_generator:
-  fail_fast: boolean    #(optional) Errors are not ignored and the generator will fail with an error -> Default = false
-  check_before_generate: boolean #(optional) this will check if your pubspec.yaml & pubspec.lock are in sync before generating the code -> Default = false
-  output_path: String #(optional) Override the default output path to generate the license file somewhere else -> Default = lib/util/license.dart
-  download_pub_dev_details: bool #(optional) This will download the pubdev details (homepage/repository) -> Default = false
-  pub_dev_base_url: String #(optional) This will override the default pubdev base url for downloading the pubdev details (homepage/repository) -> Default = https://pub.dev
+  fail_fast: boolean #(optional) if true the `check` command will fail at the first version missmatch. If false you will receive a list at the end of the command. -> Default: false
+  check_before_generate: boolean #(optional) If true the `generate` command will check if your pubspec.yaml & pubspec.lock are in sync before generating the code -> Default: false
+  output_path: String #(optional) Override the default output path to generate the license file somewhere else -> Default: lib/util/license.dart
+  download_pub_dev_details: bool #(optional) If ture the `generate` command will download the pubdev details (homepage/repository) -> Default: false
+  pub_dev_base_url: String #(optional) This will override the default pubdev base url for downloading the pubdev details (homepage/repository) -> Default: https://pub.dev
   licenses: #(optional) This will accept key value pairs (String/String) -> (package name/raw license url)
     #license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE (example)
   extra_licenses: #(optional) this will allow you to add extra licenses that are not added in your pubspec.yaml
