@@ -269,5 +269,112 @@ packages:
         );
       });
     });
+    group('extra licenses', () {
+      test('Test Params with license_override', () {
+        const yaml = r'''
+name: test_example
+dependencies:
+dev_dependencies:
+  license_generator: 1.0.0
+  test_package: 1.0.0
+license_generator:
+  extra_licenses:
+    test_package: 
+      name: Test Package
+      license: https://test.com
+''';
+        const lock = r'''
+packages:
+  license_generator:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
+  test_package:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1"
+''';
+        final params = Params(yaml, lock);
+        expect(params.extraDependencies.length, 1);
+        expect(params.extraDependencies.first.name, 'test_package');
+      });
+
+      test('Test Params with license_override non string (yaml list)', () {
+        const yaml = r'''
+name: test_example
+dependencies:
+  test_package: 1.0.0
+dev_dependencies:
+  license_generator: 1.0.0
+license_generator:
+  extra_licenses:
+    test_package:
+      - test1
+      - test2
+      - test3
+''';
+        const lock = r'''
+packages:
+  license_generator:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
+  test_package:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1"
+''';
+        expect(
+              () => Params(yaml, lock),
+          throwsA(predicate((e) => e is FatalException && e.message == 'YamlList is no YamlMap')),
+        );
+      });
+
+      test('Test Params with license_override non yaml map (string)', () {
+        const yaml = r'''
+name: test_example
+dependencies:
+  test_package: 1.0.0
+dev_dependencies:
+  license_generator: 1.0.0 
+license_generator:
+  extra_licenses: 
+    test_package: test
+''';
+        const lock = r'''
+packages:
+  license_generator:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0"
+  test_package:
+    dependency: "direct dev"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.1"
+''';
+        expect(
+              () => Params(yaml, lock),
+          throwsA(predicate((e) => e is FatalException && e.message == 'String is no YamlMap')),
+        );
+      });
+    });
   });
 }

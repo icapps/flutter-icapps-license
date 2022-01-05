@@ -6,6 +6,7 @@ import 'package:path/path.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_license_data.dart';
 import '../model/dto/dependency_lock.dart';
+import '../model/dto/extra_dependency.dart';
 import '../model/exception/fatal_exception.dart';
 import '../model/pubspec.dart';
 import '../service/config_service.dart';
@@ -44,7 +45,7 @@ class LicenseRepository {
     this._pubDevWebservice,
   );
 
-  Future<DependencyLicenseData> getLicenseData(Params params, Dependency dependency, DependencyLock lockedDependency) async {
+  Future<DependencyLicenseData> getLicenseDataForDependency(Params params, Dependency dependency, DependencyLock lockedDependency) async {
     if (dependency.isPartOfFlutterSdk) return _getFlutterLicenseData();
     final licenseOverride = params.dependencyOverrides[dependency.name];
     var licenseUrl = licenseOverride;
@@ -62,6 +63,16 @@ class LicenseRepository {
       homepageUrl: pubDevData?.pubspec.homepage,
       repositoryUrl: pubDevData?.pubspec.repository,
       license: licenseData,
+    );
+  }
+
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(ExtraDependency dependency) async {
+    if (dependency.isPartOfFlutterSdk) return _getFlutterLicenseData();
+    final license = await _getLicenseDataByUrl(dependency.licenseUrl);
+    return DependencyLicenseData(
+      homepageUrl: dependency.homepageUrl,
+      repositoryUrl: dependency.repositoryUrl,
+      license: license,
     );
   }
 

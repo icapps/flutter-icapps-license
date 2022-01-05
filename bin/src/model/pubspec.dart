@@ -2,6 +2,7 @@ import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
 import '../util/logger.dart';
 import 'dto/dependency.dart';
+import 'dto/extra_dependency.dart';
 import 'exception/fatal_exception.dart';
 import 'pubspec_lock.dart';
 
@@ -34,8 +35,11 @@ class Params {
   var downloadPubDevDetails = false;
   final _dependencies = <Dependency>[];
   final _dependencyOverrides = <String, String>{};
+  final _extraDependencies = <ExtraDependency>[];
 
   Map<String, String> get dependencyOverrides => _dependencyOverrides;
+
+  List<ExtraDependency> get extraDependencies => _extraDependencies;
 
   List<Dependency> get dependencies => _dependencies;
 
@@ -61,6 +65,7 @@ class Params {
       fileOutputPath = (icappsLicenseConfig[yamlConfigOuputPath] as String?) ?? defaultFileOutputPath;
 
       _generateLicensesOverride(icappsLicenseConfig[yamlConfigLicensesList] as YamlMap?);
+      _generateExtraLicenses(icappsLicenseConfig[yamlConfigExtraLicensesList] as YamlMap?);
     }
 
     final packages = config['dependencies'] as YamlMap?;
@@ -124,6 +129,27 @@ class Params {
             _dependencyOverrides[package] = value;
           } else {
             throw FatalException('${value.runtimeType} is no String');
+          }
+        } catch (e, trace) {
+          Logger.logInfo('Failed to parse: $package because of $e');
+          Logger.logError('Because of $e');
+          Logger.logStacktrace(trace);
+          rethrow;
+        }
+      }
+    }
+  }
+
+  void _generateExtraLicenses(YamlMap? packages) {
+    if (packages != null) {
+      for (final package in packages.keys) {
+        try {
+          if (package is! String) throw ArgumentError('package should be a String, the name of the package');
+          final dynamic value = packages.value[package];
+          if (value is YamlMap) {
+            _extraDependencies.add(ExtraDependency.fromJson(package, value));
+          } else {
+            throw FatalException('${value.runtimeType} is no YamlMap');
           }
         } catch (e, trace) {
           Logger.logInfo('Failed to parse: $package because of $e');

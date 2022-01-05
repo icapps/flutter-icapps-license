@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import '../extension/string_builder_extension.dart';
 import '../model/dto/dependency.dart';
 import '../model/dto/dependency_lock.dart';
+import '../model/dto/extra_dependency.dart';
 import '../model/pubspec.dart';
 import '../repo/license_repository.dart';
 import '../util/logger.dart';
@@ -53,11 +54,15 @@ class GenerateCommand {
       ..writeln('}')
       ..writeln();
 
-    final dependencies = <Dependency, DependencyLock>{};
-    final sortedDependencies = params.dependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
-    for (final dependency in sortedDependencies) {
-      dependencies[dependency] = params.pubspecLock.dependencies.firstWhere((element) => element.name == dependency.name);
+    final allDependencies = <Dependency>[];
+    allDependencies.addAll(params.extraDependencies);
+    for (final dependency in params.dependencies) {
+      if (allDependencies.where((element) => element.name == dependency.name).isEmpty) {
+        allDependencies.add(dependency);
+      }
     }
+
+    final sortedDependencies = allDependencies..sort((a1, a2) => a1.name.compareTo(a2.name));
 
     sb
       ..writeln('class LicenseUtil {')
@@ -66,9 +71,13 @@ class GenerateCommand {
       ..writeln('  static List<License> getLicenses() {')
       ..writeln('    return [');
 
-    for (final dependency in dependencies.keys) {
-      final lockedDependency = dependencies[dependency]!;
-      sb.write(await _getDependencyText(params, dependency, lockedDependency));
+    for (final dependency in sortedDependencies) {
+      if (dependency is ExtraDependency) {
+        sb.write(await _getExtraDependencyText(dependency));
+      } else {
+        final lockedDependency = params.pubspecLock.dependencies.firstWhere((element) => element.name == dependency.name);
+        sb.write(await _getDependencyText(params, dependency, lockedDependency));
+      }
     }
 
     sb
@@ -80,12 +89,25 @@ class GenerateCommand {
   }
 
   Future<String> _getDependencyText(Params params, Dependency dependency, DependencyLock lockedDependency) async {
-    final licenseData = await _licenseRepo.getLicenseData(params, dependency, lockedDependency);
+    final licenseData = await _licenseRepo.getLicenseDataForDependency(params, dependency, lockedDependency);
     final sb = StringBuffer()
       ..writeln('      License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
       ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
       ..writelnWithQuotesOrNull('version', dependency.getVersion(lockedDependency))
+      ..writelnWithQuotesOrNull('homepage', licenseData.homepageUrl)
+      ..writelnWithQuotesOrNull('repository', licenseData.repositoryUrl)
+      ..writeln('      ),');
+    return sb.toString();
+  }
+
+  Future<String> _getExtraDependencyText(ExtraDependency dependency) async {
+    final licenseData = await _licenseRepo.getLicenseDataForExtraDependency(dependency);
+    final sb = StringBuffer()
+      ..writeln('      License(')
+      ..writelnWithQuotesOrNull('name', dependency.name)
+      ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
+      ..writelnWithQuotesOrNull('version', dependency.version)
       ..writelnWithQuotesOrNull('homepage', licenseData.homepageUrl)
       ..writelnWithQuotesOrNull('repository', licenseData.repositoryUrl)
       ..writeln('      ),');

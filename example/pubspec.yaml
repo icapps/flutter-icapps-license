@@ -32,15 +32,15 @@ flutter:
     - assets/locale/
 
 license_generator:
-#  fail_fast: true
+  #  fail_fast: true
   check_before_generate: true
   licenses:
-#    license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
+  #    license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE
   extra_licenses:
     something_something:
       name: Something Something
       version: 2.0.0
-      url: https://www.google.com
+      homepage: https://www.google.com
       license: test_license
     license_generator:
       name: license_generator
