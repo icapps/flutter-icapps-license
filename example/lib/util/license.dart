@@ -122,7 +122,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: r'^1.0.4',
         homepage: null,
-        repository: r'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
+        repository:
+            r'https://github.com/flutter/packages/tree/master/packages/flutter_lints',
       ),
       License(
         name: r'flutter_localizations',
@@ -273,7 +274,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
         version: r'^2.0.11',
         homepage: null,
-        repository: r'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
+        repository:
+            r'https://github.com/flutter/plugins/tree/master/packages/shared_preferences/shared_preferences',
       ),
       License(
         name: r'test',
