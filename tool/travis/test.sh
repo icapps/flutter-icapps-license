@@ -6,8 +6,6 @@ echo ""
 echo "===="
 echo "Start testing"
 echo "===="
-dart run ./tool/test_coverage_helper.dart || exit -1;
-
 rm -rf ./coverage
 
 ## Run Dart tests and output them at directory `./coverage`:
