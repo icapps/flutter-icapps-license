@@ -9,6 +9,7 @@ Future<void> main(List<String> args) async {
     final generator = LicenseGenerator(args);
     await generator.run();
   } on FatalException catch (e, trace) {
+    Logger.logInfo('Failed to complete the license generator, because of $e');
     Logger.logError(e);
     Logger.logStacktrace(trace);
   }

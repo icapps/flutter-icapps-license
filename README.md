@@ -3,6 +3,8 @@
 A dart package to download the licenses for al the packages used.
 
 [![pub package](https://img.shields.io/pub/v/license_generator.svg)](https://pub.dartlang.org/packages/license_generator)
+[![Build Status](https://app.travis-ci.com/icapps/flutter-icapps-license.svg?branch=master)](https://app.travis-ci.com/icapps/flutter-icapps-license)
+[![Coverage Status](https://coveralls.io/repos/github/icapps/flutter-icapps-license/badge.svg)](https://coveralls.io/github/icapps/flutter-icapps-license)
 
 ## Setup
 

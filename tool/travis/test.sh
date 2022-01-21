@@ -1,8 +1,11 @@
 #!/bin/bash
 
+dart run ./tool/travis/test_coverage_helper.dart || exit -1;
 
-dart run ./tool/test_coverage_helper.dart || exit -1;
-
+echo ""
+echo "===="
+echo "Start testing"
+echo "===="
 rm -rf ./coverage
 
 ## Run Dart tests and output them at directory `./coverage`:
@@ -18,3 +21,6 @@ genhtml -o ./coverage/report ./coverage/lcov.info
 open ./coverage/report/index.html
 
 rm test/coverage_helper_test.dart
+echo "===="
+echo "Finished testing"
+echo "===="
