@@ -26,4 +26,7 @@ class CachedPackage {
       packageUri: json['packageUri'] as String,
     );
   }
+
+  @override
+  String toString() => name;
 }
