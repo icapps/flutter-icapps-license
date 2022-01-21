@@ -130,7 +130,7 @@ class Params {
           _dependencies.add(dependency);
         } catch (e, trace) {
           Logger.logInfo('Failed to parse: $package for $type because of $e');
-          Logger.logError('because of $e');
+          Logger.logError('Because of $e');
           Logger.logStacktrace(trace);
           rethrow;
         }
