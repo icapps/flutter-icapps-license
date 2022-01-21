@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.3] - 2022-01-21
+### Fixed
+- always log a FatalException with a basic message. (debug or verbose should be used to see the full stacktrace.)
+
 ## [1.0.2] - 2022-01-05
 ### Improved
 - changelog formatting
