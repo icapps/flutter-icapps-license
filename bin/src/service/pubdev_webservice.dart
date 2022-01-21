@@ -71,6 +71,8 @@ class PubDevWebservice {
       url = gitInfo.getGithubPubSpecUrl();
     } else if (gitInfo.url.isGitLabUrl()) {
       url = gitInfo.getGitLabPubSpecUrl();
+    } else if (gitInfo.url.isBitbucketUrl()) {
+      url = gitInfo.getBitbucketPubSpecUrl();
     }
     if (url == null) {
       throw FatalException(

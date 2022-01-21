@@ -22,6 +22,10 @@ extension StringExtensions on String {
       startsWith('https://www.raw.githubusercontent.com') ||
       startsWith('http://raw.githubusercontent.com') ||
       startsWith('http://www.raw.githubusercontent.com');
+
+  bool isBitbucketUrl() =>
+      startsWith(RegExp(r'https?://(.*?)@(?:www.)?bitbucket.org')) ||
+      startsWith('git@bitbucket.org');
 }
 
 extension GitInfoExtensions on GitInfo {
@@ -47,6 +51,28 @@ extension GitInfoExtensions on GitInfo {
     const rawGithubUrl = 'https://raw.githubusercontent.com/';
     var newUrl = _getCleanedUpUrl(hostName);
     newUrl = _replaceHostname(newUrl, hostName, rawGithubUrl);
+    if (ref != null) {
+      newUrl = '$newUrl/$ref';
+    } else {
+      newUrl = '$newUrl/master';
+    }
+    if (path != null) {
+      newUrl = '$newUrl/$path';
+    }
+    return '$newUrl/pubspec.yaml';
+  }
+
+  String getBitbucketPubSpecUrl() {
+    // Bitbucket uses a different url scheme than GitHUb or Gitlab.
+    // Instead of adding a bunch of checks to the _getCleanedUpUrl function,
+    // we simply build the correct url directly.
+
+    // Extract username and repo name from url
+    final userAndRepo = RegExp(r'.org(?:\:|/)(.*?)(?:$|.git)').firstMatch(url)!.group(1);
+    var newUrl = 'https://bitbucket.org/$userAndRepo';
+
+    newUrl = '$newUrl/raw';
+
     if (ref != null) {
       newUrl = '$newUrl/$ref';
     } else {
