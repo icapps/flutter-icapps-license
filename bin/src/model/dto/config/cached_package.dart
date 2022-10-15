@@ -14,8 +14,8 @@ class CachedPackage {
 
   factory CachedPackage.fromJson(Map<String, dynamic> json) {
     var rootUri = json['rootUri'] as String;
-    if (rootUri.startsWith('file://')) {
-      rootUri = rootUri.replaceFirst('file://', '');
+    if (rootUri.startsWith('file:///')) {
+      rootUri = rootUri.replaceFirst('file:///', '');
     }
     if (rootUri.startsWith('../')) {
       rootUri = rootUri.replaceFirst('../', '');
