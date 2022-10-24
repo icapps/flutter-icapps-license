@@ -47,7 +47,7 @@ void main() {
       expect(
         () async => LicenseGenerator(
           ['check'],
-          pubspecPath: pubspecPath + 'does-not-exist',
+          pubspecPath: '${pubspecPath}does-not-exist',
           pubspecLockPath: pubspecLockPath,
         ),
         throwsA(predicate((e) =>
@@ -61,7 +61,7 @@ void main() {
         () async => LicenseGenerator(
           ['check'],
           pubspecPath: pubspecPath,
-          pubspecLockPath: pubspecLockPath + 'does-not-exist',
+          pubspecLockPath: '${pubspecLockPath}does-not-exist',
         ),
         throwsA(predicate((e) =>
             e is FatalException &&

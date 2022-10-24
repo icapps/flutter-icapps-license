@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5] - 2022-10-24
+### Fixed
+- Analyzer
+
 ## [1.0.4] - 2022-10-24
 ### Added
 - Better support for Windows (Thanks [stacew](https://github.com/stacew))

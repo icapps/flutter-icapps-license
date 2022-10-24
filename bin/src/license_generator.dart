@@ -61,7 +61,7 @@ class LicenseGenerator {
     }
     const webservice = WebService();
     const configService = ConfigService();
-    final _pubDevWebservice = PubDevWebservice(
+    final pubDevWebservice = PubDevWebservice(
       webservice: webservice,
       baseUrl: _params.pubDevBaseUrlOverride ??
           PubDevWebservice.defaultPubDevBaseUrl,
@@ -69,7 +69,7 @@ class LicenseGenerator {
     final licenseRepo = LicenseRepository(
       webservice,
       configService,
-      _pubDevWebservice,
+      pubDevWebservice,
     );
     _checkCommand = const CheckCommand();
     _generateCommand = GenerateCommand(licenseRepo);
