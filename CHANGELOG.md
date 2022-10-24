@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.4] - 2022-10-24
+### Added
+- Better support for Windows (Thanks [stacew](https://github.com/stacew))
+
 ## [1.0.3] - 2022-01-21
 ### Fixed
 - always log a FatalException with a basic message. (debug or verbose should be used to see the full stacktrace.)
