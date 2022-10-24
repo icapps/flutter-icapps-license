@@ -5,6 +5,6 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  test_package: ^1.0.0
+  meta: ^1.8.0
 dev_dependencies:
   license_generator: ^1.0.0

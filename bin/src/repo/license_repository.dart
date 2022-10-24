@@ -16,8 +16,7 @@ import '../util/logger.dart';
 
 const _flutterHomeUrl = 'https://flutter.dev/';
 const _flutterRepoUrl = 'https://github.com/flutter/flutter';
-const _flutterLicenseUrl =
-    'https://raw.githubusercontent.com/flutter/flutter/master/LICENSE';
+const _flutterLicenseUrl = 'https://raw.githubusercontent.com/flutter/flutter/master/LICENSE';
 
 const _allowedLicenseFilesName = [
   'LICENSE',
@@ -46,22 +45,18 @@ class LicenseRepository {
     this._pubDevWebservice,
   );
 
-  Future<DependencyLicenseData> getLicenseDataForDependency(Params params,
-      Dependency dependency, DependencyLock lockedDependency) async {
+  Future<DependencyLicenseData> getLicenseDataForDependency(Params params, Dependency dependency, DependencyLock lockedDependency) async {
     if (dependency.isPartOfFlutterSdk) return _getFlutterLicenseData();
     final licenseOverride = params.dependencyOverrides[dependency.name];
     var licenseUrl = licenseOverride;
-    final pubDevData =
-        await _pubDevWebservice.getPubDevData(dependency, lockedDependency);
+    final pubDevData = await _pubDevWebservice.getPubDevData(dependency, lockedDependency);
     if (licenseOverride == null) {
-      final configData =
-          await _configService.getConfigData(dependency, lockedDependency);
+      final configData = await _configService.getConfigData(dependency, lockedDependency);
       licenseUrl = _guessLocalLicenseFile(configData.rootUri);
-      Logger.logVerbose('GET LICENSE AT ${configData.rootUri} - $licenseUrl');
+      Logger.logVerbose("GET LICENSE AT '${configData.rootUri}' - $licenseUrl");
     }
     if (licenseUrl == null) {
-      throw FatalException(
-          'Failed to get the license url for ${dependency.name}');
+      throw FatalException("Failed to get the license url for '${dependency.name}'");
     }
     final licenseData = await _getLicenseDataByUrl(licenseUrl);
     return DependencyLicenseData(
@@ -71,8 +66,7 @@ class LicenseRepository {
     );
   }
 
-  Future<DependencyLicenseData> getLicenseDataForExtraDependency(
-      ExtraDependency dependency) async {
+  Future<DependencyLicenseData> getLicenseDataForExtraDependency(ExtraDependency dependency) async {
     if (dependency.isPartOfFlutterSdk) return _getFlutterLicenseData();
     final license = await _getLicenseDataByUrl(dependency.licenseUrl);
     return DependencyLicenseData(
@@ -91,10 +85,11 @@ class LicenseRepository {
   }
 
   static String? _guessLocalLicenseFile(String packagePath) {
-    final packageFile = Directory(packagePath);
-    if (!packageFile.existsSync()) {
-      throw FatalException(
-          '.dart_tool/package_config.json is not up to date. `$packagePath` does not exist anymore.');
+    if (packagePath.isNotEmpty) {
+      final packageFolder = Directory(packagePath);
+      if (!packageFolder.existsSync()) {
+        throw FatalException(".dart_tool/package_config.json is not up to date. Path: '$packagePath' does not exist anymore.");
+      }
     }
     for (final fileName in _allowedLicenseFilesName) {
       final file = File(join(packagePath, fileName));

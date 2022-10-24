@@ -209,7 +209,7 @@ void main() {
           throwsA(predicate((e) =>
               e is FatalException &&
               e.message ==
-                  '.dart_tool/package_config.json is not up to date. `test/repo/test_data/no-local-license/test_package-1.0.0-does-not-exist` does not exist anymore.')),
+                  ".dart_tool/package_config.json is not up to date. Path: 'test/repo/test_data/no-local-license/test_package-1.0.0-does-not-exist' does not exist anymore.")),
         );
       });
       test('test LicenseRepository no local license dev', () async {
@@ -236,7 +236,7 @@ void main() {
           throwsA(predicate((e) =>
               e is FatalException &&
               e.message ==
-                  '.dart_tool/package_config.json is not up to date. `test/repo/test_data/no-local-license-dev/test_package-1.0.0-does-not-exist` does not exist anymore.')),
+                  ".dart_tool/package_config.json is not up to date. Path: 'test/repo/test_data/no-local-license-dev/test_package-1.0.0-does-not-exist' does not exist anymore.")),
         );
       });
 
@@ -263,7 +263,7 @@ void main() {
           ),
           throwsA(predicate((e) =>
               e is FatalException &&
-              e.message == 'Failed to get the license url for test_package')),
+              e.message == "Failed to get the license url for 'test_package'")),
         );
       });
 
@@ -290,7 +290,7 @@ void main() {
           ),
           throwsA(predicate((e) =>
               e is FatalException &&
-              e.message == 'Failed to get the license url for test_package')),
+              e.message == "Failed to get the license url for 'test_package'")),
         );
       });
 

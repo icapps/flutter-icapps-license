@@ -3,6 +3,10 @@
 ## [1.0.4] - 2022-10-24
 ### Added
 - Better support for Windows (Thanks [stacew](https://github.com/stacew))
+### Fixed
+- Tests
+### Updated
+- Dependencies
 
 ## [1.0.3] - 2022-01-21
 ### Fixed
