@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.5] - 2022-10-24
+### Fixed
+- Analyzer
+
+## [1.0.4] - 2022-10-24
+### Added
+- Better support for Windows (Thanks [stacew](https://github.com/stacew))
+### Fixed
+- Tests
+### Updated
+- Dependencies
+
 ## [1.0.3] - 2022-01-21
 ### Fixed
 - always log a FatalException with a basic message. (debug or verbose should be used to see the full stacktrace.)

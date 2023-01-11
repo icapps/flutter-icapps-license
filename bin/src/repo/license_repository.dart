@@ -57,11 +57,11 @@ class LicenseRepository {
       final configData =
           await _configService.getConfigData(dependency, lockedDependency);
       licenseUrl = _guessLocalLicenseFile(configData.rootUri);
-      Logger.logVerbose('GET LICENSE AT ${configData.rootUri} - $licenseUrl');
+      Logger.logVerbose("GET LICENSE AT '${configData.rootUri}' - $licenseUrl");
     }
     if (licenseUrl == null) {
       throw FatalException(
-          'Failed to get the license url for ${dependency.name}');
+          "Failed to get the license url for '${dependency.name}'");
     }
     final licenseData = await _getLicenseDataByUrl(licenseUrl);
     return DependencyLicenseData(
@@ -91,10 +91,12 @@ class LicenseRepository {
   }
 
   static String? _guessLocalLicenseFile(String packagePath) {
-    final packageFile = Directory(packagePath);
-    if (!packageFile.existsSync()) {
-      throw FatalException(
-          '.dart_tool/package_config.json is not up to date. `$packagePath` does not exist anymore.');
+    if (packagePath.isNotEmpty) {
+      final packageFolder = Directory(packagePath);
+      if (!packageFolder.existsSync()) {
+        throw FatalException(
+            ".dart_tool/package_config.json is not up to date. Path: '$packagePath' does not exist anymore.");
+      }
     }
     for (final fileName in _allowedLicenseFilesName) {
       final file = File(join(packagePath, fileName));

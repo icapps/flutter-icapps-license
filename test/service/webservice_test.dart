@@ -9,7 +9,7 @@ void main() {
       final result = await webservice
           .get('https://pub.dev/api/packages/icapps_license/versions/1.0.0');
       expect(result,
-          '{"version":"1.0.0","pubspec":{"name":"icapps_license","description":"Dart tool to generate a file that contains all licenses of the third party libraries","version":"1.0.0","homepage":"https://github.com/icapps/flutter-icapps-license","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"http":"^0.13.0","path":"^1.8.0","yaml":"^3.1.0"},"dev_dependencies":{"test":"^1.16.5"}},"archive_url":"https://pub.dartlang.org/packages/icapps_license/versions/1.0.0.tar.gz","published":"2021-03-04T16:45:46.440798Z"}');
+          '{"version":"1.0.0","pubspec":{"name":"icapps_license","description":"Dart tool to generate a file that contains all licenses of the third party libraries","version":"1.0.0","homepage":"https://github.com/icapps/flutter-icapps-license","environment":{"sdk":">=2.12.0 <3.0.0"},"dependencies":{"http":"^0.13.0","path":"^1.8.0","yaml":"^3.1.0"},"dev_dependencies":{"test":"^1.16.5"}},"archive_url":"https://pub.dartlang.org/packages/icapps_license/versions/1.0.0.tar.gz","archive_sha256":"d64fbfa3f49891fe81f3c4ecb2653eb6c77618629096b95c3ca406ccadc582ff","published":"2021-03-04T16:45:46.440798Z"}');
     });
     test('test simpel get non existing version', () async {
       const webservice = WebService();

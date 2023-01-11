@@ -1,3 +1,5 @@
+import 'dart:io' show Platform;
+
 import 'package:meta/meta.dart';
 
 @immutable
@@ -14,8 +16,8 @@ class CachedPackage {
 
   factory CachedPackage.fromJson(Map<String, dynamic> json) {
     var rootUri = json['rootUri'] as String;
-    if (rootUri.startsWith('file://')) {
-      rootUri = rootUri.replaceFirst('file://', '');
+    if (rootUri.startsWith(_rootUriPrefixOnPlatform())) {
+      rootUri = rootUri.replaceFirst(_rootUriPrefixOnPlatform(), '');
     }
     if (rootUri.startsWith('../')) {
       rootUri = rootUri.replaceFirst('../', '');
@@ -27,6 +29,14 @@ class CachedPackage {
     );
   }
 
+
   @override
   String toString() => name;
+
+  static String _rootUriPrefixOnPlatform() {
+    if (Platform.isWindows) {
+      return 'file:///';
+    }
+    return 'file://';
+  }
 }
