@@ -29,9 +29,10 @@ class CachedPackage {
     );
   }
 
-
   @override
-  String toString() => name;
+  String toString() {
+    return name;
+  }
 
   static String _rootUriPrefixOnPlatform() {
     if (Platform.isWindows) {

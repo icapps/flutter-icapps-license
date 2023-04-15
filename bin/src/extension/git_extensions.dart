@@ -68,7 +68,8 @@ extension GitInfoExtensions on GitInfo {
     // we simply build the correct url directly.
 
     // Extract username and repo name from url
-    final userAndRepo = RegExp(r'.org(?:\:|/)(.*?)(?:$|.git)').firstMatch(url)!.group(1);
+    final regex = RegExp(r'\.org.(.+?)(?:\.git|$)');
+    final userAndRepo = regex.firstMatch(url)!.group(1);
     var newUrl = 'https://bitbucket.org/$userAndRepo';
 
     newUrl = '$newUrl/raw';

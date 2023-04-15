@@ -75,7 +75,7 @@ class GenerateCommand {
       ..writeln('  LicenseUtil._();')
       ..writeln()
       ..writeln('  static List<License> getLicenses() {')
-      ..writeln('    return const [');
+      ..writeln('    return [');
 
     for (final dependency in sortedDependencies) {
       if (dependency is ExtraDependency) {
