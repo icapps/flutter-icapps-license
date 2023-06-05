@@ -101,7 +101,7 @@ class GenerateCommand {
     final licenseData = await _licenseRepo.getLicenseDataForDependency(
         params, dependency, lockedDependency);
     final sb = StringBuffer()
-      ..writeln('      License(')
+      ..writeln('      const License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
       ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
       ..writelnWithQuotesOrNull(
@@ -116,7 +116,7 @@ class GenerateCommand {
     final licenseData =
         await _licenseRepo.getLicenseDataForExtraDependency(dependency);
     final sb = StringBuffer()
-      ..writeln('      License(')
+      ..writeln('      const License(')
       ..writelnWithQuotesOrNull('name', dependency.name)
       ..writeln('        license: r\'\'\'${licenseData.license}\'\'\',')
       ..writelnWithQuotesOrNull('version', dependency.version)

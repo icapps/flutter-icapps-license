@@ -1,4 +1,7 @@
 # Changelog
+## [2.0.0] - 2022-06-05
+### Breaking
+- Updated to the dart 3.0.0
 
 ## [1.0.5] - 2022-10-24
 ### Fixed
