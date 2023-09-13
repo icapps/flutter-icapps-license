@@ -32,6 +32,8 @@ license_generator:
   pub_dev_base_url: String #(optional) This will override the default pubdev base url for downloading the pubdev details (homepage/repository) -> Default: https://pub.dev
   licenses: #(optional) This will accept key value pairs (String/String) -> (package name/raw license url)
     #license_generator: https://raw.githubusercontent.com/icapps/flutter-icapps-license/master/LICENSE (example)
+  ignore_licenses: #(optional) This wil accept a list of package names (String)
+    - shared_preferences
   extra_licenses: #(optional) this will allow you to add extra licenses that are not added in your pubspec.yaml
     something_something: #the name of your package will be used if `name` is not specified
       name: String #(optional) This will override your package name

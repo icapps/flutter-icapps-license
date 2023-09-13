@@ -263,7 +263,8 @@ void main() {
           ),
           throwsA(predicate((e) =>
               e is FatalException &&
-              e.message == "Failed to get the license url for 'test_package'")),
+              e.message ==
+                  ".dart_tool/package_config.json is not up to date. Path: 'test/repo/test_data/no-local-license-file-dev/test_package-1.0.0' does not exist anymore.")),
         );
       });
 
@@ -290,7 +291,8 @@ void main() {
           ),
           throwsA(predicate((e) =>
               e is FatalException &&
-              e.message == "Failed to get the license url for 'test_package'")),
+              e.message ==
+                  ".dart_tool/package_config.json is not up to date. Path: 'test/repo/test_data/no-local-license-file-dev/test_package-1.0.0' does not exist anymore.")),
         );
       });
 

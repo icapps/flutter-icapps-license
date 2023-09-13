@@ -1,5 +1,6 @@
 import 'package:path/path.dart';
 import 'package:yaml/yaml.dart';
+
 import '../util/logger.dart';
 import 'dto/dependency.dart';
 import 'dto/extra_dependency.dart';
@@ -21,6 +22,7 @@ class Params {
   static const yamlConfigPubDevBaseUrl = 'pub_dev_base_url';
   static const yamlConfigLicensesList = 'licenses';
   static const yamlConfigExtraLicensesList = 'extra_licenses';
+  static const yamlConfigIgnoreLicenses = 'ignore_licenses';
 
   late PubspecLock pubspecLock;
   String fileOutputPath = defaultFileOutputPath;
@@ -73,10 +75,20 @@ class Params {
           icappsLicenseConfig[yamlConfigExtraLicensesList] as YamlMap?);
     }
 
+    final ignoredPackages =
+        icappsLicenseConfig?[yamlConfigIgnoreLicenses] as YamlList?;
     final packages = config['dependencies'] as YamlMap?;
     final devPackages = config['dev_dependencies'] as YamlMap?;
-    _generateDependencies(packages: packages, isDevDependency: false);
-    _generateDependencies(packages: devPackages, isDevDependency: true);
+    _generateDependencies(
+      packages: packages,
+      isDevDependency: false,
+      ignoredPackages: ignoredPackages,
+    );
+    _generateDependencies(
+      packages: devPackages,
+      isDevDependency: true,
+      ignoredPackages: ignoredPackages,
+    );
 
     final containsLicenseGenerator = devDependencies
         .where((element) => element.name == yamlConfigLicense)
@@ -102,7 +114,9 @@ class Params {
   }
 
   void _generateDependencies(
-      {required YamlMap? packages, required bool isDevDependency}) {
+      {required YamlMap? packages,
+      required bool isDevDependency,
+      required YamlList? ignoredPackages}) {
     final type = isDevDependency ? 'dev_dependencies' : 'dependencies';
     if (packages != null) {
       for (final package in packages.keys) {
@@ -110,6 +124,9 @@ class Params {
           if (package is! String) {
             throw ArgumentError(
                 'package should be a String: the name of the package');
+          }
+          if (ignoredPackages?.contains(package) == true) {
+            continue;
           }
           final dynamic values = packages.value[package];
           Dependency dependency;
