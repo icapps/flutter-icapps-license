@@ -1,4 +1,7 @@
 # Changelog
+## [2.1.0] - 2023-09-13
+### Added
+- Option to ignore certain packages
 ## [2.0.0] - 2022-06-05
 ### Breaking
 - Updated to the dart 3.0.0
