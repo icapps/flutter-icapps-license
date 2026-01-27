@@ -90,7 +90,8 @@ class LicenseRepository {
     );
   }
 
-  static String? _guessLocalLicenseFile(String packagePath) {
+  static String? _guessLocalLicenseFile(Uri packagePathUri) {
+    final packagePath = packagePathUri.toFilePath();
     if (packagePath.isNotEmpty) {
       final packageFolder = Directory(packagePath);
       if (!packageFolder.existsSync()) {

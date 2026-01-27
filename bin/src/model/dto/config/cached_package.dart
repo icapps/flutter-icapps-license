@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 @immutable
 class CachedPackage {
   final String name;
-  final String rootUri;
+  final Uri rootUri;
   final String packageUri;
 
   const CachedPackage({
@@ -24,7 +24,7 @@ class CachedPackage {
     }
     return CachedPackage(
       name: json['name'] as String,
-      rootUri: rootUri,
+      rootUri: Uri.parse(rootUri),
       packageUri: json['packageUri'] as String,
     );
   }
