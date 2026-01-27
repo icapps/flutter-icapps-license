@@ -10,18 +10,14 @@ class ExtraDependency extends Dependency {
   final String? repositoryUrl;
 
   const ExtraDependency({
-    required String name,
-    required String? version,
+    required super.name,
+    required super.version,
     required this.homepageUrl,
     required this.repositoryUrl,
     required this.licenseUrl,
-    required bool isDevDependency,
-    required bool isPartOfFlutterSdk,
+    required super.isDevDependency,
+    required super.isPartOfFlutterSdk,
   }) : super(
-          name: name,
-          version: version,
-          isDevDependency: isDevDependency,
-          isPartOfFlutterSdk: isPartOfFlutterSdk,
           isLocalDependency: false,
           isGitDependency: false,
         );

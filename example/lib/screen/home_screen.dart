@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:license_generator_example/util/license.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8),
               child: Container(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withAlpha(127),
                 child: Column(
                   children: [
                     Text(item.name),

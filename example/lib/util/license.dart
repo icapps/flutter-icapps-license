@@ -120,10 +120,9 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ''',
-        version: r'^2.0.1',
+        version: r'^6.0.0',
         homepage: null,
-        repository:
-            r'https://github.com/flutter/packages/tree/main/packages/flutter_lints',
+        repository: r'https://github.com/flutter/packages/tree/main/packages/flutter_lints',
       ),
       const License(
         name: r'flutter_localizations',
@@ -208,7 +207,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.''',
-        version: r'^6.0.5',
+        version: r'^6.1.5',
         homepage: null,
         repository: r'https://github.com/rrousselGit/provider',
       ),
